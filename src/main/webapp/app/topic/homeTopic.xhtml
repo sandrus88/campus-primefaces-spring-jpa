@@ -1,0 +1,97 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/template/pageLayout.xhtml">
+		<ui:define name="content">
+		
+			<h:form id="searchTopicForm" styleClass="searchForm">
+				
+				<h1>
+					<h:outputText value="#{msg['topic.search']}" />
+				</h1>
+				
+				<h:panelGrid border="0" columns="2">
+					<p:outputLabel for="name" value="#{msg['topic.name']}" />
+					<p:inputText id="name" value="#{topicController.searchName}" maxlength="20"/>
+				</h:panelGrid>
+
+				<h:panelGrid border="0" columns="2" style="margin-left: 58px;">
+					<p:commandButton value="#{msg['search']}" actionListener="#{topicController.searchTopic()}" update="topicsListForm"/>
+					<p:commandButton value="#{msg['clear']}" actionListener="#{topicController.cleanSearchForm()}" update="searchTopicForm" />
+				</h:panelGrid>
+			</h:form>
+
+			<h:form id="topicsListForm">
+				<h1>
+					<h:outputText value="#{msg['topic.home.table']}" />
+					<p:commandLink oncomplete="PF('dialogNewTopic').show()" id="linkAddTopic">
+						<i class="fa fa-fw fa-plus" style="font-size: 2rem"/>
+						<p:tooltip for="linkAddTopic" value="#{msg['add']}" position="bottom"/>
+					</p:commandLink>
+				</h1>
+				
+				<p:dataTable value="#{topicController.searchTopicList}" var="item" border="2" id="topicsTable" styleClass="fixed-size">
+					<p:column width="5">
+						<f:facet name="header">
+							<h:outputText value="#{msg['topic.id']}" />
+						</f:facet>
+						<h:outputText value="#{item.id}" />
+					</p:column>
+
+					<p:column width="100">
+						<f:facet name="header">
+							<h:outputText value="#{msg['topic.name']}" />
+						</f:facet>
+						<h:outputText value="#{item.name}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg['topic.description']}" />
+						</f:facet>
+						<h:outputText value="#{item.description}" styleClass="descriptionTopic"/>
+					</p:column>
+
+					<p:column width="80">
+						<f:facet name="header">
+							<h:outputText value="#{msg['action.title']}" />
+						</f:facet>
+						<p:commandLink oncomplete="PF('dialogViewTopic').show()" update="detailTopicForm" id="linkSearch">
+							<i class="fa fa-fw fa-search"/>
+							<p:tooltip for="linkSearch" value="#{msg['action.view']}" position="bottom"/>
+							<f:setPropertyActionListener value="#{item}" target="#{topicController.selectedTopic}" />
+						</p:commandLink> |
+                        <p:commandLink oncomplete="PF('dialogEditTopic').show()" update="topicEditForm" id="linkEdit">
+                        	<i class="fa fa-fw fa-pencil"/>
+                        	<p:tooltip for="linkEdit" value="#{msg['action.edit']}" position="bottom"/>
+                        	<f:setPropertyActionListener value="#{item}" target="#{topicController.selectedTopic}" />
+                        </p:commandLink> |
+                        <p:commandLink oncomplete="PF('dialog').show()" id="linkRemove">
+							<i class="fa fa-fw fa-remove"/>
+							<p:tooltip for="linkRemove" value="#{msg['action.delete']}" position="bottom"/>
+							<f:setPropertyActionListener value="#{item}" target="#{topicController.selectedTopic}" />
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+				
+				<p:dialog widgetVar="dialog" showEffect="fade" hideEffect="fade" modal="true" width="350" resizable="false" header="#{msg['popup.confirm']}" position="center" draggable="false">	
+					<h:outputText value="#{msg['popup.message.delete']}"/><br/><br/>
+					<p:commandButton value="#{msg['popup.delete.yes']}" actionListener="#{topicController.deleteTopic(topicController.selectedTopic)}" styleClass="ui-confirmdialog-yes" update="topicsListForm" oncomplete="PF('dialog').hide()"/>
+            		<p:commandButton value="#{msg['popup.delete.no']}" styleClass="ui-confirmdialog-no ui-button-flat" onclick="PF('dialog').hide()"/>
+				</p:dialog>
+			</h:form>
+		
+			<ui:include src="editTopicDialog.xhtml" />
+			<ui:include src="viewTopicDialog.xhtml" />
+			<ui:include src="newTopicDialog.xhtml" />
+		</ui:define>
+	</ui:composition>
+</html>
+
+
+
+
+

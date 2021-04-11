@@ -5,14 +5,14 @@ import org.sg.campus.bl.dao.GenericDao;
 import org.sg.campus.bl.entities.AddressEntity;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class AddressDaoImpl extends GenericDao implements AddressDao {
 
 	@Override
 	public AddressEntity insert(AddressEntity addressEntity) {
-		entityManager.getTransaction().begin();
 		entityManager.persist(addressEntity);
-		entityManager.getTransaction().commit();
 		return addressEntity;
 	}
 
@@ -23,15 +23,17 @@ public class AddressDaoImpl extends GenericDao implements AddressDao {
 
 	@Override
 	public AddressEntity update(AddressEntity addressEntity) {
-		entityManager.getTransaction().begin();
-		entityManager.persist(addressEntity);
-		entityManager.getTransaction().commit();
+		entityManager.merge(addressEntity);
 		return addressEntity;
 	}
-	
+
 	public void delete(AddressEntity addressEntity) {
-		entityManager.getTransaction().begin();
 		entityManager.remove(entityManager.merge(addressEntity));
-		entityManager.getTransaction().commit();
+	}
+
+	@Override
+	public List<AddressEntity> getAll() {
+		List<AddressEntity> addresses = entityManager.createQuery("from AddressEntity", AddressEntity.class).getResultList();
+		return addresses;
 	}
 }

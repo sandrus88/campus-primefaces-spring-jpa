@@ -5,11 +5,15 @@ import org.sg.campus.bl.entities.TopicEntity;
 import org.sg.campus.bl.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
+@Transactional
 public class TopicServiceImpl implements TopicService {
-	
-	private TopicDao topicDao;
+
+	final private TopicDao topicDao;
 	
 	@Autowired
 	public TopicServiceImpl(TopicDao topicDao) {
@@ -34,5 +38,10 @@ public class TopicServiceImpl implements TopicService {
 	@Override
 	public boolean delete(Integer id) {
 		return topicDao.delete(id);
+	}
+
+	@Override
+	public List<TopicEntity> getAll() {
+		return topicDao.getAll();
 	}
 }

@@ -1,15 +1,6 @@
 package org.sg.campus.bl.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "TOPIC")
@@ -96,6 +87,6 @@ public class TopicEntity {
 
 	@Override
 	public String toString() {
-		return "Topic  [id: " + id + ", name: " + name + ", description: " + description + ", id course: " + (courseEntity != null ? courseEntity.getId() : "null") + "]";
+		return "Topic  [id: " + id + ", name: " + name + ", description: " + description + ", courseId: " + (courseEntity != null ? courseEntity.getId() : "null") + "]";
 	}
 }

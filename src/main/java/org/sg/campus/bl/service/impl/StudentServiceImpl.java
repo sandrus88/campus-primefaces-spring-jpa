@@ -7,12 +7,16 @@ import org.sg.campus.bl.entities.StudentEntity;
 import org.sg.campus.bl.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
+@Transactional
 public class StudentServiceImpl implements StudentService {
 	
-	private StudentDao studentDao;
-	private AddressDao addressDao;
+	final private StudentDao studentDao;
+	final private AddressDao addressDao;
 	
 	@Autowired
 	public StudentServiceImpl(StudentDao studentDao, AddressDao addressDao) {
@@ -55,4 +59,13 @@ public class StudentServiceImpl implements StudentService {
 		addressDao.delete(addressEntity);
 	}
 
+	@Override
+	public List<StudentEntity> getAllStudents() {
+		return studentDao.getAll();
+	}
+
+	@Override
+	public List<AddressEntity> getAllAddresses() {
+		return addressDao.getAll();
+	}
 }

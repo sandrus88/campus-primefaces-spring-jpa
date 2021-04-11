@@ -5,13 +5,13 @@ import org.sg.campus.bl.dao.GenericDao;
 import org.sg.campus.bl.entities.ExamEntity;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public class ExamDaoImpl extends GenericDao implements ExamDao{
+public class ExamDaoImpl extends GenericDao implements ExamDao {
 	
 	public ExamEntity insert(ExamEntity examEntity) {
-		entityManager.getTransaction().begin();
 		entityManager.persist(examEntity);
-		entityManager.getTransaction().commit();
 		return examEntity;
 	}
 
@@ -21,20 +21,22 @@ public class ExamDaoImpl extends GenericDao implements ExamDao{
 	}
 
 	public ExamEntity update(ExamEntity examEntity) {
-		entityManager.getTransaction().begin();
-		entityManager.persist(examEntity);
-		entityManager.getTransaction().commit();
+		entityManager.merge(examEntity);
 		return examEntity;
 	}
 
 	public boolean delete(Integer id) {
 		ExamEntity examEntity = entityManager.find(ExamEntity.class, id);
 		if (examEntity != null) {
-			entityManager.getTransaction().begin();
 			entityManager.remove(examEntity);
-			entityManager.getTransaction().commit();
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<ExamEntity> getAll() {
+		List<ExamEntity> exams = entityManager.createQuery("from ExamEntity", ExamEntity.class).getResultList();
+		return exams;
 	}
 }

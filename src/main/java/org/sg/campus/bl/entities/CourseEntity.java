@@ -1,22 +1,8 @@
 package org.sg.campus.bl.entities;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
 @Entity
 @Table(name = "COURSE")
@@ -38,7 +24,6 @@ public class CourseEntity {
 	@OneToMany(mappedBy = "courseEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ExamEntity> exams;
 	
-//	@ManyToMany(mappedBy = "courses")
 	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "SUBSCRIPTIONS",
 			joinColumns = @JoinColumn(name = "COURSE_ID"),

@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
+@Service(value = "topicService")
 @Transactional
 public class TopicServiceImpl implements TopicService {
 

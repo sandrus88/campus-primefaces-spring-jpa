@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
+@Service(value = "examService")
 @Transactional
 public class ExamServiceImpl implements ExamService {
 	

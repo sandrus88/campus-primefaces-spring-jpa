@@ -11,6 +11,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import org.sg.campus.bl.service.StudentService;
 import org.sg.campus.web.beans.ApplicationBean;
 import org.sg.campus.web.domain.PaymentType;
 import org.sg.campus.web.domain.Student;
@@ -22,6 +23,9 @@ public class StudentController {
 
 	@ManagedProperty(value = "#{applicationBean}")
 	private ApplicationBean applicationBean;
+
+	@ManagedProperty(value = "#{studentService}")
+	private StudentService studentService;
 
 	private String newName;
 	private String newSurname;
@@ -58,37 +62,43 @@ public class StudentController {
 		student.setJobTitle(newJobTitle);
 		student.setPaymentType(newPaymentType);
 		student.setSex(newSex);
-		studentList.add(student);
+//		studentList.add(student);
+//		studentService.insert(student);
+
 		System.out.println("Added student: " + student);
 		cleanDialogForm();
 	}
 
 	public void searchStudent() {
-		if (SGUtil.isEmpty(searchName) && SGUtil.isEmpty(searchSurname) && SGUtil.isEmpty(searchEmail) && SGUtil.isEmpty(searchJobTitle)
-				&& SGUtil.isEmpty(searchSex)) {
-			searchStudentList = studentList;
-			return;
-		}
-		List<Student> studentListNew = new ArrayList<>();
-		for (Student student : studentList) {
-			if (!SGUtil.isEmpty(searchName) && student.getName().toUpperCase().contains(searchName.toUpperCase())) {
-				studentListNew.add(student);
-			} else if (!SGUtil.isEmpty(searchSurname) && student.getSurname().toUpperCase().contains(searchSurname.toUpperCase())) {
-				studentListNew.add(student);
-			} else if (!SGUtil.isEmpty(searchEmail) && student.getEmail().toUpperCase().contains(searchEmail.toUpperCase())) {
-				studentListNew.add(student);
-			} else if (!SGUtil.isEmpty(searchJobTitle) && student.getJobTitle().toUpperCase().contains(searchJobTitle.toUpperCase())) {
-				studentListNew.add(student);
-			} else
-//			if(student.getPaymentType()!=null && !student.getPaymentType().equals("") && student.getPaymentType().name().contains(searchPaymentType.name())){
-//				// trova nella lista chi ha getName Sandr
+		searchStudentList = studentService.getAllStudents(); // provisorio
+		Student searchDto = new Student(searchName, searchSurname, newEmail, newJobTitle, null, newSex);
+		searchStudentList = studentService.searchStudent(searchDto);
+
+//		if (SGUtil.isEmpty(searchName) && SGUtil.isEmpty(searchSurname) && SGUtil.isEmpty(searchEmail) && SGUtil.isEmpty(searchJobTitle)
+//				&& SGUtil.isEmpty(searchSex)) {
+//			searchStudentList = studentList;
+//			return;
+//		}
+//		List<Student> studentListNew = new ArrayList<>();
+//		for (Student student : studentList) {
+//			if (!SGUtil.isEmpty(searchName) && student.getName().toUpperCase().contains(searchName.toUpperCase())) {
+//				studentListNew.add(student);
+//			} else if (!SGUtil.isEmpty(searchSurname) && student.getSurname().toUpperCase().contains(searchSurname.toUpperCase())) {
+//				studentListNew.add(student);
+//			} else if (!SGUtil.isEmpty(searchEmail) && student.getEmail().toUpperCase().contains(searchEmail.toUpperCase())) {
+//				studentListNew.add(student);
+//			} else if (!SGUtil.isEmpty(searchJobTitle) && student.getJobTitle().toUpperCase().contains(searchJobTitle.toUpperCase())) {
+//				studentListNew.add(student);
+//			} else
+////			if(student.getPaymentType()!=null && !student.getPaymentType().equals("") && student.getPaymentType().name().contains(searchPaymentType.name())){
+////				// trova nella lista chi ha getName Sandr
+////				studentListNew.add(student);
+////			}
+//			if (!SGUtil.isEmpty(searchSex) && student.getSex().toUpperCase().equals(searchSex.toUpperCase())) {
 //				studentListNew.add(student);
 //			}
-			if (!SGUtil.isEmpty(searchSex) && student.getSex().toUpperCase().equals(searchSex.toUpperCase())) {
-				studentListNew.add(student);
-			}
-		}
-		searchStudentList = studentListNew;
+//		}
+//		searchStudentList = studentListNew;
 	}
 
 	public void cleanDialogForm() {
@@ -284,6 +294,12 @@ public class StudentController {
 	public void setSearchStudentList(List<Student> searchStudentList) {
 		this.searchStudentList = searchStudentList;
 	}
-	
-	
+
+	public StudentService getStudentService() {
+		return studentService;
+	}
+
+	public void setStudentService(StudentService studentService) {
+		this.studentService = studentService;
+	}
 }

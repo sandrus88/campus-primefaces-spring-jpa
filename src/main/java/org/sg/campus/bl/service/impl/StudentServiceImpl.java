@@ -1,17 +1,19 @@
 package org.sg.campus.bl.service.impl;
 
+import org.sg.campus.bl.assembler.StudentAssembler;
 import org.sg.campus.bl.dao.AddressDao;
 import org.sg.campus.bl.dao.StudentDao;
 import org.sg.campus.bl.entities.AddressEntity;
 import org.sg.campus.bl.entities.StudentEntity;
 import org.sg.campus.bl.service.StudentService;
+import org.sg.campus.web.domain.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
+@Service(value = "studentService")
 @Transactional
 public class StudentServiceImpl implements StudentService {
 	
@@ -60,12 +62,22 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public List<StudentEntity> getAllStudents() {
-		return studentDao.getAll();
+	public List<Student> getAllStudents() {
+		List<StudentEntity> entityList = studentDao.getAll();
+		List<Student> dtoList = StudentAssembler.getDTO(entityList);
+		return dtoList;
 	}
 
 	@Override
 	public List<AddressEntity> getAllAddresses() {
 		return addressDao.getAll();
+	}
+
+
+	@Override
+	public List<Student> searchStudent(Student searchDto) {
+		List<StudentEntity> listEntities = studentDao.searchStudent(searchDto);
+		List<Student> list = StudentAssembler.getDTO(listEntities);
+		return list;
 	}
 }

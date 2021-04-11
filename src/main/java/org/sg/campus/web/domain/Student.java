@@ -9,7 +9,20 @@ public class Student {
 	private PaymentType paymentType;
 	private String sex;
 
-	public void setName(String name) {
+	public Student(){
+
+	}
+
+    public Student(String name, String surname, String email, String jobTitle, PaymentType paymentType, String sex) {
+    	this.name = name;
+		this.surname = surname;
+		this.email = email;
+		this.jobTitle = jobTitle;
+		this.paymentType = paymentType;
+		this.name = sex;
+    }
+
+    public void setName(String name) {
 		this.name = name;
 	}
 

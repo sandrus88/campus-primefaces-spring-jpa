@@ -120,20 +120,20 @@ public class DashboardController {
 	}
 
 	public void refreshStudentCount() {
-		StudentController student = JSFUtil.findBean("studentController");
-		List<Student> allStudentsList = student.getStudentList();
-		studentCount = allStudentsList.size();
+//		StudentController student = JSFUtil.findBean("studentController");
+//		List<Student> allStudentsList = student.getStudentList();
+//		studentCount = allStudentsList.size();
 	}
 
 	private void refreshTopicCount() {
-		TopicController topicController = JSFUtil.findBean("topicController");
-		List<Topic> allTopicsList = topicController.getTopicList();
-		topicCount = allTopicsList.size();
+//		TopicController topicController = JSFUtil.findBean("topicController");
+//		List<Topic> allTopicsList = topicController.getTopicList();
+//		topicCount = allTopicsList.size();
 	}
 
 	private void refreshCourseCount() {
-		CourseController courseController = JSFUtil.findBean("courseController");
-		List<Course> allCoursesList = courseController.getCourseList();
-		courseCount = allCoursesList.size();
+//		CourseController courseController = JSFUtil.findBean("courseController");
+//		List<Course> allCoursesList = courseController.getCourseList();
+//		courseCount = allCoursesList.size();
 	}
 }

@@ -5,6 +5,10 @@
     http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
 	version="2.0">
 	<application>
+		<!-- Permits the Injection of spring beans into JSF context.
+		Example: @ManagedProperty(value="#{studentService}") into StudentController-->
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+
 		<message-bundle>messages.messages</message-bundle>
 		<resource-bundle>
 			<base-name>messages.messages</base-name>

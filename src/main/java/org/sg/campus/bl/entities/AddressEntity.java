@@ -1,19 +1,14 @@
 package org.sg.campus.bl.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "ADDRESS")
 public class AddressEntity {
 
 	@Id
+	@GeneratedValue
+	@Column(name = "STUDENT_ID")
 	private Integer id;
 	@Column(name = "STREET")
 	private String street;
@@ -28,8 +23,8 @@ public class AddressEntity {
 	
 	@OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "STUDENT_ID")
-	@MapsId
-    private StudentEntity studentEntity;
+//	@MapsId
+    private StudentEntity studentEntity; 
 
 	public Integer getId() {
 		return id;

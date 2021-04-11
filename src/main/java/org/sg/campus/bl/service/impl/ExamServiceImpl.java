@@ -1,23 +1,31 @@
 package org.sg.campus.bl.service.impl;
 
 import org.sg.campus.bl.dao.CourseDao;
+import org.sg.campus.bl.dao.ExamDao;
 import org.sg.campus.bl.dao.StudentDao;
 import org.sg.campus.bl.entities.CourseEntity;
+import org.sg.campus.bl.entities.ExamEntity;
 import org.sg.campus.bl.entities.StudentEntity;
 import org.sg.campus.bl.service.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-@Service
+import java.util.List;
+
+@Service(value = "examService")
+@Transactional
 public class ExamServiceImpl implements ExamService {
 	
-	private StudentDao studentDao;
-	private CourseDao courseDao;
-	
+	final private StudentDao studentDao;
+    final private CourseDao courseDao;
+    final private ExamDao examDao;
+
 	@Autowired
-	public ExamServiceImpl(StudentDao studentDao, CourseDao courseDao) {
+	public ExamServiceImpl(StudentDao studentDao, CourseDao courseDao,  ExamDao examDao) {
 		this.studentDao = studentDao;
 		this.courseDao = courseDao;
+		this.examDao = examDao;
 	}
 
 	public StudentEntity insertStudent(StudentEntity studentEntity) {
@@ -54,5 +62,20 @@ public class ExamServiceImpl implements ExamService {
 	@Override
 	public boolean deleteCourse(Integer id) {
 		return courseDao.delete(id);
+	}
+
+	@Override
+	public List<StudentEntity> getAllStudents() {
+		return studentDao.getAll();
+	}
+
+	@Override
+	public List<CourseEntity> getAllCourses() {
+		return courseDao.getAll();
+	}
+
+	@Override
+	public List<ExamEntity> getAllExams() {
+		return examDao.getAll();
 	}
 }

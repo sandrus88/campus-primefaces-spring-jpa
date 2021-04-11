@@ -1,14 +1,10 @@
-package org.sg.campus.bl.test.util;
+package org.sg.test.util;
+
+import org.sg.campus.bl.entities.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import org.sg.campus.bl.entities.AddressEntity;
-import org.sg.campus.bl.entities.CourseEntity;
-import org.sg.campus.bl.entities.ExamEntity;
-import org.sg.campus.bl.entities.StudentEntity;
-import org.sg.campus.bl.entities.TopicEntity;
 
 public class EntityUtils {
 

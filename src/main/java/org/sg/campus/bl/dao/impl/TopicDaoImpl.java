@@ -5,14 +5,14 @@ import org.sg.campus.bl.dao.TopicDao;
 import org.sg.campus.bl.entities.TopicEntity;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public class TopicDaoImpl extends GenericDao implements TopicDao{
+public class TopicDaoImpl extends GenericDao implements TopicDao {
 
 	@Override
 	public TopicEntity insert(TopicEntity topicEntity) {
-		entityManager.getTransaction().begin();
 		entityManager.persist(topicEntity);
-		entityManager.getTransaction().commit();
 		return topicEntity;
 	}
 
@@ -24,9 +24,7 @@ public class TopicDaoImpl extends GenericDao implements TopicDao{
 
 	@Override
 	public TopicEntity update(TopicEntity topicEntity) {
-		entityManager.getTransaction().begin();
-		entityManager.persist(topicEntity);
-		entityManager.getTransaction().commit();
+		entityManager.merge(topicEntity);
 		return topicEntity;
 	}
 
@@ -34,12 +32,16 @@ public class TopicDaoImpl extends GenericDao implements TopicDao{
 	public boolean delete(Integer id) {
 		TopicEntity topicEntity = entityManager.find(TopicEntity.class, id);
 		if (topicEntity != null) {
-			entityManager.getTransaction().begin();
 			entityManager.remove(topicEntity);
-			entityManager.getTransaction().commit();
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<TopicEntity> getAll() {
+		List<TopicEntity> topics = entityManager.createQuery("from TopicEntity", TopicEntity.class).getResultList();
+		return topics;
 	}
 
 }

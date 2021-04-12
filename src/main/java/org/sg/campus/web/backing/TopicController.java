@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
+import org.sg.campus.bl.service.TopicService;
 import org.sg.campus.web.beans.ApplicationBean;
 import org.sg.campus.web.domain.Topic;
 import org.sg.campus.web.util.SGUtil;
@@ -18,6 +19,10 @@ public class TopicController {
 
 	@ManagedProperty(value = "#{applicationBean}")
 	private ApplicationBean applicationBean;
+	
+	@ManagedProperty(value = "#{topicService}")
+	private TopicService topicService;
+	
 	private List<Topic> topicList = new ArrayList<Topic>();
 	private List<Topic> searchTopicList = new ArrayList<Topic>();
 	private Topic selectedTopic;
@@ -40,7 +45,7 @@ public class TopicController {
 		topic.setId(applicationBean.getNextInt());
 		topic.setName(newName);
 		topic.setDescription(newDescription);
-		topicList.add(topic);
+//		topicList.add(topic);
 		System.out.println("Topic " + topic + " added correctly");
 		cleanDialogForm();
 	}
@@ -144,6 +149,14 @@ public class TopicController {
 
 	public void setSearchName(String searchName) {
 		this.searchName = searchName;
+	}
+
+	public TopicService getTopicService() {
+		return topicService;
+	}
+
+	public void setTopicService(TopicService topicService) {
+		this.topicService = topicService;
 	}
 
 	public String reset() {

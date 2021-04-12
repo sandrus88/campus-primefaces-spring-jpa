@@ -5,6 +5,15 @@ public class Topic {
 	private String name;
 	private String description;
 	private boolean checked;
+	
+	public Topic(){
+
+	}
+
+    public Topic(String name, String description) {
+    	this.name = name;
+		this.description = description;
+    }
 
 	public int getId() {
 		return id;

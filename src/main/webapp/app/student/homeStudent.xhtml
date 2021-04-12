@@ -56,7 +56,7 @@
 					</p:commandLink>
 				</h1>
 				
-				<p:dataTable value="#{studentController.searchStudentList}" var="item" border="2" id="studentsTable" styleClass="fixed-size">
+				<p:dataTable value="#{studentController.searchStudentList}" var="item" border="2" id="studentsTable" styleClass="fixed-size" emptyMessage="#{msg['student.empty.table']}">
 
 					<p:column width="5">
 						<f:facet name="header">

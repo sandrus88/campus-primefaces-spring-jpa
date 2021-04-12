@@ -34,8 +34,8 @@ public class StudentServiceTest extends AbstractSpringTest {
 		assertEquals(studentEntity.getName(), "Armela");
 		assertEquals(studentEntity.getSurname(), "Xhaxho");
 		assertEquals(studentEntity.getJobTitle(), "Shop Assistant");
-		assertEquals(studentEntity.getPaymentType(), "To be confirmed");
-		assertEquals(studentEntity.getSex(), Character.valueOf('F'));
+		assertEquals(studentEntity.getPaymentType(), "UNKNOWN");
+		assertEquals(studentEntity.getSex(), "Femmina");
 	}
 
 	@Test
@@ -51,8 +51,8 @@ public class StudentServiceTest extends AbstractSpringTest {
 		assertEquals(studentEntity.getName(), "Sandro");
 		assertEquals(studentEntity.getSurname(), "Gargano");
 		assertEquals(studentEntity.getJobTitle(), "Waiter");
-		assertEquals(studentEntity.getPaymentType(), "Confirmed");
-		assertEquals(studentEntity.getSex(), Character.valueOf('M'));
+		assertEquals(studentEntity.getPaymentType(), "OK");
+		assertEquals(studentEntity.getSex(), "Maschio");
 		assertNotNull(studentEntity.getAddressEntity());
 		assertEquals(studentEntity.getAddressEntity().getId(), addressId);
 	}

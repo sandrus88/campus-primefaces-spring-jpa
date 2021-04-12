@@ -1,9 +1,10 @@
 package org.sg.campus.bl.service;
 
+import java.util.List;
+
 import org.sg.campus.bl.entities.CourseEntity;
 import org.sg.campus.bl.entities.TopicEntity;
-
-import java.util.List;
+import org.sg.campus.web.domain.Course;
 
 public interface CourseService {
     CourseEntity insert(CourseEntity courseEntity);
@@ -12,9 +13,11 @@ public interface CourseService {
 
     CourseEntity update(CourseEntity courseEntity);
 
-    List<CourseEntity> getAllCourses();
+    List<Course> getAllCourses();
 
     List<TopicEntity> getAllTopics();
 
     boolean delete(Integer id);
+    
+    List<Course> searchCourse(Course searchDto);
 }

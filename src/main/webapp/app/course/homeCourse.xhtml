@@ -39,7 +39,7 @@
 					</p:commandLink>
 				</h1>
 				
-				<p:dataTable value="#{courseController.searchCourseList}" var="item" border="2" styleClass="fixed-size">
+				<p:dataTable value="#{courseController.searchCourseList}" var="item" border="2" styleClass="fixed-size" emptyMessage="#{msg['course.empty.table']}">
 					<p:column width="5">
 						<f:facet name="header">
 							<h:outputText value="#{msg['course.id']}" />

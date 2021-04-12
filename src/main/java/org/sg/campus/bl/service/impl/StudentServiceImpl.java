@@ -64,7 +64,7 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public List<Student> getAllStudents() {
 		List<StudentEntity> entityList = studentDao.getAll();
-		List<Student> dtoList = StudentAssembler.getDTO(entityList);
+		List<Student> dtoList = StudentAssembler.getDTOList(entityList);
 		return dtoList;
 	}
 
@@ -77,7 +77,7 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public List<Student> searchStudent(Student searchDto) {
 		List<StudentEntity> listEntities = studentDao.searchStudent(searchDto);
-		List<Student> list = StudentAssembler.getDTO(listEntities);
+		List<Student> list = StudentAssembler.getDTOList(listEntities);
 		return list;
 	}
 }

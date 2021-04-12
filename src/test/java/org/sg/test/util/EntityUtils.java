@@ -13,8 +13,8 @@ public class EntityUtils {
 		studentEntity.setName("newName");
 		studentEntity.setSurname("newSurname");
 		studentEntity.setJobTitle("newJob");
-		studentEntity.setPaymentType("Confirmed");
-		studentEntity.setSex('M');
+		studentEntity.setPaymentType("OK");
+		studentEntity.setSex("Maschio");
 		return studentEntity;
 	}
 
@@ -22,8 +22,8 @@ public class EntityUtils {
 		studentEntity.setName("updatedName");
 		studentEntity.setSurname("updatedSurname");
 		studentEntity.setJobTitle("updatedJJobTitle");
-		studentEntity.setPaymentType("Confirmed");
-		studentEntity.setSex('M');
+		studentEntity.setPaymentType("OK");
+		studentEntity.setSex("Maschio");
 		return studentEntity;
 	}
 	
@@ -32,8 +32,8 @@ public class EntityUtils {
 		studentEntity.setName("newNameWithAddress");
 		studentEntity.setSurname("newSurnameWithAddress");
 		studentEntity.setJobTitle("newJobWithAddress");
-		studentEntity.setPaymentType("Confirmed");
-		studentEntity.setSex('M');
+		studentEntity.setPaymentType("OK");
+		studentEntity.setSex("Maschio");
 		AddressEntity addressEntity = new AddressEntity();
 		addressEntity.setStreet("newStreetForStudent");
 		addressEntity.setNr("newNumberForStudent");

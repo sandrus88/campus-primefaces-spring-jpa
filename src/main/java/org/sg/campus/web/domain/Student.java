@@ -19,7 +19,7 @@ public class Student {
 		this.email = email;
 		this.jobTitle = jobTitle;
 		this.paymentType = paymentType;
-		this.name = sex;
+		this.sex = sex;
     }
 
     public void setName(String name) {

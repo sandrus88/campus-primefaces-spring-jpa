@@ -1,8 +1,9 @@
 package org.sg.campus.bl.dao;
 
-import org.sg.campus.bl.entities.TopicEntity;
-
 import java.util.List;
+
+import org.sg.campus.bl.entities.TopicEntity;
+import org.sg.campus.web.domain.Topic;
 
 public interface TopicDao {
     TopicEntity insert(TopicEntity topicEntity);
@@ -14,4 +15,6 @@ public interface TopicDao {
     List<TopicEntity> getAll();
 
     boolean delete(Integer id);
+    
+    List<TopicEntity> searchTopic(Topic searchDto);
 }

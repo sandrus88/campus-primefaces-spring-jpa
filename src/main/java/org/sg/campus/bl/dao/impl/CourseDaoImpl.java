@@ -3,6 +3,7 @@ package org.sg.campus.bl.dao.impl;
 import org.sg.campus.bl.dao.CourseDao;
 import org.sg.campus.bl.dao.GenericDao;
 import org.sg.campus.bl.entities.CourseEntity;
+import org.sg.campus.web.domain.Course;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -42,6 +43,12 @@ public class CourseDaoImpl extends GenericDao implements CourseDao {
 	public List<CourseEntity> getAll() {
 		List<CourseEntity> courses = entityManager.createQuery("from CourseEntity", CourseEntity.class).getResultList();
 		return courses;
+	}
+
+	@Override
+	public List<CourseEntity> searchCourse(Course searchDto) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

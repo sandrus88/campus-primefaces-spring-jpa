@@ -12,9 +12,10 @@ create table student (
     ID number, 
     NAME varchar2(100 byte) not null, 
     SURNAME varchar2(100 byte) not null,
+    EMAIL varchar2(100 byte),
     JOB_TITLE varchar2(100 byte),
     PAYMENT_TYPE varchar2(100 byte),
-    SEX	char(1 byte) not null,
+    SEX	varchar2(1 byte) not null,
         
     PRIMARY KEY (ID)
 );

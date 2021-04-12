@@ -1,5 +1,6 @@
 package org.sg.campus.bl.dao.impl;
 
+import org.sg.campus.bl.assembler.PaymentTypeAssembler;
 import org.sg.campus.bl.dao.GenericDao;
 import org.sg.campus.bl.dao.StudentDao;
 import org.sg.campus.bl.entities.StudentEntity;
@@ -47,10 +48,23 @@ public class StudentDaoImpl extends GenericDao implements StudentDao {
 		String sql = "select s from StudentEntity s ";
 		sql += "where 1=1 ";
 		if (!SGUtil.isEmpty(searchDto.getName())) {
-			sql += "and s.name like('%" + searchDto.getName() + "%'";
+			sql += "and upper(s.name) like upper('%" + searchDto.getName() + "%')";
 		}
-		// add other filters
-
+		if (!SGUtil.isEmpty(searchDto.getSurname())) {
+			sql += "and upper(s.surname) like upper('%" + searchDto.getSurname() + "%')";
+		}
+		if (!SGUtil.isEmpty(searchDto.getEmail())) {
+			sql += "and upper(s.email) like upper('%" + searchDto.getEmail() + "%')";
+		}
+		if (!SGUtil.isEmpty(searchDto.getJobTitle())) {
+			sql += "and upper(s.jobTitle) like upper('%" + searchDto.getJobTitle() + "%')";
+		}
+		if (searchDto.getPaymentType() != null) {
+			sql += "and upper(s.paymentType) like upper('%" + searchDto.getPaymentType() + "%')";
+		}
+		if (!SGUtil.isEmpty(searchDto.getSex())) {
+			sql += "and upper(s.sex) like upper('%" + searchDto.getSex() + "%')";
+		}
 		List<StudentEntity> students = entityManager.createQuery(sql, StudentEntity.class).getResultList();
 		return students;
 	}

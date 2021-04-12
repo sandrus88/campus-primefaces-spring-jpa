@@ -14,23 +14,28 @@ public class StudentAssembler {
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setSurname(entity.getSurname());
-        // ..
-
+        dto.setEmail(entity.getEmail());
+        dto.setJobTitle(entity.getJobTitle());
+        dto.setPaymentType(PaymentTypeAssembler.getEnum(entity.getPaymentType()));
+        dto.setJobTitle(entity.getJobTitle());
+        dto.setSex(entity.getSex());
         return dto;
     }
 
     //quando arrivi dal FE, e devi creare gli oggetti del DB
     public static StudentEntity getEntity(Student dto) {
         StudentEntity entity = new StudentEntity();
-        entity.setId(entity.getId());
-        entity.setName(entity.getName());
-        entity.setSurname(entity.getSurname());
-        // ..
-
+        entity.setId(dto.getId());
+        entity.setName(dto.getName());
+        entity.setSurname(dto.getSurname());
+        entity.setEmail(dto.getEmail());
+        entity.setJobTitle(dto.getJobTitle());
+        entity.setPaymentType(PaymentTypeAssembler.getString(dto.getPaymentType()));
+        entity.setSex(dto.getSex());
         return entity;
     }
 
-    public static List<Student> getDTO(List<StudentEntity> entityList) {
+    public static List<Student> getDTOList(List<StudentEntity> entityList) {
         List<Student> list = new ArrayList<>();
         for (StudentEntity entity : entityList) {
             list.add(getDTO(entity));

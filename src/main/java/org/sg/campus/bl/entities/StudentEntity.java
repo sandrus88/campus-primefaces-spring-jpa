@@ -17,12 +17,14 @@ public class StudentEntity {
 	private String name;
 	@Column(name = "SURNAME")
 	private String surname;
+	@Column(name = "EMAIL")
+	private String email;
 	@Column(name = "JOB_TITLE")
 	private String jobTitle;
 	@Column(name = "PAYMENT_TYPE")
 	private String paymentType;
 	@Column(name = "SEX")
-	private Character sex;
+	private String sex;
 
 	@OneToOne(mappedBy = "studentEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = true, orphanRemoval = true)
 	private AddressEntity addressEntity;
@@ -96,6 +98,14 @@ public class StudentEntity {
 		this.surname = surname;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getJobTitle() {
 		return jobTitle;
 	}
@@ -112,11 +122,11 @@ public class StudentEntity {
 		this.paymentType = paymentType;
 	}
 
-	public Character getSex() {
+	public String getSex() {
 		return sex;
 	}
 
-	public void setSex(Character sex) {
+	public void setSex(String sex) {
 		this.sex = sex;
 	}
 
@@ -162,6 +172,9 @@ public class StudentEntity {
 		if (surname != null && !surname.equals(other.surname)) {
 			return false;
 		}
+		if (email != null && !email.equals(other.email)) {
+			return false;
+		}
 		if (jobTitle != null && !jobTitle.equals(other.jobTitle)) {
 			return false;
 		}
@@ -188,6 +201,7 @@ public class StudentEntity {
 		int result = id;
 		result = result + ((name == null) ? 0 : name.hashCode());
 		result = result + ((surname == null) ? 0 : surname.hashCode());
+		result = result + ((email == null) ? 0 : email.hashCode());
 		result = result + ((jobTitle == null) ? 0 : jobTitle.hashCode());
 		result = result + ((paymentType == null) ? 0 : paymentType.hashCode());
 		result = result + ((sex == null) ? 0 : sex.hashCode());
@@ -199,7 +213,7 @@ public class StudentEntity {
 
 	@Override
 	public String toString() {
-		return "Student  [id: " + id + ", name: " + name + ", surname: " + surname + ", job title: " + jobTitle
+		return "Student  [id: " + id + ", name: " + name + ", surname: " + surname + ", email: " + email + ", job title: " + jobTitle
 				+ ", paymentType: " + paymentType + ", sex: " + sex + ", address: " + addressEntity + "]";
 	}
 }

@@ -1,8 +1,9 @@
 package org.sg.campus.bl.dao;
 
-import org.sg.campus.bl.entities.CourseEntity;
-
 import java.util.List;
+
+import org.sg.campus.bl.entities.CourseEntity;
+import org.sg.campus.web.domain.Course;
 
 public interface CourseDao {
     CourseEntity insert(CourseEntity courseEntity);
@@ -14,4 +15,6 @@ public interface CourseDao {
     List<CourseEntity> getAll();
 
     boolean delete(Integer id);
+    
+    List<CourseEntity> searchCourse(Course searchDto);
 }

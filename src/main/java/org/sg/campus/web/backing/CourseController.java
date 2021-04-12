@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
+import org.sg.campus.bl.service.CourseService;
 import org.sg.campus.web.beans.ApplicationBean;
 import org.sg.campus.web.domain.Course;
 import org.sg.campus.web.domain.Topic;
@@ -20,6 +21,10 @@ public class CourseController {
 
 	@ManagedProperty(value = "#{applicationBean}")
 	private ApplicationBean applicationBean;
+	
+	@ManagedProperty(value = "#{courseService}")
+	private CourseService courseService;
+	
 	private TopicController topicController;
 	private List<Course> courseList = new ArrayList<Course>();
 	private List<Course> searchCourseList = new ArrayList<Course>();
@@ -48,7 +53,7 @@ public class CourseController {
 		course.setName(newName);
 		course.setDescription(newDescription);
 		course.setEnabled(newEnabled);
-		courseList.add(course);
+//		courseList.add(course);
 		System.out.println("Course " + course + " added correctly");
 		cleanDialogForm();
 	}
@@ -226,6 +231,14 @@ public class CourseController {
 
 	public Boolean getNewEnabled() {
 		return newEnabled;
+	}
+
+	public CourseService getCourseService() {
+		return courseService;
+	}
+
+	public void setCourseService(CourseService courseService) {
+		this.courseService = courseService;
 	}
 
 	public List<Topic> getAllTopics() {

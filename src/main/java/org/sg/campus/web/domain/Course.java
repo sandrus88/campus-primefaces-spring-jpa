@@ -9,6 +9,15 @@ public class Course {
 	private String description;
 	private Boolean enabled;
 	private List<Topic> topicList = new ArrayList<Topic>();
+	
+	public Course(){
+
+	}
+
+    public Course(String name, String description) {
+    	this.name = name;
+		this.description = description;
+    }
 
 	public int getId() {
 		return id;

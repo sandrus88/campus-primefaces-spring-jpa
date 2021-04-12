@@ -3,6 +3,7 @@ package org.sg.campus.bl.dao.impl;
 import org.sg.campus.bl.dao.GenericDao;
 import org.sg.campus.bl.dao.TopicDao;
 import org.sg.campus.bl.entities.TopicEntity;
+import org.sg.campus.web.domain.Topic;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -42,6 +43,12 @@ public class TopicDaoImpl extends GenericDao implements TopicDao {
 	public List<TopicEntity> getAll() {
 		List<TopicEntity> topics = entityManager.createQuery("from TopicEntity", TopicEntity.class).getResultList();
 		return topics;
+	}
+
+	@Override
+	public List<TopicEntity> searchTopic(Topic searchDto) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

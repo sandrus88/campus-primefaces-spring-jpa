@@ -26,11 +26,11 @@ public class CourseController {
 	private CourseService courseService;
 	
 	private TopicController topicController;
-	private List<Course> courseList = new ArrayList<Course>();
-	private List<Course> searchCourseList = new ArrayList<Course>();
+	private List<Course> courseList = new ArrayList<>();
+	private List<Course> searchCourseList = new ArrayList<>();  //remove
 	private Course selectedCourse;
 
-	private List<Topic> allTopics = new ArrayList<Topic>();
+	private List<Topic> allTopics = new ArrayList<>();
 
 	private String newName;
 	private String newDescription;

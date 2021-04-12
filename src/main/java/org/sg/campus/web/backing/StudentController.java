@@ -40,8 +40,7 @@ public class StudentController {
 	private PaymentType searchPaymentType;
 	private String searchSex;
 
-	private List<Student> studentList = new ArrayList<Student>();
-	private List<Student> searchStudentList = new ArrayList<Student>();
+	private List<Student> studentList = new ArrayList<>();
 	private Student selectedStudent;
 
 	@PostConstruct
@@ -61,17 +60,14 @@ public class StudentController {
 		student.setJobTitle(newJobTitle);
 		student.setPaymentType(newPaymentType);
 		student.setSex(newSex);
-//		studentList.add(student);
-//		studentService.insert(student);
 
 		System.out.println("Added student: " + student);
 		cleanDialogForm();
 	}
 
 	public void searchStudent() {
-		searchStudentList = studentService.getAllStudents();
 		Student searchDto = new Student(searchName, searchSurname, searchEmail, searchJobTitle, searchPaymentType, searchSex);
-		searchStudentList = studentService.searchStudent(searchDto);
+		studentList = studentService.searchStudent(searchDto);studentList = studentService.searchStudent(searchDto);
 	}
 
 	public void cleanDialogForm() {
@@ -258,14 +254,6 @@ public class StudentController {
 
 	public void setSearchSex(String searchSex) {
 		this.searchSex = searchSex;
-	}
-
-	public List<Student> getSearchStudentList() {
-		return searchStudentList;
-	}
-
-	public void setSearchStudentList(List<Student> searchStudentList) {
-		this.searchStudentList = searchStudentList;
 	}
 
 	public StudentService getStudentService() {

@@ -1,6 +1,10 @@
 package org.sg.campus.web.domain;
 
 public class Student {
+
+	public static final String SEX_M = "M";
+	public static final String SEX_F = "F";
+
 	private int id;
 	private String name;
 	private String surname;

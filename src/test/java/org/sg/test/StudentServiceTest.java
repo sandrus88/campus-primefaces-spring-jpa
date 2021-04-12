@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.sg.campus.bl.entities.AddressEntity;
 import org.sg.campus.bl.entities.StudentEntity;
 import org.sg.campus.bl.service.StudentService;
+import org.sg.campus.web.domain.PaymentType;
 import org.sg.campus.web.domain.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -89,7 +90,60 @@ public class StudentServiceTest extends AbstractSpringTest {
 //		assertEquals(students.get(18).getId(), studentsId[18]);
 //		assertEquals(students.get(19).getId(), studentsId[19]);
 	}
-	
+
+	@Test
+	public void test_searchStudents() {
+		Student searchBean = new Student();
+		List<Student> list = studentService.searchStudent(searchBean);
+		assertEquals(20, list.size());
+
+		searchBean.setName("Sandro");
+		searchBean.setSurname("Gargano");
+		searchBean.setEmail("sandrus88@hotmail.it");
+		searchBean.setJobTitle("Waiter");
+		searchBean.setPaymentType(PaymentType.OK);
+		searchBean.setSex("Maschio");
+		list = studentService.searchStudent(searchBean);
+		assertEquals(1, list.size());
+
+		searchBean.setName("Sandro");
+		list = studentService.searchStudent(searchBean);
+		assertEquals(1, list.size());
+
+		searchBean.setName("Sa");
+		list = studentService.searchStudent(searchBean);
+		assertEquals(1, list.size());
+
+		searchBean.setName("sandr");
+		list = studentService.searchStudent(searchBean);
+		assertEquals(1, list.size());
+
+		searchBean.setName("ndRO");
+		searchBean.setSurname("rgANo");
+		searchBean.setEmail("sandrus88@hotMAIL.it");
+		searchBean.setJobTitle("Wait");
+		searchBean.setPaymentType(PaymentType.OK);
+		searchBean.setSex("Maschio");
+		list = studentService.searchStudent(searchBean);
+		assertEquals(1, list.size());
+
+		searchBean.setSex("Femmina");
+		list = studentService.searchStudent(searchBean);
+		assertEquals(0, list.size());
+	}
+
+	@Test
+	public void test_searchStudents_gender() {
+		Student searchBean = new Student();
+		searchBean.setSex("Maschio");
+		List<Student> list = studentService.searchStudent(searchBean);
+		assertEquals(16, list.size());
+
+		searchBean.setSex("Femmina");
+		list = studentService.searchStudent(searchBean);
+		assertEquals(4, list.size());
+	}
+
 	@Test
 	public void test_getAllAddresses() {
 		// Given

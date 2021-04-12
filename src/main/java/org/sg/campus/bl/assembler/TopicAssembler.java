@@ -18,7 +18,6 @@ public class TopicAssembler {
         return dto;
     }
 
-    //quando arrivi dal FE, e devi creare gli oggetti del DB
     public static TopicEntity getEntity(Topic dto) {
     	TopicEntity entity = new TopicEntity();
         entity.setId(dto.getId());

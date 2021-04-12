@@ -22,7 +22,6 @@ public class StudentAssembler {
         return dto;
     }
 
-    //quando arrivi dal FE, e devi creare gli oggetti del DB
     public static StudentEntity getEntity(Student dto) {
         StudentEntity entity = new StudentEntity();
         entity.setId(dto.getId());

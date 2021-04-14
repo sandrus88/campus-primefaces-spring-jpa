@@ -6,9 +6,12 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 @ApplicationScoped
 public class ApplicationBean {
-	private int num;
+	private Integer num;
 
-	public int getNextInt() {
-		return num++;
+	public Integer getNextInt() {
+		if (num == null) {
+			return null;
+		}
+		return num = new Integer(num.intValue() + 1);
 	}
 }

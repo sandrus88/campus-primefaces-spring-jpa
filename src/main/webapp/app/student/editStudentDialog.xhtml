@@ -43,14 +43,14 @@
 
 				<p:outputLabel for="sex" value="#{msg['student.sex']}" />
 				<p:selectOneRadio id="sex" value="#{studentController.selectedStudent.sex}" required="true">
-					<f:selectItem itemValue="#{msg['student.male']}" itemLabel="M" />
-					<f:selectItem itemValue="#{msg['student.female']}" itemLabel="F" />
+					<f:selectItem itemValue="#{studentController.getGenderMale()}" itemLabel="M" />
+					<f:selectItem itemValue="#{studentController.getGenderFemale()}" itemLabel="F" />
 				</p:selectOneRadio>
 				<p:message for="sex" style="color:red" />
 			</h:panelGrid>
 
 			<h:panelGrid border="0" columns="2">
-				<p:commandButton value="#{msg['save']}" update="studentListForm studentEditForm" oncomplete="PF('dialogEditStudent').show()" />
+				<p:commandButton value="#{msg['save']}" actionListener="#{studentController.updateSelectedStudent(studentController.selectedStudent)}" update="studentListForm studentEditForm" oncomplete="PF('dialogEditStudent').hide()" />
 				<p:commandButton value="#{msg['close']}" onclick="PF('dialogEditStudent').hide()" />
 			</h:panelGrid>
 		</p:dialog>

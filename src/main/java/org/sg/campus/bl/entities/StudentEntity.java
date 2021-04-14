@@ -213,7 +213,7 @@ public class StudentEntity {
 
 	@Override
 	public String toString() {
-		return "Student  [id: " + id + ", name: " + name + ", surname: " + surname + ", email: " + email + ", job title: " + jobTitle
+		return this.getClass().getSimpleName() + " [id: " + id + ", name: " + name + ", surname: " + surname + ", email: " + email + ", job title: " + jobTitle
 				+ ", paymentType: " + paymentType + ", sex: " + sex + ", address: " + addressEntity + "]";
 	}
 }

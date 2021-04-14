@@ -41,8 +41,8 @@
 
 					<p:outputLabel for="sex" value="#{msg['student.sex']}" />
 					<p:selectOneRadio id="sex" value="#{studentController.newSex}" required="true">
-						<f:selectItem itemValue="#{msg['student.male']}" itemLabel="M" />
-						<f:selectItem itemValue="#{msg['student.female']}" itemLabel="F" />
+						<f:selectItem itemValue="#{studentController.getGenderMale()}" itemLabel="M" />
+						<f:selectItem itemValue="#{studentController.getGenderFemale()}" itemLabel="F" />
 					</p:selectOneRadio>
 					<p:message for="sex" style="color:red" />
 				</h:panelGrid>

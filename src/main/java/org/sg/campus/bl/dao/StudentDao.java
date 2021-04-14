@@ -1,7 +1,7 @@
 package org.sg.campus.bl.dao;
 
+import org.sg.campus.bl.domain.Student;
 import org.sg.campus.bl.entities.StudentEntity;
-import org.sg.campus.web.domain.Student;
 
 import java.util.List;
 
@@ -17,4 +17,5 @@ public interface StudentDao {
     boolean delete(Integer id);
 
     List<StudentEntity> searchStudent(Student searchDto);
+
 }

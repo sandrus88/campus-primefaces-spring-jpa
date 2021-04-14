@@ -26,7 +26,7 @@
 			</h:panelGrid>
 
 			<h:panelGrid border="0" columns="2">
-				<p:commandButton value="#{msg['save']}" update="topicsListForm topicEditForm" oncomplete="PF('dialogEditTopic').show()" />
+				<p:commandButton value="#{msg['save']}" update="topicsListForm topicEditForm" oncomplete="PF('dialogEditTopic').hide()" />
 				<p:commandButton value="#{msg['close']}" onclick="PF('dialogEditTopic').hide()" />
 			</h:panelGrid>
 		</p:dialog>

@@ -3,11 +3,10 @@ package org.sg.test;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.sg.campus.bl.domain.PaymentType;
+import org.sg.campus.bl.domain.Student;
 import org.sg.campus.bl.entities.AddressEntity;
-import org.sg.campus.bl.entities.StudentEntity;
 import org.sg.campus.bl.service.StudentService;
-import org.sg.campus.web.domain.PaymentType;
-import org.sg.campus.web.domain.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -16,48 +15,30 @@ import static org.junit.Assert.*;
 import static org.sg.test.util.EntityUtils.*;
 
 public class StudentServiceTest extends AbstractSpringTest {
-	
+
 	private static Logger logger = LogManager.getLogger(StudentServiceTest.class);
-	
+
 	@Autowired
 	private StudentService studentService;
-	
-	@Test
-	public void test_getStudent_withoutAddress() {
-		//Given
-		final Integer studentId = 21;
-		
-		//When
-		StudentEntity studentEntity = studentService.getStudent(studentId);
-		
-		//Then
-		assertNotNull(studentEntity);
-		assertEquals(studentEntity.getName(), "Armela");
-		assertEquals(studentEntity.getSurname(), "Xhaxho");
-		assertEquals(studentEntity.getJobTitle(), "Shop Assistant");
-		assertEquals(studentEntity.getPaymentType(), "UNKNOWN");
-		assertEquals(studentEntity.getSex(), "Femmina");
-	}
 
 	@Test
-	public void test_getStudent_withAddress() {
-		//Given
-		final Integer studentId = 1;
-		final Integer addressId = 1;
-		
-		//When
-		StudentEntity studentEntity = studentService.getStudent(studentId);
-		
-		//Then
-		assertEquals(studentEntity.getName(), "Sandro");
-		assertEquals(studentEntity.getSurname(), "Gargano");
-		assertEquals(studentEntity.getJobTitle(), "Waiter");
-		assertEquals(studentEntity.getPaymentType(), "OK");
-		assertEquals(studentEntity.getSex(), "Maschio");
-		assertNotNull(studentEntity.getAddressEntity());
-		assertEquals(studentEntity.getAddressEntity().getId(), addressId);
+	public void test_getStudent() {
+		// Given
+		final Integer studentId = 21;
+
+		// When
+		Student student = studentService.getStudent(studentId);
+
+		// Then
+		assertNotNull(student);
+		assertEquals(student.getName(), "Armela");
+		assertEquals(student.getSurname(), "Xhaxho");
+		assertEquals(student.getEmail(), "armelaxhaxho@hotmail.com");
+		assertEquals(student.getJobTitle(), "Shop Assistant");
+		assertEquals(student.getPaymentType(), PaymentType.UNKNOWN);
+		assertEquals(student.getSex(), "F");
 	}
-	
+
 	@Test
 	public void test_getAllStudents() {
 		// Given
@@ -69,341 +50,263 @@ public class StudentServiceTest extends AbstractSpringTest {
 		// Then
 		assertNotNull(students);
 		assertEquals(students.size(), 20);
-//		assertEquals(students.get(0).getId(), studentsId[0]);
-//		assertEquals(students.get(1).getId(), studentsId[1]);
-//		assertEquals(students.get(2).getId(), studentsId[2]);
-//		assertEquals(students.get(3).getId(), studentsId[3]);
-//		assertEquals(students.get(4).getId(), studentsId[4]);
-//		assertEquals(students.get(5).getId(), studentsId[5]);
-//		assertEquals(students.get(6).getId(), studentsId[6]);
-//		assertEquals(students.get(7).getId(), studentsId[7]);
-//		assertEquals(students.get(8).getId(), studentsId[8]);
-//		assertEquals(students.get(9).getId(), studentsId[9]);
-//		assertEquals(students.get(10).getId(), studentsId[10]);
-//		assertEquals(students.get(11).getId(), studentsId[11]);
-//		assertEquals(students.get(12).getId(), studentsId[12]);
-//		assertEquals(students.get(13).getId(), studentsId[13]);
-//		assertEquals(students.get(14).getId(), studentsId[14]);
-//		assertEquals(students.get(15).getId(), studentsId[15]);
-//		assertEquals(students.get(16).getId(), studentsId[16]);
-//		assertEquals(students.get(17).getId(), studentsId[17]);
-//		assertEquals(students.get(18).getId(), studentsId[18]);
-//		assertEquals(students.get(19).getId(), studentsId[19]);
+		assertEquals(students.get(0).getId(), studentsId[0]);
+		assertEquals(students.get(19).getId(), studentsId[19]);
 	}
 
 	@Test
-	public void test_searchStudents() {
-		Student searchBean = new Student();
-		List<Student> list = studentService.searchStudent(searchBean);
-		assertEquals(20, list.size());
+	public void test_getStudent_notPresent() {
+		// Given
+		final Integer studentId = -1;
 
+		// When
+		Student student = studentService.getStudent(studentId);
+
+		// Then
+		assertNull(student);
+	}
+
+	@Test
+	public void test_searchAllStudents() {
+		// Given
+		Student searchBean = new Student();
+
+		// When
+		List<Student> list = studentService.searchStudent(searchBean);
+
+		// Then
+		assertEquals(20, list.size());
+	}
+
+	@Test
+	public void test_searchStudent_correctData() {
+		// Given
+		Student searchBean = new Student();
 		searchBean.setName("Sandro");
 		searchBean.setSurname("Gargano");
 		searchBean.setEmail("sandrus88@hotmail.it");
 		searchBean.setJobTitle("Waiter");
 		searchBean.setPaymentType(PaymentType.OK);
-		searchBean.setSex("Maschio");
-		list = studentService.searchStudent(searchBean);
-		assertEquals(1, list.size());
+		searchBean.setSex("M");
 
-		searchBean.setName("Sandro");
-		list = studentService.searchStudent(searchBean);
-		assertEquals(1, list.size());
+		// When
+		List<Student> list = studentService.searchStudent(searchBean);
 
-		searchBean.setName("Sa");
-		list = studentService.searchStudent(searchBean);
+		// Then
 		assertEquals(1, list.size());
+	}
 
-		searchBean.setName("sandr");
-		list = studentService.searchStudent(searchBean);
-		assertEquals(1, list.size());
-
+	@Test
+	public void test_searchStudent_modifiedData() {
+		// Given
+		Student searchBean = new Student();
 		searchBean.setName("ndRO");
 		searchBean.setSurname("rgANo");
 		searchBean.setEmail("sandrus88@hotMAIL.it");
 		searchBean.setJobTitle("Wait");
 		searchBean.setPaymentType(PaymentType.OK);
-		searchBean.setSex("Maschio");
-		list = studentService.searchStudent(searchBean);
-		assertEquals(1, list.size());
+		searchBean.setSex("M");
 
-		searchBean.setSex("Femmina");
-		list = studentService.searchStudent(searchBean);
-		assertEquals(0, list.size());
+		// When
+		List<Student> list = studentService.searchStudent(searchBean);
+
+		// Then
+		assertEquals(1, list.size());
 	}
 
 	@Test
-	public void test_searchStudents_gender() {
+	public void test_searchStudents_byName() {
+		// Given
 		Student searchBean = new Student();
-		searchBean.setSex("Maschio");
-		List<Student> list = studentService.searchStudent(searchBean);
-		assertEquals(16, list.size());
+		searchBean.setName("Student");
 
-		searchBean.setSex("Femmina");
-		list = studentService.searchStudent(searchBean);
+		// When
+		List<Student> list = studentService.searchStudent(searchBean);
+
+		// Then
+		assertEquals(12, list.size());
+	}
+
+	@Test
+	public void test_searchStudents_bySurname() {
+		// Given
+		Student searchBean = new Student();
+		searchBean.setSurname("Xhaxho");
+		
+		// When
+		List<Student> list = studentService.searchStudent(searchBean);
+
+		// Then
+		assertEquals(2, list.size());
+	}
+
+	@Test
+	public void test_searchStudents_byEmail() {
+		// Given
+		Student searchBean = new Student();
+		searchBean.setEmail(null);
+
+		// When
+		List<Student> list = studentService.searchStudent(searchBean);
+
+		// Then
+		assertEquals(15, list.size());
+	}
+
+	@Test
+	public void test_searchStudents_byJobTitle() {
+		// Given
+		Student searchBean = new Student();
+		searchBean.setJobTitle("Job");
+
+		// When
+		List<Student> list = studentService.searchStudent(searchBean);
+
+		// Then
+		assertEquals(12, list.size());
+	}
+
+	@Test
+	public void test_searchStudents_byPaymentType_OK() {
+		// Given
+		Student searchBean = new Student();
+		searchBean.setPaymentType(PaymentType.OK);
+
+		// When
+		List<Student> list = studentService.searchStudent(searchBean);
+
+		// Then
+		assertEquals(16, list.size());
+	}
+
+	@Test
+	public void test_searchStudents_byPaymentType_NOTOK() {
+		// Given
+		Student searchBean = new Student();
+		searchBean.setPaymentType(PaymentType.NOTOK);
+
+		// When
+		List<Student> list = studentService.searchStudent(searchBean);
+
+		// Then
+		assertEquals(2, list.size());
+	}
+
+	@Test
+	public void test_searchStudents_byPaymentType_UNKNOWN() {
+		// Given
+		Student searchBean = new Student();
+		searchBean.setPaymentType(PaymentType.UNKNOWN);
+
+		// When
+		List<Student> list = studentService.searchStudent(searchBean);
+
+		// Then
+		assertEquals(2, list.size());
+	}
+
+	@Test
+	public void test_searchStudents_byGenderMale() {
+		// Given
+		Student searchBean = new Student();
+		searchBean.setSex("M");
+
+		// When
+		List<Student> list = studentService.searchStudent(searchBean);
+
+		// Then
+		assertEquals(16, list.size());
+	}
+
+	@Test
+	public void test_searchStudents_byGenderFemale() {
+		// Given
+		Student searchBean = new Student();
+		searchBean.setSex("F");
+
+		// When
+		List<Student> list = studentService.searchStudent(searchBean);
+
+		// Then
 		assertEquals(4, list.size());
 	}
 
 	@Test
-	public void test_getAllAddresses() {
+	public void test_insertStudent() {
 		// Given
-		final Integer[] addressesId = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+		Student student = createStudent();
 
 		// When
-		List<AddressEntity> addresses = studentService.getAllAddresses();
+		student = studentService.insert(student);
+		Student studentDb = studentService.getStudent(student.getId());
 
 		// Then
-		assertNotNull(addresses);
-		assertEquals(addresses.size(), 10);
-		assertEquals(addresses.get(0).getId(), addressesId[0]);
-		assertEquals(addresses.get(1).getId(), addressesId[1]);
-		assertEquals(addresses.get(2).getId(), addressesId[2]);
-		assertEquals(addresses.get(3).getId(), addressesId[3]);
-		assertEquals(addresses.get(4).getId(), addressesId[4]);
-		assertEquals(addresses.get(5).getId(), addressesId[5]);
-		assertEquals(addresses.get(6).getId(), addressesId[6]);
-		assertEquals(addresses.get(7).getId(), addressesId[7]);
-		assertEquals(addresses.get(8).getId(), addressesId[8]);
-		assertEquals(addresses.get(9).getId(), addressesId[9]);
-	}
-	
-
-	@Test
-	public void test_getStudent_notPresent() {
-		//Given
-		final Integer studentId = -1;
-		
-		//When
-		StudentEntity studentEntity = studentService.getStudent(studentId);
-		
-		//Then
-		assertNull(studentEntity);
+		assertEquals(studentDb, student);
 	}
 
 	@Test
-	public void test_insertStudent_withoutAddress() {
-		//Given
-		StudentEntity studentEntity = createStudent();
-		
-		//When
-		studentService.insert(studentEntity);
-		StudentEntity studentEntityDb = studentService.getStudent(studentEntity.getId());
-		
-		//Then
-		assertEquals(studentEntityDb, studentEntity);
-		assertNull(studentEntityDb.getAddressEntity());
-	}
-
-	@Test
-	public void test_insertStudent_withAddress() {
-		//Given
-		StudentEntity studentEntity = createStudentWithAddress();
-		
-		//When
-		studentService.insert(studentEntity);
-		StudentEntity studentEntityDb = studentService.getStudent(studentEntity.getId());
-		
-		//Then
-		assertEquals(studentEntityDb, studentEntity);
-		assertEquals(studentEntityDb.getAddressEntity(), studentEntity.getAddressEntity());
-	}
-	
-	@Test
-	public void test_updateStudent_withoutAddress() {
-		//Given
+	public void test_updateStudent() {
+		// Given
 		final Integer studentId = 22;
-		
-		//When
-		StudentEntity studentEntity = studentService.getStudent(studentId);
-		studentEntity = updateStudent(studentEntity);
-		studentService.update(studentEntity);
-		StudentEntity studentEntityDb = studentService.getStudent(studentId);
-		
-		//Then
-		assertEquals(studentEntityDb, studentEntity);
+
+		// When
+		Student student = studentService.getStudent(studentId);
+		updateStudent(student);
+		student = studentService.update(student);
+		Student studentDb = studentService.getStudent(studentId);
+
+		// Then
+		assertEquals(studentDb, student);
 	}
-	
+
 	@Test
-	public void test_updateStudent_withAddress() {
-		//Given
-		final Integer studentId = 2;
-		
-		//When
-		StudentEntity studentEntity = studentService.getStudent(studentId);
-		studentEntity = updateStudent(studentEntity);
-		studentService.update(studentEntity);
-		StudentEntity studentEntityDb = studentService.getStudent(studentId);
-		
-		//Then
-		assertEquals(studentEntityDb, studentEntity);
-	}
-	
-	@Test
-	public void test_deleteStudent_withoutAddress() {
-		//Given
+	public void test_deleteStudent() {
+		// Given
 		final Integer studentId = 24;
-		
-		//When
+
+		// When
 		boolean deleting = studentService.deleteStudent(studentId);
-		StudentEntity studentEntity = studentService.getStudent(studentId);
-		
-		//Then
+		Student student = studentService.getStudent(studentId);
+
+		// Then
 		assertTrue(deleting);
-		assertNull(studentEntity);
+		assertNull(student);
 	}
-	
-	@Test
-	public void test_deleteStudent_withAddress() {
-		//Given
-		final Integer studentId = 4;
-		
-		//When
-		boolean deleting = studentService.deleteStudent(studentId);
-		StudentEntity studentEntity = studentService.getStudent(studentId);
-		
-		//Then
-		assertTrue(deleting);
-		assertNull(studentEntity);
-	}
-	
+
 	@Test
 	public void test_deleteStudent_notPresent() {
-		//Given
+		// Given
 		final Integer studentId = -1;
-		
-		//When
+
+		// When
 		boolean deleting = studentService.deleteStudent(studentId);
-		
-		//Then
+
+		// Then
 		assertFalse(deleting);
 	}
-	
-	@Test
-	public void test_addAddress_forStudent() {
-		//Given
-		final Integer studentId = 23;
-		
-		//When
-		StudentEntity studentEntity = studentService.getStudent(studentId);
-		AddressEntity addressEntity = createAddress(studentEntity);
-		studentService.update(studentEntity);
-		StudentEntity studentEntityDb = studentService.getStudent(studentId);
-		
-		//Then
-		assertNotNull(studentEntityDb.getAddressEntity());
-		assertEquals(studentEntityDb.getAddressEntity(), addressEntity);
-	}
-	
-	@Test
-	public void test_deleteAddress_forStudent() {
-		//Given
-		final Integer studentId = 5;
-		
-		//When
-		StudentEntity studentEntity = studentService.getStudent(studentId);
-		studentEntity.getAddressEntity().setStudentEntity(null);
-		studentEntity.setAddressEntity(null);
-		studentService.update(studentEntity);
-		StudentEntity db = studentService.getStudent(studentEntity.getId());
-		
-		//Then
-		assertNull(db.getAddressEntity());
-	}
-	
-	@Test
-	public void test_updateAddress_forStudent() {
-		//Given
-		final Integer studentId = 3;
-		
-		//When
-		StudentEntity studentEntity = studentService.getStudent(studentId);
-		AddressEntity addressEntity = updateAddress(studentEntity.getAddressEntity());
-		studentService.update(studentEntity);
-		StudentEntity studentEntityDb = studentService.getStudent(studentId);
-		
-		//Then
-		assertEquals(studentEntityDb.getAddressEntity(), addressEntity);
-	}
-	
+
 	@Test
 	public void test_student_integrationTest_CRUD() {
 		// 1. insert a new student in DB
-		StudentEntity studentEntity = createStudent();
-		studentService.insert(studentEntity);
-		assertNotNull(studentEntity.getId());
-		
+		Student student = createStudent();
+		student = studentService.insert(student);
+		assertNotNull(student.getId());
+
 		// 2. get the student from DB
-		StudentEntity studentEntityDb = studentService.getStudent(studentEntity.getId());
-		assertNotNull(studentEntityDb);
-		assertEquals(studentEntityDb, studentEntity);
-		
+		Student studentDb = studentService.getStudent(student.getId());
+		assertNotNull(studentDb);
+		assertEquals(studentDb, student);
+
 		// 3. Update the student in DB, and Get to check if updated correctly
-		updateStudent(studentEntity);
-		studentService.update(studentEntity);
-		studentEntityDb = studentService.getStudent(studentEntity.getId());
-		assertEquals(studentEntityDb, studentEntity);
+		updateStudent(student);
+		student = studentService.update(student);
+		studentDb = studentService.getStudent(student.getId());
+		assertEquals(studentDb, student);
 
 		// 4. Delete the student from DB, and Get to check if deleted correctly
-		boolean isRemoved = studentService.deleteStudent(studentEntity.getId());
+		boolean isRemoved = studentService.deleteStudent(student.getId());
 		assertTrue(isRemoved);
-		studentEntityDb = studentService.getStudent(studentEntity.getId());
-		assertNull(studentEntityDb);
+		studentDb = studentService.getStudent(student.getId());
+		assertNull(studentDb);
 	}
-	
-	@Test
-	public void test_address_integrationTest_CRUD() {
-		// 1. insert a new student
-		StudentEntity studentEntity = createStudent();
-		studentService.insert(studentEntity);
-		assertNotNull(studentEntity.getId());
-		
-		// 2. insert an address for the student
-		AddressEntity addressEntity = createAddress(studentEntity);
-		assertNotNull(addressEntity);
-		studentService.update(studentEntity);
-		
-		// 3. Get and check if the student and the address has correctly been fetched
-		StudentEntity studentEntityDb = studentService.getStudent(studentEntity.getId());
-		assertNotNull(studentEntityDb);
-		assertNotNull(studentEntityDb.getAddressEntity());
-		assertEquals(studentEntityDb, studentEntity);
-		assertEquals(studentEntityDb.getAddressEntity(), studentEntity.getAddressEntity());
-		
-		// 4. Update the address, and Get to check if is updated correctly
-		updateAddress(addressEntity);
-		studentService.update(studentEntity);
-		studentEntityDb = studentService.getStudent(studentEntity.getId());
-		assertEquals(studentEntityDb.getAddressEntity(), studentEntity.getAddressEntity());
-		
-		// 5. Delete the address of the student, and Get to check if is deleted
-		// correctly
-		studentEntity.getAddressEntity().setStudentEntity(null);
-		studentEntity.setAddressEntity(null);
-		studentService.update(studentEntity);
-		studentEntityDb = studentService.getStudent(studentEntity.getId());
-		assertNull(studentEntityDb.getAddressEntity());
-	}
-	
-	@Test
-	public void test_studentWithAddress_integrationTest_CRUD() {
-		// 1. insert a new student with address
-		StudentEntity studentEntity = createStudentWithAddress();
-		studentService.insert(studentEntity);
-		assertNotNull(studentEntity.getId());
-		assertNotNull(studentEntity.getAddressEntity());
-		
-		// 2. Get and check if the student and the address has correctly been fetched
-		StudentEntity studentEntityDb = studentService.getStudent(studentEntity.getId());
-		assertNotNull(studentEntityDb);
-		assertNotNull(studentEntityDb.getAddressEntity());
-		assertEquals(studentEntityDb, studentEntity);
-		assertEquals(studentEntityDb.getAddressEntity(), studentEntity.getAddressEntity());
-		
-		// 3. Delete the student, and Get to check if is deleted correctly
-		boolean isRemoved = studentService.deleteStudent(studentEntity.getId());
-		assertTrue(isRemoved);
-		studentEntityDb = studentService.getStudent(studentEntity.getId());
-		assertNull(studentEntityDb);
-	}
-	
 }

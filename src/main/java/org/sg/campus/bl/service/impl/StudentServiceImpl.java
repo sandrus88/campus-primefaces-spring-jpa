@@ -3,10 +3,10 @@ package org.sg.campus.bl.service.impl;
 import org.sg.campus.bl.assembler.StudentAssembler;
 import org.sg.campus.bl.dao.AddressDao;
 import org.sg.campus.bl.dao.StudentDao;
+import org.sg.campus.bl.domain.Student;
 import org.sg.campus.bl.entities.AddressEntity;
 import org.sg.campus.bl.entities.StudentEntity;
 import org.sg.campus.bl.service.StudentService;
-import org.sg.campus.web.domain.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,47 +18,34 @@ import java.util.List;
 public class StudentServiceImpl implements StudentService {
 	
 	final private StudentDao studentDao;
-	final private AddressDao addressDao;
 	
 	@Autowired
-	public StudentServiceImpl(StudentDao studentDao, AddressDao addressDao) {
+	public StudentServiceImpl(StudentDao studentDao) {
 		this.studentDao = studentDao;
-		this.addressDao = addressDao;
 	}
 
-	public StudentEntity insert(StudentEntity studentEntity) {
-		return studentDao.insert(studentEntity);
+	public Student insert(Student student) {
+		StudentEntity entity = StudentAssembler.getEntity(student);
+		entity = studentDao.insert(entity);
+		student = StudentAssembler.getDTO(entity);
+		return student;
 	}
 
-	public StudentEntity getStudent(Integer id) {
-		return studentDao.get(id);
+	public Student getStudent(Integer id) {
+		StudentEntity entity = studentDao.get(id);
+		Student student = StudentAssembler.getDTO(entity);
+		return student;
 	}
 
-	public StudentEntity update(StudentEntity studentEntity) {
-		return studentDao.update(studentEntity);
+	public Student update(Student student) {
+		StudentEntity entity = StudentAssembler.getEntity(student);
+		StudentEntity entityUp = studentDao.update(entity);
+		student = StudentAssembler.getDTO(entityUp);
+		return student;
 	}
 
 	public boolean deleteStudent(Integer id) {
 		return studentDao.delete(id);
-	}
-
-	@Override
-	public AddressEntity insert(AddressEntity addressEntity) {
-		return addressDao.insert(addressEntity);
-	}
-
-	@Override
-	public AddressEntity get(AddressEntity addressEntity) {
-		return addressDao.get(addressEntity);
-	}
-
-	@Override
-	public AddressEntity update(AddressEntity addressEntity) {
-		return addressDao.update(addressEntity);
-	}
-
-	public void delete(AddressEntity addressEntity) {
-		addressDao.delete(addressEntity);
 	}
 
 	@Override
@@ -67,12 +54,6 @@ public class StudentServiceImpl implements StudentService {
 		List<Student> dtoList = StudentAssembler.getDTOList(entityList);
 		return dtoList;
 	}
-
-	@Override
-	public List<AddressEntity> getAllAddresses() {
-		return addressDao.getAll();
-	}
-
 
 	@Override
 	public List<Student> searchStudent(Student searchDto) {

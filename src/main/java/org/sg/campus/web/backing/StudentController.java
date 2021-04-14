@@ -11,10 +11,11 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import org.sg.campus.bl.assembler.StudentAssembler;
+import org.sg.campus.bl.domain.PaymentType;
+import org.sg.campus.bl.domain.Student;
 import org.sg.campus.bl.service.StudentService;
 import org.sg.campus.web.beans.ApplicationBean;
-import org.sg.campus.web.domain.PaymentType;
-import org.sg.campus.web.domain.Student;
 
 @ManagedBean
 @SessionScoped
@@ -50,26 +51,12 @@ public class StudentController {
 		cleanDialogForm();
 		cleanSearchForm();
 	}
-
-	public void addStudent() {
-		Student student = new Student();
-		student.setId(applicationBean.getNextInt());
-		student.setName(newName);
-		student.setSurname(newSurname);
-		student.setEmail(newEmail);
-		student.setJobTitle(newJobTitle);
-		student.setPaymentType(newPaymentType);
-		student.setSex(newSex);
-
-		System.out.println("Added student: " + student);
-		cleanDialogForm();
-	}
-
+	
 	public void searchStudent() {
 		Student searchDto = new Student(searchName, searchSurname, searchEmail, searchJobTitle, searchPaymentType, searchSex);
-		studentList = studentService.searchStudent(searchDto);studentList = studentService.searchStudent(searchDto);
+		studentList = studentService.searchStudent(searchDto);
 	}
-
+	
 	public void cleanDialogForm() {
 		newName = null;
 		newSurname = null;
@@ -88,21 +75,34 @@ public class StudentController {
 		searchSex = null;
 	}
 
-	public String reset() {
+	public void addStudent() {
+		Student student = new Student();
+		student.setId(applicationBean.getNextInt());
+		student.setName(newName);
+		student.setSurname(newSurname);
+		student.setEmail(newEmail);
+		student.setJobTitle(newJobTitle);
+		student.setPaymentType(newPaymentType);
+		student.setSex(newSex);
+		studentService.insert(student);
+		System.out.println("Added student: " + student);
 		cleanDialogForm();
-		return "/app/student/homeStudent.xhtml?faces-redirect=true";
+		searchStudent();
 	}
 
-	public String backHome() {
-		cleanDialogForm();
-		return "/index.xhtml?faces-redirect=true";
+	public void updateSelectedStudent(Student student) {
+		selectedStudent = student;
+		studentService.update(selectedStudent);
+		System.out.println("Going in edit mode for student: " + selectedStudent);
+		searchStudent();
 	}
 
-	public PaymentType[] getEnumValues() {
-		PaymentType[] values = PaymentType.values();
-		return values;
+	public void deleteStudent(Student student) { 
+		studentService.deleteStudent(student.getId());
+		System.out.println("Deleted student: " + student.getId());
+		searchStudent();
 	}
-
+	
 	public String showPaymentType(PaymentType paymentType) {
 		Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
 		ResourceBundle bundle = ResourceBundle.getBundle("messages.messages", locale);
@@ -112,28 +112,18 @@ public class StudentController {
 		}
 		return label;
 	}
-
-	public void updateSelectedStudent(Student student) {
-		selectedStudent = student;
-		System.out.println("Going in edit mode for student: " + selectedStudent);
-//		return "/app/student/editStudent.xhtml?faces-redirect=true";
+	
+	public String getGenderMale() {
+		return Student.SEX_M;
+	}
+	
+	public String getGenderFemale() {
+		return Student.SEX_F;
 	}
 
-	public String updateStudent() {
-		cleanDialogForm();
-		System.out.println("Updated student: " + selectedStudent);
-		return "/app/student/homeStudent.xhtml?faces-redirect=true";
-	}
-
-	public String viewStudent(Student student) {
-		selectedStudent = student;
-		System.out.println("View student: " + selectedStudent);
-		return "/app/student/viewStudent.xhtml?faces-redirect=true";
-	}
-
-	public void deleteStudent(Student student) {
-		studentList.remove(student);
-		System.out.println("Deleted student: " + selectedStudent.getId());
+	public PaymentType[] getEnumValues() {
+		PaymentType[] values = PaymentType.values();
+		return values;
 	}
 
 	public void setNewName(String newName) {

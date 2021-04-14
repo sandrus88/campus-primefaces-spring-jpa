@@ -3,8 +3,8 @@ package org.sg.campus.bl.dao.impl;
 import org.sg.campus.bl.assembler.PaymentTypeAssembler;
 import org.sg.campus.bl.dao.GenericDao;
 import org.sg.campus.bl.dao.StudentDao;
+import org.sg.campus.bl.domain.Student;
 import org.sg.campus.bl.entities.StudentEntity;
-import org.sg.campus.web.domain.Student;
 import org.sg.campus.web.util.SGUtil;
 import org.springframework.stereotype.Repository;
 

@@ -35,10 +35,11 @@
 					<p:inputText id="jobTitle" value="#{studentController.searchJobTitle}" maxlength="20"/>
 				
 					<p:outputLabel for="sex" value="#{msg['student.sex']}" />
-					<p:selectOneRadio id="sex" value="#{studentController.searchSex}">
-						<f:selectItem itemLabel="M" itemValue="#{msg['student.male']}"/>
-						<f:selectItem itemLabel="F" itemValue="#{msg['student.female']}"/>
-					</p:selectOneRadio>
+					<p:selectOneMenu id="sex" value="#{studentController.searchSex}">
+						<f:selectItem itemLabel=""/>
+						<f:selectItem itemLabel="M" itemValue="#{studentController.getGenderMale()}"/>
+						<f:selectItem itemLabel="F" itemValue="#{studentController.getGenderFemale()}"/>
+					</p:selectOneMenu>
 				</h:panelGrid>
 
 				<h:panelGrid border="0" columns="2" style="margin-left: 680px;">
@@ -114,7 +115,7 @@
 						<p:commandLink oncomplete="PF('dialogViewStudent').show()" update="detailStudentForm" id="linkSearch">
 							<i class="fa fa-fw fa-search"/>
 							<p:tooltip for="linkSearch" value="#{msg['action.view']}" position="bottom"/>
-							<f:setPropertyActionListener value="#{item}" target="#{studentController.selectedStudent}" />
+							<f:setPropertyActionListener value="#{item}" target="#{studentController.selectedStudent}"/>
 						</p:commandLink> |
 						<p:commandLink oncomplete="PF('dialogEditStudent').show()" update="studentEditForm" id="linkEdit">
 							<i class="fa fa-fw fa-pencil"/>

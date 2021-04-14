@@ -19,9 +19,9 @@ import org.primefaces.model.charts.bar.BarChartModel;
 import org.primefaces.model.charts.bar.BarChartOptions;
 import org.primefaces.model.charts.optionconfig.legend.Legend;
 import org.primefaces.model.charts.optionconfig.legend.LegendLabel;
-import org.sg.campus.web.domain.Course;
-import org.sg.campus.web.domain.Student;
-import org.sg.campus.web.domain.Topic;
+import org.sg.campus.bl.domain.Course;
+import org.sg.campus.bl.domain.Student;
+import org.sg.campus.bl.domain.Topic;
 import org.sg.campus.web.util.JSFUtil;
 
 @ManagedBean

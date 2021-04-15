@@ -45,17 +45,19 @@ public class StudentServiceTest extends AbstractSpringTest {
 
 	@Test
 	public void test_getAllStudents() {
-		// Given
-		final Integer[] studentsId = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 };
-
 		// When
 		List<Student> students = studentService.getAllStudents();
 
 		// Then
 		assertNotNull(students);
-		assertEquals(students.size(), 20);
-		assertEquals(students.get(0).getId(), studentsId[0]);
-		assertEquals(students.get(19).getId(), studentsId[19]);
+		assertEquals(20, students.size());
+		assertEquals(new Integer(1), students.get(0).getId());
+		assertEquals("Sandro", students.get(0).getName());
+		assertEquals("Gargano", students.get(0).getSurname());
+		assertEquals("sandrus88@hotmail.it", students.get(0).getEmail());
+		assertEquals("Waiter", students.get(0).getJobTitle());
+		assertEquals("M", students.get(0).getSex());
+		assertEquals(PaymentType.OK, students.get(0).getPaymentType());
 	}
 
 	@Test
@@ -76,14 +78,21 @@ public class StudentServiceTest extends AbstractSpringTest {
 		Student searchBean = new Student();
 
 		// When
-		List<Student> list = studentService.searchStudent(searchBean);
+		List<Student> students = studentService.searchStudent(searchBean);
 
 		// Then
-		assertEquals(20, list.size());
+		assertEquals(20, students.size());
+		assertEquals(new Integer(1), students.get(0).getId());
+		assertEquals("Sandro", students.get(0).getName());
+		assertEquals("Gargano", students.get(0).getSurname());
+		assertEquals("sandrus88@hotmail.it", students.get(0).getEmail());
+		assertEquals("Waiter", students.get(0).getJobTitle());
+		assertEquals("M", students.get(0).getSex());
+		assertEquals(PaymentType.OK, students.get(0).getPaymentType());
 	}
 
 	@Test
-	public void test_searchStudents_correctData() {
+	public void test_searchStudents_fullMatch() {
 		// Given
 		Student searchBean = new Student();
 		searchBean.setName("Sandro");
@@ -101,7 +110,7 @@ public class StudentServiceTest extends AbstractSpringTest {
 	}
 
 	@Test
-	public void test_searchStudents_modifiedData() {
+	public void test_searchStudents_fullSearch_partialMatch() {
 		// Given
 		Student searchBean = new Student();
 		searchBean.setName("ndRO");
@@ -171,67 +180,36 @@ public class StudentServiceTest extends AbstractSpringTest {
 	}
 
 	@Test
-	public void test_searchStudents_byPaymentType_OK() {
+	public void test_searchStudents_byPaymentType() {
 		// Given
 		Student searchBean = new Student();
 		searchBean.setPaymentType(PaymentType.OK);
-
 		// When
 		List<Student> list = studentService.searchStudent(searchBean);
-
 		// Then
 		assertEquals(16, list.size());
-	}
 
-	@Test
-	public void test_searchStudents_byPaymentType_NOTOK() {
-		// Given
-		Student searchBean = new Student();
 		searchBean.setPaymentType(PaymentType.NOTOK);
-
-		// When
-		List<Student> list = studentService.searchStudent(searchBean);
-
-		// Then
+		list = studentService.searchStudent(searchBean);
 		assertEquals(2, list.size());
-	}
 
-	@Test
-	public void test_searchStudents_byPaymentType_UNKNOWN() {
-		// Given
-		Student searchBean = new Student();
 		searchBean.setPaymentType(PaymentType.UNKNOWN);
-
-		// When
-		List<Student> list = studentService.searchStudent(searchBean);
-
-		// Then
+		list = studentService.searchStudent(searchBean);
 		assertEquals(2, list.size());
 	}
 
 	@Test
-	public void test_searchStudents_byGenderMale() {
+	public void test_searchStudents_byGender() {
 		// Given
 		Student searchBean = new Student();
 		searchBean.setSex("M");
-
 		// When
 		List<Student> list = studentService.searchStudent(searchBean);
-
 		// Then
 		assertEquals(16, list.size());
-	}
 
-	@Test
-	public void test_searchStudents_byGenderFemale() {
-		// Given
-		Student searchBean = new Student();
 		searchBean.setSex("F");
-
-		// When
-		List<Student> list = studentService.searchStudent(searchBean);
-
-		// Then
+		list = studentService.searchStudent(searchBean);
 		assertEquals(4, list.size());
 	}
 

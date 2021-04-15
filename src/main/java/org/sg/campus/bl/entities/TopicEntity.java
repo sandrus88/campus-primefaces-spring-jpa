@@ -16,9 +16,11 @@ public class TopicEntity {
 	@Column(name = "DESCRIPTION")
 	private String description;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "COURSE_ID")
-	private CourseEntity courseEntity;
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "COURSE_ID")
+//	private CourseEntity courseEntity;
+	@Column(name = "COURSE_ID")
+	private Integer courseId;
 
 	public Integer getId() {
 		return id;
@@ -44,13 +46,13 @@ public class TopicEntity {
 		this.description = description;
 	}
 
-	public void setCourseEntity(CourseEntity courseEntity) {
-		this.courseEntity = courseEntity;
-	}
+//	public void setCourseEntity(CourseEntity courseEntity) {
+//		this.courseEntity = courseEntity;
+//	}
 
-	public CourseEntity getCourseEntity() {
-		return courseEntity;
-	}
+//	public CourseEntity getCourseEntity() {
+//		return courseEntity;
+//	}
 
 	@Override
 	public boolean equals(Object o) {
@@ -70,9 +72,9 @@ public class TopicEntity {
 		if (description != null && !description.equals(other.description)) {
 			return false;
 		}
-		if (courseEntity != null && !courseEntity.equals(other.courseEntity)) {
-			return false;
-		}
+//		if (courseEntity != null && !courseEntity.equals(other.courseEntity)) {
+//			return false;
+//		}
 		return true;
 	}
 	
@@ -81,12 +83,14 @@ public class TopicEntity {
 		int result = id;
 		result = result + ((name == null) ? 0 : name.hashCode());
 		result = result + ((description == null) ? 0 : description.hashCode());
-		result = result + ((courseEntity == null) ? 0 : courseEntity.hashCode());
+//		result = result + ((courseEntity == null) ? 0 : courseEntity.hashCode());
 		return result;
 	}
 
 	@Override
 	public String toString() {
-		return this.getClass().getSimpleName() + " [id: " + id + ", name: " + name + ", description: " + description + ", courseId: " + (courseEntity != null ? courseEntity.getId() : "null") + "]";
+		return this.getClass().getSimpleName() + " [id: " + id + ", name: " + name + ", description: " + description
+//				+ ", courseId: " + (courseEntity != null ? courseEntity.getId() : "null")
+				+ "]";
 	}
 }

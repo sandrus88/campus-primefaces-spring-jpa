@@ -74,9 +74,10 @@ public class TopicServiceTest extends AbstractSpringTest {
 	}
 
 	@Test
-	public void test_searchTopics_correctData() {
+	public void test_searchTopics_fullMartch() {
 		// Given
 		Topic searchBean = new Topic();
+        searchBean.setId(303);
 		searchBean.setName("String handling");
 
 		// When
@@ -87,7 +88,7 @@ public class TopicServiceTest extends AbstractSpringTest {
 	}
 
 	@Test
-	public void test_searchTopics_modifiedData() {
+	public void test_searchTopics_partialMatch() {
 		// Given
 		Topic searchBean = new Topic();
 		searchBean.setName("SerVLET");
@@ -152,6 +153,11 @@ public class TopicServiceTest extends AbstractSpringTest {
         // Then
         assertTrue(deleting);
         assertNull(topic);
+    }
+
+    @Test
+    public void test_deleteTopic_presentInAACourse() {
+
     }
     
     @Test

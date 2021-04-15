@@ -76,9 +76,10 @@ public class CourseServiceTest extends AbstractSpringTest {
 	}
 
 	@Test
-	public void test_searchCourses_correctData() {
+	public void test_searchCourses_fullMatch() {
 		// Given
 		Course searchBean = new Course();
+        searchBean.setId(1);
 		searchBean.setName("Java");
 		searchBean.setEnabled(true);
 
@@ -86,15 +87,14 @@ public class CourseServiceTest extends AbstractSpringTest {
 		List<Course> list = courseService.searchCourse(searchBean);
 
 		// Then
-		assertEquals(2, list.size());
+		assertEquals(1, list.size());
 	}
 
 	@Test
-	public void test_searchCourses_modifiedData() {
+	public void test_searchCourses_partialMatch() {
 		// Given
 		Course searchBean = new Course();
 		searchBean.setName("Ja");
-		searchBean.setEnabled(true);
 
 		// When
 		List<Course> list = courseService.searchCourse(searchBean);
@@ -121,16 +121,18 @@ public class CourseServiceTest extends AbstractSpringTest {
 		// Given
 		Course searchBean = new Course();
 		searchBean.setEnabled(false);
-		
 		// When
 		List<Course> list = courseService.searchCourse(searchBean);
-
 		// Then
 		assertEquals(5, list.size());
+
+        searchBean.setEnabled(true);
+        list = courseService.searchCourse(searchBean);
+        assertEquals(9999, list.size());
 	}
     
     @Test
-    public void test_insertCourse_withoutTopics() {
+    public void test_insertCourse() {
         // Given
         Course course = createCourse();
         
@@ -142,24 +144,7 @@ public class CourseServiceTest extends AbstractSpringTest {
         assertEquals(courseDb, course);
 //      assertTrue(courseDb.getTopics().isEmpty());
     }
-    
-    @Test
-    public void test_updateCourse_withoutTopics() {
-        //Given
-        final Integer courseId = 7;
-        
-        //When
-        Course course = courseService.getCourse(courseId);
-        updateCourse(course);
-        course = courseService.update(course);
-        Course courseDb = courseService.getCourse(courseId);
-        
-        //Then
-        assertEquals(courseDb, course);
-//      assertEquals(0, course.getTopics().size());
-//      assertEquals(0, courseDb.getTopics().size());
-    }
-    
+
     @Test
     public void test_deleteCourse() {
         // Given
@@ -172,6 +157,11 @@ public class CourseServiceTest extends AbstractSpringTest {
         // Then
         assertTrue(deleting);
         assertNull(course);
+    }
+
+    @Test
+    public void test_deleteCourse_withTopics() {
+        // delete only course, but not topics
     }
     
     @Test

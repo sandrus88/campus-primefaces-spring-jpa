@@ -50,6 +50,7 @@ public class CourseDaoImpl extends GenericDao implements CourseDao {
 	public List<CourseEntity> searchCourse(Course searchDto) {
 		String sql = "select c from CourseEntity c ";
 		sql += "where 1=1";
+		//search per ID in tutti i dao con ==
 		if (!SGUtil.isEmpty(searchDto.getName())) {
 			sql += "and upper(c.name) like upper('%" + searchDto.getName() + "%')";
 		}

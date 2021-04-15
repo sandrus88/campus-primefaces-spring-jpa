@@ -122,13 +122,13 @@ public class StudentServiceTest extends AbstractSpringTest {
 	public void test_searchStudents_byName() {
 		// Given
 		Student searchBean = new Student();
-		searchBean.setName("Student");
+		searchBean.setName("Sandro");
 
 		// When
 		List<Student> list = studentService.searchStudent(searchBean);
 
 		// Then
-		assertEquals(12, list.size());
+		assertEquals(1, list.size());
 	}
 
 	@Test
@@ -148,13 +148,13 @@ public class StudentServiceTest extends AbstractSpringTest {
 	public void test_searchStudents_byEmail() {
 		// Given
 		Student searchBean = new Student();
-		searchBean.setEmail(null);
+		searchBean.setEmail("sandrus88@hotmail.it");
 
 		// When
 		List<Student> list = studentService.searchStudent(searchBean);
 
 		// Then
-		assertEquals(15, list.size());
+		assertEquals(1, list.size());
 	}
 
 	@Test

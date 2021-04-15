@@ -4,11 +4,9 @@ import java.util.List;
 
 import org.sg.campus.bl.assembler.CourseAssembler;
 import org.sg.campus.bl.dao.CourseDao;
-import org.sg.campus.bl.dao.TopicDao;
+import org.sg.campus.bl.domain.Course;
 import org.sg.campus.bl.entities.CourseEntity;
-import org.sg.campus.bl.entities.TopicEntity;
 import org.sg.campus.bl.service.CourseService;
-import org.sg.campus.web.domain.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,31 +16,33 @@ import org.springframework.transaction.annotation.Transactional;
 public class CourseServiceImpl implements CourseService {
 
 	final private CourseDao courseDao;
-	final private TopicDao topicDao;
 
 	@Autowired
-	public CourseServiceImpl(CourseDao courseDao, TopicDao topicDao) {
+	public CourseServiceImpl(CourseDao courseDao) {
 		this.courseDao = courseDao;
-		this.topicDao = topicDao;
 	}
 
-	@Override
-	public CourseEntity insert(CourseEntity courseEntity) {
-		return courseDao.insert(courseEntity);
+	public Course insert(Course course) {
+		CourseEntity entity = CourseAssembler.getEntity(course);
+		entity = courseDao.insert(entity);
+		course = CourseAssembler.getDTO(entity);
+		return course;
 	}
 
-	@Override
-	public CourseEntity get(Integer id) {
-		return courseDao.get(id);
+	public Course getCourse(Integer id) {
+		CourseEntity entity = courseDao.get(id);
+		Course course = CourseAssembler.getDTO(entity);
+		return course;
 	}
 
-	@Override
-	public CourseEntity update(CourseEntity courseEntity) {
-		return courseDao.update(courseEntity);
+	public Course update(Course course) {
+		CourseEntity entity = CourseAssembler.getEntity(course);
+		CourseEntity entityUp = courseDao.update(entity);
+		course = CourseAssembler.getDTO(entityUp);
+		return course;
 	}
 
-	@Override
-	public boolean delete(Integer id) {
+	public boolean deleteCourse(Integer id) {
 		return courseDao.delete(id);
 	}
 
@@ -51,11 +51,6 @@ public class CourseServiceImpl implements CourseService {
 		List<CourseEntity> entityList = courseDao.getAll();
 		List<Course> dtoList = CourseAssembler.getDTOList(entityList);
 		return dtoList;
-	}
-
-	@Override
-	public List<TopicEntity> getAllTopics() {
-		return topicDao.getAll();
 	}
 
 	@Override

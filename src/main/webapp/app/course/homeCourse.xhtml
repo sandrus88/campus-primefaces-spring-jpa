@@ -40,14 +40,14 @@
 				</h1>
 				
 				<p:dataTable value="#{courseController.courseList}" var="item" border="2" styleClass="fixed-size" emptyMessage="#{msg['course.empty.table']}">
-					<p:column width="5">
+					<p:column width="15">
 						<f:facet name="header">
 							<h:outputText value="#{msg['course.id']}" />
 						</f:facet>
 						<h:outputText value="#{item.id}" />
 					</p:column>
 
-					<p:column width="100">
+					<p:column width="200">
 						<f:facet name="header">
 							<h:outputText value="#{msg['course.name']}" />
 						</f:facet>
@@ -61,12 +61,12 @@
 						<h:outputText value="#{item.description}" styleClass="descriptionCourse"/>
 					</p:column>
 					
-					<p:column width="85">
+					<!-- <p:column width="85">
 						<f:facet name="header">
 							<h:outputText value="#{msg['topic.number']}" />
 						</f:facet>
 						<h:outputText value="#{courseController.topicsNumber(item)}" id="numberTopics"/>
-					</p:column>
+					</p:column> -->
 				
 					<p:column width="60">
 						<f:facet name="header">
@@ -96,11 +96,6 @@
 							<p:tooltip for="linkRemove" value="#{msg['action.delete']}" position="bottom"/>
 							<f:setPropertyActionListener value="#{item}" target="#{courseController.selectedCourse}" />
 						</p:commandLink> | 
-
-						<p:commandLink actionListener="#{courseController.viewTopics(item)}" update="courseTopicForm" oncomplete="PF('dialogTopics').show()" id="linkTopics" >
-							<i class="fa fa-fw fa-list-alt"/>
-							<p:tooltip for="linkTopics" value="#{msg['course.topics']}" position="bottom"/>
-						</p:commandLink>
 					</p:column>
 				</p:dataTable>
 				
@@ -111,10 +106,14 @@
 				</p:dialog>
 			</h:form>	
 			
-			<ui:include src="courseTopicsDialog.xhtml" />
+		<!-- 	<ui:include src="courseTopicsDialog.xhtml" /> -->
 			<ui:include src="editCourseDialog.xhtml" />
 			<ui:include src="viewCourseDialog.xhtml" />
 			<ui:include src="newCourseDialog.xhtml" />
 		</ui:define>
 	</ui:composition>
+	<!-- <p:commandLink actionListener="#{courseController.viewTopics(item)}" update="courseTopicForm" oncomplete="PF('dialogTopics').show()" id="linkTopics" >
+							<i class="fa fa-fw fa-list-alt"/>
+							<p:tooltip for="linkTopics" value="#{msg['course.topics']}" position="bottom"/>
+						</p:commandLink> -->
 </html>

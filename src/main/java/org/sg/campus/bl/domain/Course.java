@@ -14,9 +14,9 @@ public class Course {
 
 	}
 
-	public Course(String name, String description) {
+	public Course(String name, Boolean enabled) {
 		this.name = name;
-		this.description = description;
+		this.enabled = enabled;
 	}
 
 	public Integer getId() {
@@ -77,6 +77,9 @@ public class Course {
 		if (description != null && !description.equals(other.description)) {
 			return false;
 		}
+		if (enabled != null && !enabled.equals(other.enabled)) {
+			return false;
+		}
 		return true;
 	}
 	
@@ -85,12 +88,13 @@ public class Course {
 		int result = id;
 		result = result + ((name == null) ? 0 : name.hashCode());
 		result = result + ((description == null) ? 0 : description.hashCode());
+		result = result + ((enabled == null) ? 0 : enabled.hashCode());
 		return result;
 	}
 
 	@Override
 	public String toString() {
 		return this.getClass().getSimpleName() + " [id: " + id + ", name: " + name + ", description: " + description
-				+ ", topics: " + topicList + "]";
+				+ ", enabled: " + enabled + ", topics: " + topicList + "]";
 	}
 }

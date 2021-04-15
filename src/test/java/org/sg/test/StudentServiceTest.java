@@ -1,18 +1,22 @@
 package org.sg.test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.sg.test.util.EntityUtils.createStudent;
+import static org.sg.test.util.EntityUtils.updateStudent;
+
+import java.util.List;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.sg.campus.bl.domain.PaymentType;
 import org.sg.campus.bl.domain.Student;
-import org.sg.campus.bl.entities.AddressEntity;
 import org.sg.campus.bl.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
-
-import static org.junit.Assert.*;
-import static org.sg.test.util.EntityUtils.*;
 
 public class StudentServiceTest extends AbstractSpringTest {
 
@@ -79,7 +83,7 @@ public class StudentServiceTest extends AbstractSpringTest {
 	}
 
 	@Test
-	public void test_searchStudent_correctData() {
+	public void test_searchStudents_correctData() {
 		// Given
 		Student searchBean = new Student();
 		searchBean.setName("Sandro");
@@ -97,7 +101,7 @@ public class StudentServiceTest extends AbstractSpringTest {
 	}
 
 	@Test
-	public void test_searchStudent_modifiedData() {
+	public void test_searchStudents_modifiedData() {
 		// Given
 		Student searchBean = new Student();
 		searchBean.setName("ndRO");

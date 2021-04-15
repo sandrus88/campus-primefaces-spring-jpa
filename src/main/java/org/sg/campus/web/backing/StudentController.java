@@ -11,11 +11,11 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-import org.sg.campus.bl.assembler.StudentAssembler;
 import org.sg.campus.bl.domain.PaymentType;
 import org.sg.campus.bl.domain.Student;
 import org.sg.campus.bl.service.StudentService;
 import org.sg.campus.web.beans.ApplicationBean;
+import org.sg.campus.web.util.SGUtil;
 
 @ManagedBean
 @SessionScoped
@@ -51,12 +51,12 @@ public class StudentController {
 		cleanDialogForm();
 		cleanSearchForm();
 	}
-	
+
 	public void searchStudent() {
 		Student searchDto = new Student(searchName, searchSurname, searchEmail, searchJobTitle, searchPaymentType, searchSex);
 		studentList = studentService.searchStudent(searchDto);
 	}
-	
+
 	public void cleanDialogForm() {
 		newName = null;
 		newSurname = null;
@@ -85,7 +85,6 @@ public class StudentController {
 		student.setPaymentType(newPaymentType);
 		student.setSex(newSex);
 		studentService.insert(student);
-		System.out.println("Added student: " + student);
 		cleanDialogForm();
 		searchStudent();
 	}
@@ -93,16 +92,14 @@ public class StudentController {
 	public void updateSelectedStudent(Student student) {
 		selectedStudent = student;
 		studentService.update(selectedStudent);
-		System.out.println("Going in edit mode for student: " + selectedStudent);
 		searchStudent();
 	}
 
-	public void deleteStudent(Student student) { 
+	public void deleteStudent(Student student) {
 		studentService.deleteStudent(student.getId());
-		System.out.println("Deleted student: " + student.getId());
 		searchStudent();
 	}
-	
+
 	public String showPaymentType(PaymentType paymentType) {
 		Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
 		ResourceBundle bundle = ResourceBundle.getBundle("messages.messages", locale);
@@ -112,11 +109,11 @@ public class StudentController {
 		}
 		return label;
 	}
-	
+
 	public String getGenderMale() {
 		return Student.SEX_M;
 	}
-	
+
 	public String getGenderFemale() {
 		return Student.SEX_F;
 	}

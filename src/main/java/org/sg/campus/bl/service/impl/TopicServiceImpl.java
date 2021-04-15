@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.sg.campus.bl.assembler.TopicAssembler;
 import org.sg.campus.bl.dao.TopicDao;
+import org.sg.campus.bl.domain.Topic;
 import org.sg.campus.bl.entities.TopicEntity;
 import org.sg.campus.bl.service.TopicService;
-import org.sg.campus.web.domain.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,29 +22,28 @@ public class TopicServiceImpl implements TopicService {
 		this.topicDao = topicDao;
 	}
 
-	@Override
-	public TopicEntity insert(TopicEntity topicEntity) {
-		return topicDao.insert(topicEntity);
+	public Topic insert(Topic topic) {
+		TopicEntity entity = TopicAssembler.getEntity(topic);
+		entity = topicDao.insert(entity);
+		topic = TopicAssembler.getDTO(entity);
+		return topic;
 	}
 
-	@Override
-	public TopicEntity get(Integer id) {
-		return topicDao.get(id);
+	public Topic getTopic(Integer id) {
+		TopicEntity entity = topicDao.get(id);
+		Topic topic = TopicAssembler.getDTO(entity);
+		return topic;
 	}
 
-	@Override
-	public TopicEntity update(TopicEntity topicEntity) {
-		return topicDao.update(topicEntity);
+	public Topic update(Topic topic) {
+		TopicEntity entity = TopicAssembler.getEntity(topic);
+		TopicEntity entityUp = topicDao.update(entity);
+		topic = TopicAssembler.getDTO(entityUp);
+		return topic;
 	}
 
-	@Override
-	public boolean delete(Integer id) {
+	public boolean deleteTopic(Integer id) {
 		return topicDao.delete(id);
-	}
-
-	@Override
-	public List<TopicEntity> getAll() {
-		return topicDao.getAll();
 	}
 
 	@Override

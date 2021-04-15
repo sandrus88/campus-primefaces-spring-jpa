@@ -1,8 +1,12 @@
 package org.sg.campus.bl.entities;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "STUDENT")
@@ -25,54 +29,6 @@ public class StudentEntity {
 	private String paymentType;
 	@Column(name = "SEX")
 	private String sex;
-
-	@OneToOne(mappedBy = "studentEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = true, orphanRemoval = true)
-	private AddressEntity addressEntity;
-
-	@OneToMany(mappedBy = "studentEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<ExamEntity> exams;
-
-	@ManyToMany(cascade = CascadeType.MERGE)
-	@JoinTable(name = "SUBSCRIPTIONS",
-			joinColumns = @JoinColumn(name = "STUDENT_ID"),
-			inverseJoinColumns = @JoinColumn(name = "COURSE_ID"))
-	private List<CourseEntity> courses;
-	
-	public StudentEntity(){
-		courses = new ArrayList<>();
-		exams = new ArrayList<>();
-	}
-	
-	public void addCourse(CourseEntity course) {
-		courses.add(course);
-	}
-
-	public void removeCourse(CourseEntity course) {
-		courses.remove(course);
-	}
-
-	public void addExam(ExamEntity exam) {
-		exams.add(exam);
-	}
-
-	public ExamEntity getExamById(Integer examId) {
-		ExamEntity examEntity = null;
-		for (ExamEntity exam : exams) {
-			if (examId == exam.getId()) {
-				examEntity = exam;
-			}
-		}
-		return examEntity;
-	}
-
-	public void removeExamById(Integer examId) {
-		ExamEntity examEntity = getExamById(examId);
-		exams.remove(examEntity);
-	}
-
-	public void removeExam(ExamEntity examEntity) {
-		exams.remove(examEntity);
-	}
 
 	public Integer getId() {
 		return id;
@@ -129,31 +85,7 @@ public class StudentEntity {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
-
-	public List<ExamEntity> getExams() {
-		return exams;
-	}
-
-	public void setExams(List<ExamEntity> exams) {
-		this.exams = exams;
-	}
-
-	public AddressEntity getAddressEntity() {
-		return addressEntity;
-	}
-
-	public void setAddressEntity(AddressEntity addressEntity) {
-		this.addressEntity = addressEntity;
-	}
 	
-	public void setCourses(List<CourseEntity> courses) {
-		this.courses = courses;
-	}
-
-	public List<CourseEntity> getCourses() {
-		return courses;
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (o == null) {
@@ -184,15 +116,6 @@ public class StudentEntity {
 		if (sex != null && !sex.equals(other.sex)) {
 			return false;
 		}
-//		if (addressEntity != null && !addressEntity.equals(other.addressEntity)) {
-//			return false;
-//		}
-//		if (exams != null && !exams.equals(other.exams)) {
-//			return false;
-//		}
-//		if (courses != null && !courses.equals(other.courses)) {
-//			return false;
-//		}
 		return true;
 	}
 
@@ -205,15 +128,12 @@ public class StudentEntity {
 		result = result + ((jobTitle == null) ? 0 : jobTitle.hashCode());
 		result = result + ((paymentType == null) ? 0 : paymentType.hashCode());
 		result = result + ((sex == null) ? 0 : sex.hashCode());
-//		result = result + ((exams == null) ? 0 : exams.hashCode());
-//		result = result + ((addressEntity == null) ? 0 : addressEntity.hashCode());
-//		result = result + ((courses == null) ? 0 : courses.hashCode());
 		return result;
 	}
 
 	@Override
 	public String toString() {
 		return this.getClass().getSimpleName() + " [id: " + id + ", name: " + name + ", surname: " + surname + ", email: " + email + ", job title: " + jobTitle
-				+ ", paymentType: " + paymentType + ", sex: " + sex + ", address: " + addressEntity + "]";
+				+ ", paymentType: " + paymentType + ", sex: " + sex + "]";
 	}
 }

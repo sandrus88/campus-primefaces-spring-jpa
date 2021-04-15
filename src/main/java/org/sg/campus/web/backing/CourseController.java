@@ -8,10 +8,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
+import org.sg.campus.bl.domain.Course;
+import org.sg.campus.bl.domain.Student;
+import org.sg.campus.bl.domain.Topic;
 import org.sg.campus.bl.service.CourseService;
 import org.sg.campus.web.beans.ApplicationBean;
-import org.sg.campus.web.domain.Course;
-import org.sg.campus.web.domain.Topic;
 import org.sg.campus.web.util.JSFUtil;
 import org.sg.campus.web.util.SGUtil;
 
@@ -27,7 +28,6 @@ public class CourseController {
 	
 	private TopicController topicController;
 	private List<Course> courseList = new ArrayList<>();
-	private List<Course> searchCourseList = new ArrayList<>();  //remove
 	private Course selectedCourse;
 
 	private List<Topic> allTopics = new ArrayList<>();
@@ -47,31 +47,9 @@ public class CourseController {
 		cleanSearchForm();
 	}
 	
-	public void addCourse() {
-		Course course = new Course();
-		course.setId(applicationBean.getNextInt());
-		course.setName(newName);
-		course.setDescription(newDescription);
-		course.setEnabled(newEnabled);
-//		courseList.add(course);
-		System.out.println("Course " + course + " added correctly");
-		cleanDialogForm();
-	}
-	
 	public void searchCourse() {
-		if (SGUtil.isEmpty(searchName) && searchEnabled == null) {
-			searchCourseList = courseList;
-			return;
-		}
-		List<Course> courseListNew = new ArrayList<>();
-		for (Course course : courseList) {
-			if (!SGUtil.isEmpty(searchName) && course.getName().toUpperCase().contains(searchName.toUpperCase())) {
-				courseListNew.add(course);
-			} else if (searchEnabled != null && course.getEnabled() == searchEnabled) {
-				courseListNew.add(course);
-			}
-		}
-		searchCourseList = courseListNew;
+		Course searchDto = new Course(searchName, searchEnabled);
+		courseList = courseService.searchCourse(searchDto);
 	}
 	
 	public void cleanDialogForm() {
@@ -84,65 +62,27 @@ public class CourseController {
 		searchName = null;
 		searchEnabled = null;
 	}
-
-	public void updateCourseTopics(Course course) {
-		selectedCourse = course;
-		List<Topic> checkedTopics = new ArrayList<Topic>();
-		for (int i = 0; i < allTopics.size(); i++) {
-			final Topic topic = allTopics.get(i);
-			if (topic.isChecked()) {
-				checkedTopics.add(topic);
-			}
-		}
-		selectedCourse.setTopicList(checkedTopics);
-		System.out.println("Topics selected for course id" + selectedCourse.getId() + ": " + checkedTopics);
-	}
 	
-	public void viewTopics(Course course) {
-		selectedCourse = course;
-		List<Topic> checkedTopics = selectedCourse.getTopicList();
-		for (int i = 0; i < allTopics.size(); i++) {
-			final Topic topic = allTopics.get(i);
-			if (checkedTopics.contains(topic)) {
-				topic.setChecked(true);
-			}
-		}
-		System.out.println("viewTopics: " + selectedCourse);
-	}
-	
-	public int topicsNumber(Course course) {
-		selectedCourse = course;
-		int topics = selectedCourse.getTopicList().size();
-		return topics;
-	}
-
-	public void cleanAllTopics() {
-		for (int i = 0; i < allTopics.size(); i++) {
-			final Topic topic = allTopics.get(i);
-			topic.setChecked(false);
-		}
-	}
-
-	public void deleteCourse(Course course) {
-		courseList.remove(course);
-		System.out.println("Course " + course + " deleted correctly");
-	}
-
-	public String updateSelectedCourse(Course course) {
-		selectedCourse = course;
-		return "/app/course/editCourse.xhtml?faces-redirect=true";
-	}
-
-	public String updateCourse() {
+	public void addCourse() {
+		Course course = new Course();
+		course.setId(applicationBean.getNextInt());
+		course.setName(newName);
+		course.setDescription(newDescription);
+		course.setEnabled(newEnabled);
+		courseService.insert(course);
 		cleanDialogForm();
-		System.out.println("Course " + selectedCourse + " updated correctly");
-		return "/app/course/homeCourse.xhtml?faces-redirect=true";
+		searchCourse();
 	}
-
-	public String viewCourse(Course course) {
+	
+	public void updateSelectedCourse(Course course) {
 		selectedCourse = course;
-		System.out.println("Course " + selectedCourse + " showed correctly");
-		return "/app/course/viewCourse.xhtml?faces-redirect=true";
+		courseService.update(selectedCourse);
+		searchCourse();
+	}
+	
+	public void deleteCourse(Course course) {
+		courseService.deleteCourse(course.getId());
+		searchCourse();
 	}
 
 	public String getNewName() {
@@ -205,14 +145,6 @@ public class CourseController {
 		this.allTopics = allTopics;
 	}
 
-	public List<Course> getSearchCourseList() {
-		return searchCourseList;
-	}
-
-	public void setSearchCourseList(List<Course> searchCourseList) {
-		this.searchCourseList = searchCourseList;
-	}
-
 	public String getSearchName() {
 		return searchName;
 	}
@@ -241,19 +173,47 @@ public class CourseController {
 		this.courseService = courseService;
 	}
 
-	public List<Topic> getAllTopics() {
-		topicController = JSFUtil.findBean("topicController");
-		allTopics = topicController.getTopicList();
-		return allTopics;
-	}
+//	public void updateCourseTopics(Course course) {
+//		selectedCourse = course;
+//		List<Topic> checkedTopics = new ArrayList<Topic>();
+//		for (int i = 0; i < allTopics.size(); i++) {
+//			final Topic topic = allTopics.get(i);
+//			if (topic.isChecked()) {
+//				checkedTopics.add(topic);
+//			}
+//		}
+//		selectedCourse.setTopicList(checkedTopics);
+//		System.out.println("Topics selected for course id" + selectedCourse.getId() + ": " + checkedTopics);
+//	}
+	
+//	public void viewTopics(Course course) {
+//		selectedCourse = course;
+//		List<Topic> checkedTopics = selectedCourse.getTopicList();
+//		for (int i = 0; i < allTopics.size(); i++) {
+//			final Topic topic = allTopics.get(i);
+//			if (checkedTopics.contains(topic)) {
+//				topic.setChecked(true);
+//			}
+//		}
+//		System.out.println("viewTopics: " + selectedCourse);
+//	}
+	
+//	public int topicsNumber(Course course) {
+//		selectedCourse = course;
+//		int topics = selectedCourse.getTopicList().size();
+//		return topics;
+//	}
+//
+//	public void cleanAllTopics() {
+//		for (int i = 0; i < allTopics.size(); i++) {
+//			final Topic topic = allTopics.get(i);
+//			topic.setChecked(false);
+//		}
+//	}
 
-	public String reset() {
-		cleanDialogForm();
-		return "/app/course/homeCourse.xhtml?faces-redirect=true";
-	}
-
-	public String backHome() {
-		cleanDialogForm();
-		return "/index.xhtml?faces-redirect=true";
-	}
+//	public List<Topic> getAllTopics() {
+//		topicController = JSFUtil.findBean("topicController");
+//		allTopics = topicController.getTopicList();
+//		return allTopics;
+//	}
 }

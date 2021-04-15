@@ -2,22 +2,18 @@ package org.sg.campus.bl.service;
 
 import java.util.List;
 
-import org.sg.campus.bl.entities.CourseEntity;
-import org.sg.campus.bl.entities.TopicEntity;
-import org.sg.campus.web.domain.Course;
+import org.sg.campus.bl.domain.Course;
 
 public interface CourseService {
-    CourseEntity insert(CourseEntity courseEntity);
+	Course insert(Course course);
 
-    CourseEntity get(Integer id);
+	Course getCourse(Integer id);
 
-    CourseEntity update(CourseEntity courseEntity);
+	Course update(Course course);
 
-    List<Course> getAllCourses();
+	List<Course> getAllCourses();
 
-    List<TopicEntity> getAllTopics();
+	List<Course> searchCourse(Course searchDto);
 
-    boolean delete(Integer id);
-    
-    List<Course> searchCourse(Course searchDto);
+	boolean deleteCourse(Integer id);
 }

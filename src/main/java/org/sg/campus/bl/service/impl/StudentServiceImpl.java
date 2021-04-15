@@ -1,17 +1,15 @@
 package org.sg.campus.bl.service.impl;
 
+import java.util.List;
+
 import org.sg.campus.bl.assembler.StudentAssembler;
-import org.sg.campus.bl.dao.AddressDao;
 import org.sg.campus.bl.dao.StudentDao;
 import org.sg.campus.bl.domain.Student;
-import org.sg.campus.bl.entities.AddressEntity;
 import org.sg.campus.bl.entities.StudentEntity;
 import org.sg.campus.bl.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service(value = "studentService")
 @Transactional

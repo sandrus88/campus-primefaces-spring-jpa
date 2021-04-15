@@ -3,14 +3,18 @@ package org.sg.campus.bl.assembler;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.sg.campus.bl.domain.Course;
+import org.sg.campus.bl.domain.Topic;
 import org.sg.campus.bl.entities.CourseEntity;
 import org.sg.campus.bl.entities.TopicEntity;
-import org.sg.campus.web.domain.Course;
-import org.sg.campus.web.domain.Topic;
 
 public class TopicAssembler {
 	
 	public static Topic getDTO(TopicEntity entity) {
+		if (entity == null) {
+			return null;
+		}
+		
 		Topic dto = new Topic();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
@@ -19,6 +23,10 @@ public class TopicAssembler {
     }
 
     public static TopicEntity getEntity(Topic dto) {
+    	if (dto == null) {
+			return null;
+		}
+    	
     	TopicEntity entity = new TopicEntity();
         entity.setId(dto.getId());
         entity.setName(dto.getName());

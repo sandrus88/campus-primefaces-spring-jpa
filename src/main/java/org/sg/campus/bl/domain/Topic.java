@@ -10,9 +10,8 @@ public class Topic {
 
 	}
 
-    public Topic(String name, String description) {
+    public Topic(String name) {
     	this.name = name;
-		this.description = description;
     }
 
 	public Integer getId() {

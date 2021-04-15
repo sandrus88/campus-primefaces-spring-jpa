@@ -1,12 +1,13 @@
 package org.sg.campus.bl.dao.impl;
 
+import java.util.List;
+
 import org.sg.campus.bl.dao.GenericDao;
 import org.sg.campus.bl.dao.TopicDao;
+import org.sg.campus.bl.domain.Topic;
 import org.sg.campus.bl.entities.TopicEntity;
-import org.sg.campus.web.domain.Topic;
+import org.sg.campus.web.util.SGUtil;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public class TopicDaoImpl extends GenericDao implements TopicDao {
@@ -47,8 +48,15 @@ public class TopicDaoImpl extends GenericDao implements TopicDao {
 
 	@Override
 	public List<TopicEntity> searchTopic(Topic searchDto) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select t from TopicEntity t ";
+		sql += "where 1=1";
+		if (!SGUtil.isEmpty(searchDto.getName())) {
+			sql += "and upper(t.name) like upper('%" + searchDto.getName() + "%')";
+		}
+		if (!SGUtil.isEmpty(searchDto.getDescription())) {
+			sql += "and upper(t.description) like upper('%" + searchDto.getDescription() + "%')";
+		}
+		List<TopicEntity> topics = entityManager.createQuery(sql, TopicEntity.class).getResultList();
+		return topics;
 	}
-
 }

@@ -39,7 +39,8 @@ public class StudentDaoImpl extends GenericDao implements StudentDao {
 
 	@Override
 	public List<StudentEntity> getAll() {
-		List<StudentEntity> students = entityManager.createQuery("from StudentEntity", StudentEntity.class).getResultList();
+		List<StudentEntity> students = entityManager.createQuery("from StudentEntity", StudentEntity.class)
+				.getResultList();
 		return students;
 	}
 
@@ -60,10 +61,10 @@ public class StudentDaoImpl extends GenericDao implements StudentDao {
 			sql += "and upper(s.jobTitle) like upper('%" + searchDto.getJobTitle() + "%')";
 		}
 		if (searchDto.getPaymentType() != null) {
-			sql += "and upper(s.paymentType) like upper('%" + searchDto.getPaymentType() + "%')";
+			sql += "and s.paymentType = '" + searchDto.getPaymentType() + "'";
 		}
 		if (!SGUtil.isEmpty(searchDto.getSex())) {
-			sql += "and upper(s.sex) like upper('%" + searchDto.getSex() + "%')";
+			sql += "and s.sex = '" + searchDto.getSex() + "'";
 		}
 		List<StudentEntity> students = entityManager.createQuery(sql, StudentEntity.class).getResultList();
 		return students;

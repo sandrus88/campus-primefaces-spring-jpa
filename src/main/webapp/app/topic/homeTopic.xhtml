@@ -34,14 +34,14 @@
 				</h1>
 				
 				<p:dataTable value="#{topicController.topicList}" var="item" border="2" id="topicsTable" styleClass="fixed-size" emptyMessage="#{msg['topic.empty.table']}">
-					<p:column width="5">
+					<p:column width="15">
 						<f:facet name="header">
 							<h:outputText value="#{msg['topic.id']}" />
 						</f:facet>
 						<h:outputText value="#{item.id}" />
 					</p:column>
 
-					<p:column width="100">
+					<p:column width="300">
 						<f:facet name="header">
 							<h:outputText value="#{msg['topic.name']}" />
 						</f:facet>

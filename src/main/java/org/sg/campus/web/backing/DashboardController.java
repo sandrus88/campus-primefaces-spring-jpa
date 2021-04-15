@@ -22,7 +22,11 @@ import org.primefaces.model.charts.optionconfig.legend.LegendLabel;
 import org.sg.campus.bl.domain.Course;
 import org.sg.campus.bl.domain.Student;
 import org.sg.campus.bl.domain.Topic;
+import org.sg.campus.bl.service.CourseService;
+import org.sg.campus.bl.service.StudentService;
+import org.sg.campus.bl.service.TopicService;
 import org.sg.campus.web.util.JSFUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @ManagedBean
 @SessionScoped
@@ -33,6 +37,15 @@ public class DashboardController {
 	private int studentCount;
 	private int courseCount;
 	private int topicCount;
+
+	@Autowired
+	private StudentService studentService;
+
+	@Autowired
+	private CourseService courseService;
+
+	@Autowired
+	private TopicService topicService;
 
 	@PostConstruct
 	public void init() {
@@ -120,20 +133,17 @@ public class DashboardController {
 	}
 
 	public void refreshStudentCount() {
-//		StudentController student = JSFUtil.findBean("studentController");
-//		List<Student> allStudentsList = student.getStudentList();
+//		List<Student> allStudentsList = studentService.getAllStudents();
 //		studentCount = allStudentsList.size();
 	}
 
-	private void refreshTopicCount() {
-//		TopicController topicController = JSFUtil.findBean("topicController");
-//		List<Topic> allTopicsList = topicController.getTopicList();
+	public void refreshTopicCount() {
+//		List<Topic> allTopicsList = topicService.getAllTopics();
 //		topicCount = allTopicsList.size();
 	}
 
-	private void refreshCourseCount() {
-//		CourseController courseController = JSFUtil.findBean("courseController");
-//		List<Course> allCoursesList = courseController.getCourseList();
+	public void refreshCourseCount() {
+//		List<Course> allCoursesList = courseService.getAllCourses();
 //		courseCount = allCoursesList.size();
 	}
 }

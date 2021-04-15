@@ -2,8 +2,8 @@ package org.sg.campus.bl.dao;
 
 import java.util.List;
 
+import org.sg.campus.bl.domain.Topic;
 import org.sg.campus.bl.entities.TopicEntity;
-import org.sg.campus.web.domain.Topic;
 
 public interface TopicDao {
     TopicEntity insert(TopicEntity topicEntity);

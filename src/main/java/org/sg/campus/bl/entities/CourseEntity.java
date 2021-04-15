@@ -1,12 +1,8 @@
 package org.sg.campus.bl.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "COURSE")
@@ -25,30 +21,30 @@ public class CourseEntity {
 	private Boolean enabled;
 	
 //	@OneToMany(mappedBy = "courseEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-//	private List<TopicEntity> topics;
-//	
-//	public CourseEntity(){
-//		topics = new ArrayList<>();
-//	}
-	
-//	public void addTopic(TopicEntity topic) {
-//		topics.add(topic);
-//	}
+	private List<TopicEntity> topics;
 
-//	public TopicEntity getTopicById(Integer topicId) {
-//		TopicEntity topicEntity = null;
-//		for (TopicEntity topic : topics) {
-//			if (topicId == topic.getId()) {
-//				topicEntity = topic;
-//			}
-//		}
-//		return topicEntity;
-//	}
-//
-//	public void removeTopicById(Integer topicId) {
-//		TopicEntity topicEntity = getTopicById(topicId);
-//		topics.remove(topicEntity);
-//	}
+	public CourseEntity(){
+		topics = new ArrayList<>();
+	}
+	
+	public void addTopic(TopicEntity topic) {
+		topics.add(topic);
+	}
+
+	public TopicEntity getTopicById(Integer topicId) {
+		TopicEntity topicEntity = null;
+		for (TopicEntity topic : topics) {
+			if (topicId == topic.getId()) {
+				topicEntity = topic;
+			}
+		}
+		return topicEntity;
+	}
+
+	public void removeTopicById(Integer topicId) {
+		TopicEntity topicEntity = getTopicById(topicId);
+		topics.remove(topicEntity);
+	}
 	
 	public Integer getId() {
 		return id;
@@ -81,14 +77,14 @@ public class CourseEntity {
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
-//	
-//	public void setTopics(List<TopicEntity> topics) {
-//		this.topics = topics;
-//	}
-//	
-//	public List<TopicEntity> getTopics() {
-//		return topics;
-//	}
+
+	public void setTopics(List<TopicEntity> topics) {
+		this.topics = topics;
+	}
+
+	public List<TopicEntity> getTopics() {
+		return topics;
+	}
 
 	@Override
 	public boolean equals(Object o) {
@@ -111,9 +107,9 @@ public class CourseEntity {
 		if (enabled != null && !enabled.equals(other.enabled)) {
 			return false;
 		}
-//		if (topics != null && !topics.equals(other.topics)) {
-//			return false;
-//		}
+		if (topics != null && !topics.equals(other.topics)) {
+			return false;
+		}
 		return true;
 	}
 	
@@ -123,12 +119,13 @@ public class CourseEntity {
 		result = result + ((name == null) ? 0 : name.hashCode());
 		result = result + ((description == null) ? 0 : description.hashCode());
 		result = result + ((enabled == null) ? 0 : enabled.hashCode());
-//		result = result + ((topics == null) ? 0 : topics.hashCode());
+		result = result + ((topics == null) ? 0 : topics.hashCode());
 		return result;
 	}
 	
 	@Override
 	public String toString() {
-		return this.getClass().getSimpleName() + " [id: " + id + ", name: " + name + ", description: " + description + ", enabled: " + enabled + "]";
+		return this.getClass().getSimpleName() + " [id: " + id + ", name: " + name + ", description: " + description + ", enabled: " + enabled +
+				", topics: " + topics + "]";
 	}
 }

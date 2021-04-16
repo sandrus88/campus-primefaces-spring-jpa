@@ -105,14 +105,15 @@ public class CourseController {
 	public void updateCourseTopics(Course course) {
 		selectedCourse = course;
 		List<Topic> allTopics = topicService.getAllTopics();
-		
+		System.out.println("Topics before update for courseId" + selectedCourse.getId() + ": " + selectedCourse.getTopics());
 		for (int i = 0; i < allTopics.size(); i++) {
 			final Topic topic = allTopics.get(i);
 			if (topic.isChecked()) {
 				selectedCourse.addTopic(topic);
 			}
 		}
-		System.out.println("Topics selected for course id" + selectedCourse.getId() + ": " + selectedCourse.getTopics());
+		courseService.update(selectedCourse);
+		System.out.println("Topics after update for courseId" + selectedCourse.getId() + ": " + selectedCourse.getTopics());
 		searchCourse();
 	}
 

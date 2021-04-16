@@ -104,14 +104,14 @@ public class CourseController {
 
 	public void updateCourseTopics(Course course) {
 		selectedCourse = course;
-		List<Topic> allTopics = topicService.getAllTopics();
-		
+
 		for (int i = 0; i < allTopics.size(); i++) {
 			final Topic topic = allTopics.get(i);
 			if (topic.isChecked()) {
 				selectedCourse.addTopic(topic);
 			}
 		}
+		courseService.update(selectedCourse);
 		System.out.println("Topics selected for course id" + selectedCourse.getId() + ": " + selectedCourse.getTopics());
 		searchCourse();
 	}

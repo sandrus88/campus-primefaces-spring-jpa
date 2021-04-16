@@ -23,6 +23,10 @@ public class Course {
 	public void addTopic(Topic topic) {
 		topics.add(topic);
 	}
+	
+	public void removeTopic(Topic topic) {
+		topics.remove(topic);
+	}
 
 	public Integer getId() {
 		return id;

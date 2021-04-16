@@ -72,9 +72,9 @@ public class Topic {
 		if (description != null && !description.equals(other.description)) {
 			return false;
 		}
-//		if (checked != null && !checked.equals(other.checked)) {
-//			return false;
-//		}
+		if (courseId != null && !courseId.equals(other.courseId)) {
+			return false;
+		}
 		return true;
 	}
 	
@@ -83,12 +83,12 @@ public class Topic {
 		int result = id;
 		result = result + ((name == null) ? 0 : name.hashCode());
 		result = result + ((description == null) ? 0 : description.hashCode());
-//		result = result + ((checked == null) ? 0 : checked.hashCode());
+		result = result + ((courseId == null) ? 0 : courseId.hashCode());
 		return result;
 	}
 
 	@Override
 	public String toString() {
-		return this.getClass().getSimpleName() + " [id: " + id + ", name: " + name + ", description: " + description + "]";
+		return this.getClass().getSimpleName() + " [id: " + id + ", name: " + name + ", description: " + description + ", courseId: " + courseId + "]";
 	}
 }

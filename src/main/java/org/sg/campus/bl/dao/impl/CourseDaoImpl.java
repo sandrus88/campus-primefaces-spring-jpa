@@ -35,6 +35,7 @@ public class CourseDaoImpl extends GenericDao implements CourseDao {
 	public boolean delete(Integer id) {
 		CourseEntity courseEntity = entityManager.find(CourseEntity.class, id);
 		if (courseEntity != null) {
+			courseEntity.setTopics(null);
 			entityManager.remove(courseEntity);
 			return true;
 		}

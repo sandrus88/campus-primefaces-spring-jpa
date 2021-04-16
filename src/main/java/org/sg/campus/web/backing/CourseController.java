@@ -106,6 +106,7 @@ public class CourseController {
 		selectedCourse = course;
 		List<Topic> allTopics = topicService.getAllTopics();
 		System.out.println("Topics before update for courseId" + selectedCourse.getId() + ": " + selectedCourse.getTopics());
+		
 		for (int i = 0; i < allTopics.size(); i++) {
 			final Topic topic = allTopics.get(i);
 			if (topic.isChecked()) {

@@ -12,8 +12,6 @@ import java.util.List;
 
 import org.junit.Test;
 import org.sg.campus.bl.domain.Course;
-import org.sg.campus.bl.domain.PaymentType;
-import org.sg.campus.bl.domain.Student;
 import org.sg.campus.bl.domain.Topic;
 import org.sg.campus.bl.service.CourseService;
 import org.sg.campus.bl.service.TopicService;
@@ -170,6 +168,19 @@ public class CourseServiceTest extends AbstractSpringTest {
     }
 
     @Test
+    public void test_updateCourse() {
+        //course 1
+        //cambia name e desc , verifica che la lista dei topics rimane intatta
+        //TODO
+    }
+
+    @Test
+    public void test_updateCourse_addTopics() {
+        //course 1, e aggiungi altri topics, e rimuovi alcuni
+        //TODO
+    }
+
+    @Test
     public void test_deleteCourse_withoutTopics() {
         // Given
         final Integer courseId = 9;
@@ -236,170 +247,4 @@ public class CourseServiceTest extends AbstractSpringTest {
         courseDb = courseService.getCourse(course.getId());
         assertNull(courseDb);
     }
-    
-    
-//  @Test
-//  public void test_getCourse_withTopics() {
-//      // Given
-//      final Integer courseId = 201;
-//      
-//      // When
-//      Course course = courseService.get(courseId);
-//      
-//      // Then
-//      assertNotNull(course.getTopics());
-//      assertEquals(course.getTopics().get(0).getId(), Integer.valueOf(1));
-//      assertEquals(course.getTopics().get(1).getId(), Integer.valueOf(2));
-//      assertEquals(course.getTopics().get(2).getId(), Integer.valueOf(3));
-//      assertEquals(course.getTopics().get(3).getId(), Integer.valueOf(4));
-//      assertEquals(course.getTopics().get(4).getId(), Integer.valueOf(6));
-//  }
-  
-//    
-//    @Test
-//    public void test_insertCourse_withTopics() {
-//        // Given
-//        Course course = createCourse();
-//        TopicEntity topicEntity = createTopic(course);
-//        
-//        // When
-//        courseService.insert(course);
-//        Course courseDb = courseService.get(course.getId());
-//        
-//        // Then
-//        assertNotNull(course.getTopicById(topicEntity.getId()));
-//        assertEquals(courseDb, course);
-//        assertNotNull(courseDb.getTopics());
-//        assertEquals(courseDb.getTopics().size(), course.getTopics().size());
-//    }
-    
-//    @Test
-//    public void test_addTopic_forCourse() {
-//        //Given
-//        final Integer courseId = 208;
-//        
-//        //When
-//        Course course = courseService.get(courseId);
-//        TopicEntity topicEntity = createTopic(course);
-//        course.addTopic(topicEntity);
-//        courseService.update(course);
-//        Course courseDb = courseService.get(courseId);
-//        
-//        //Then
-//        assertNotNull(courseDb.getTopicById(topicEntity.getId()));
-//        assertEquals(courseDb.getTopicById(topicEntity.getId()), topicEntity);
-//    }
-    
-//    @Test
-//    public void test_deleteTopic_forCourse() {
-//        // Given
-//        final Integer courseId = 206;
-//        final Integer topicId = 15;
-//        
-//        // When
-//        Course course = courseService.get(courseId);
-//        course.removeTopicById(topicId);
-//        courseService.update(course);
-//        Course courseDb = courseService.get(courseId);
-//        
-//        // Then
-//        assertNull(courseDb.getTopicById(topicId));
-//    }
-    
-//    @Test
-//    public void test_updateTopic_forCourse() {
-//        //Given
-//        final Integer courseId = 203;
-//        final Integer topicId = 10;
-//        
-//        //When
-//        Course course = courseService.get(courseId);
-//        TopicEntity topicEntity = course.getTopicById(topicId);
-//        updateTopic(topicEntity);
-//        courseService.update(course);
-//        Course courseDb = courseService.get(courseId);
-//        
-//        //Then
-//        assertEquals(courseDb.getTopicById(topicId), topicEntity);
-//    }
-    
-    
-//    @Test
-//    public void test_updateCourse_withTopics() {
-//        //Given
-//        final Integer courseId = 202;
-//        
-//        //When
-//        Course course = courseService.get(courseId);
-//        course = updateCourse(course);
-//        courseService.update(course);
-//        Course courseDb = courseService.get(courseId);
-//        
-//        //Then
-//        assertEquals(2, course.getTopics().size());
-//        assertEquals(courseDb, course);
-//        assertEquals(2, courseDb.getTopics().size());
-//        assertEquals(courseDb.getTopics().get(0), courseDb.getTopics().get(0));
-//        assertEquals(courseDb.getTopics().get(1), courseDb.getTopics().get(1));
-//    }
-//    
-    
-//    @Test
-//    public void test_deleteCourse_WithTopics() {
-//        // Given
-//        final Integer courseId = 204;
-//        
-//        // When
-//        boolean deleting = courseService.delete(courseId);
-//        Course course = courseService.get(courseId);
-//        
-//        // Then
-//        assertTrue(deleting);
-//        assertNull(course);
-//    }
-    
-//    @Test
-//    public void test_topic_integrationTest_CRUD() {
-//        // 1. insert a new course
-//        Course course = createCourse();
-//        courseService.insert(course);
-//        assertNotNull(course.getId());
-//        
-//        // 2. insert a new topic
-//        TopicEntity topicEntity = createTopic(course);
-//        courseService.update(course);
-//        assertNotNull(topicEntity.getId());
-//        
-//        // 3. get the topic from DB
-//        TopicEntity topicEntityDb = course.getTopicById(topicEntity.getId());
-//        assertNotNull(topicEntityDb);
-//        assertEquals(topicEntityDb, topicEntity);
-//        
-//        // 4. Update the topic in DB, and Get to check if updated correctly
-//        updateTopic(topicEntity);
-//        courseService.update(course);
-//        topicEntityDb = course.getTopicById(topicEntity.getId());
-//        assertEquals(topicEntityDb, topicEntity);
-//        
-//        // 5. Delete the topic from DB, and Get to check if deleted correctly
-//        course.removeTopicById(topicEntity.getId());
-//        courseService.update(course);
-//        topicEntityDb = course.getTopicById(topicEntity.getId());
-//        assertNull(topicEntityDb);
-//    }
-
-//    @Test
-//    public void test_getAllTopics() {
-//        // Given
-//        final Integer[] topicsId = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22 };
-//
-//        // When
-//        List<TopicEntity> topics = courseService.getAllTopics();
-//
-//        // Then
-//        assertNotNull(topics);
-//        assertEquals(topics.size(), 22);
-//        assertEquals(topics.get(0).getId(), topicsId[0]);
-//        assertEquals(topics.get(21).getId(), topicsId[21]);
-//    }
 }

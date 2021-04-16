@@ -74,7 +74,7 @@ public class TopicServiceTest extends AbstractSpringTest {
 	}
 
 	@Test
-	public void test_searchTopics_fullMartch() {
+	public void test_searchTopics_fullMatch() {
 		// Given
 		Topic searchBean = new Topic();
         searchBean.setId(303);
@@ -156,8 +156,8 @@ public class TopicServiceTest extends AbstractSpringTest {
     }
 
     @Test
-    public void test_deleteTopic_presentInAACourse() {
-
+    public void test_deleteTopic_presentInACourse() {
+        //TODO
     }
     
     @Test

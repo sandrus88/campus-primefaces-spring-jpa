@@ -48,6 +48,9 @@ public class StudentDaoImpl extends GenericDao implements StudentDao {
 	public List<StudentEntity> searchStudent(Student searchDto) {
 		String sql = "select s from StudentEntity s ";
 		sql += "where 1=1";
+		if (searchDto.getId() != null) {
+			sql += "and s.id = '" + searchDto.getId() + "'";
+		}
 		if (!SGUtil.isEmpty(searchDto.getName())) {
 			sql += "and upper(s.name) like upper('%" + searchDto.getName() + "%')";
 		}

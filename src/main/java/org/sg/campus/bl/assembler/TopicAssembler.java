@@ -3,9 +3,7 @@ package org.sg.campus.bl.assembler;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.sg.campus.bl.domain.Course;
 import org.sg.campus.bl.domain.Topic;
-import org.sg.campus.bl.entities.CourseEntity;
 import org.sg.campus.bl.entities.TopicEntity;
 
 public class TopicAssembler {
@@ -41,5 +39,4 @@ public class TopicAssembler {
         }
         return list;
     }
-
 }

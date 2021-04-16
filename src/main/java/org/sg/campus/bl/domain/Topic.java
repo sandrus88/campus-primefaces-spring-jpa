@@ -10,7 +10,8 @@ public class Topic {
 
 	}
 
-    public Topic(String name) {
+    public Topic(Integer id, String name) {
+    	this.id = id;
     	this.name = name;
     }
 
@@ -64,6 +65,9 @@ public class Topic {
 		if (description != null && !description.equals(other.description)) {
 			return false;
 		}
+//		if (checked != null && !checked.equals(other.checked)) {
+//			return false;
+//		}
 		return true;
 	}
 	
@@ -72,6 +76,7 @@ public class Topic {
 		int result = id;
 		result = result + ((name == null) ? 0 : name.hashCode());
 		result = result + ((description == null) ? 0 : description.hashCode());
+//		result = result + ((checked == null) ? 0 : checked.hashCode());
 		return result;
 	}
 

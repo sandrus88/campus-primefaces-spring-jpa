@@ -29,7 +29,8 @@ public class TopicController {
 
 	private String newName;
 	private String newDescription;
-
+	
+	private Integer searchId;
 	private String searchName;
 
 	@PostConstruct
@@ -41,7 +42,7 @@ public class TopicController {
 	}
 	
 	public void searchTopic() {
-		Topic searchDto = new Topic(searchName);
+		Topic searchDto = new Topic(searchId, searchName);
 		topicList = topicService.searchTopic(searchDto);
 	}
 
@@ -51,6 +52,7 @@ public class TopicController {
 	}
 
 	public void cleanSearchForm() {
+		searchId = null;
 		searchName = null;
 	}
 
@@ -121,6 +123,14 @@ public class TopicController {
 
 	public void setSearchName(String searchName) {
 		this.searchName = searchName;
+	}
+	
+	public Integer getSearchId() {
+		return searchId;
+	}
+
+	public void setSearchId(Integer searchId) {
+		this.searchId = searchId;
 	}
 
 	public TopicService getTopicService() {

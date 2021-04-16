@@ -44,12 +44,8 @@ insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (310, 'Operating Sys
 insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (311, 'Operating System structures', '', 3);
 insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (312, 'Local Area Network (LAN) Technologies', '', 4);
 insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (313, 'Introduction of MAC Address', '', 4);
-insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (314, 'Multiple Access Protocols', '', null);
-insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (315, 'Ethernet Frame Format', '', 6);
-insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (316, 'Basic Data Structures', 'Arrays, Strings, Stacks, Queues', 6);
-insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (317, 'Basic math operations', 'addition, subtraction, multiplication, division, exponentiation', 6);
-insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (318, 'Euclid s GCD Algorithm', '', null);
-insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (319, 'Greedy Algorithms', '', null);
-insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (320, 'Binary Searching', '', null);
-insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (321, 'Multithreading', '', 2);
-insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (322, 'Programmazione di stringa', '', 2);
+insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (314, 'Ethernet Frame Format', '', 6);
+insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (315, 'Basic Data Structures', 'Arrays, Strings, Stacks, Queues', 6);
+insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (316, 'Basic math operations', 'addition, subtraction, multiplication, division, exponentiation', 6);
+insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (317, 'Multithreading', '', 2);
+insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (318, 'Programmazione di stringa', '', 2);

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.sg.campus.bl.domain.Course;
 import org.sg.campus.bl.entities.CourseEntity;
+import org.sg.campus.bl.entities.TopicEntity;
 
 public interface CourseDao {
     CourseEntity insert(CourseEntity courseEntity);
@@ -17,4 +18,6 @@ public interface CourseDao {
     boolean delete(Integer id);
     
     List<CourseEntity> searchCourse(Course searchDto);
+    
+    List<TopicEntity> TopicsOfCourse(Course searchDto);
 }

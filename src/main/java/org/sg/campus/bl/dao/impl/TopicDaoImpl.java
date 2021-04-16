@@ -50,6 +50,9 @@ public class TopicDaoImpl extends GenericDao implements TopicDao {
 	public List<TopicEntity> searchTopic(Topic searchDto) {
 		String sql = "select t from TopicEntity t ";
 		sql += "where 1=1";
+		if (searchDto.getId() != null) {
+			sql += "and t.id = '" + searchDto.getId() + "'";
+		}
 		if (!SGUtil.isEmpty(searchDto.getName())) {
 			sql += "and upper(t.name) like upper('%" + searchDto.getName() + "%')";
 		}

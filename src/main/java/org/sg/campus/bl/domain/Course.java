@@ -8,13 +8,14 @@ public class Course {
 	private String name;
 	private String description;
 	private Boolean enabled;
-	private List<Topic> topicList = new ArrayList<Topic>();
+	private List<Topic> topics = new ArrayList<>();
 
 	public Course() {
 
 	}
 
-	public Course(String name, Boolean enabled) {
+	public Course(Integer id, String name, Boolean enabled) {
+		this.id = id;
 		this.name = name;
 		this.enabled = enabled;
 	}
@@ -43,12 +44,12 @@ public class Course {
 		this.description = description;
 	}
 
-	public List<Topic> getTopicList() {
-		return topicList;
+	public List<Topic> getTopics() {
+		return topics;
 	}
 
-	public void setTopicList(List<Topic> topicList) {
-		this.topicList = topicList;
+	public void setTopics(List<Topic> topics) {
+		this.topics = topics;
 	}
 
 	public Boolean getEnabled() {
@@ -80,6 +81,9 @@ public class Course {
 		if (enabled != null && !enabled.equals(other.enabled)) {
 			return false;
 		}
+		if (topics != null && !topics.equals(other.topics)) {
+			return false;
+		}
 		return true;
 	}
 	
@@ -89,12 +93,13 @@ public class Course {
 		result = result + ((name == null) ? 0 : name.hashCode());
 		result = result + ((description == null) ? 0 : description.hashCode());
 		result = result + ((enabled == null) ? 0 : enabled.hashCode());
+		result = result + ((topics == null) ? 0 : topics.hashCode());
 		return result;
 	}
 
 	@Override
 	public String toString() {
 		return this.getClass().getSimpleName() + " [id: " + id + ", name: " + name + ", description: " + description
-				+ ", enabled: " + enabled + ", topics: " + topicList + "]";
+				+ ", enabled: " + enabled + ", topics: " + topics + "]";
 	}
 }

@@ -17,7 +17,8 @@ public class Student {
 
 	}
 
-	public Student(String name, String surname, String email, String jobTitle, PaymentType paymentType, String sex) {
+	public Student(Integer id, String name, String surname, String email, String jobTitle, PaymentType paymentType, String sex) {
+		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.email = email;

@@ -20,30 +20,12 @@ public class CourseEntity {
 	@Column(name = "ENABLED")
 	private Boolean enabled;
 	
-//	@OneToMany(mappedBy = "courseEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "COURSE_ID")
 	private List<TopicEntity> topics;
 
 	public CourseEntity(){
 		topics = new ArrayList<>();
-	}
-	
-	public void addTopic(TopicEntity topic) {
-		topics.add(topic);
-	}
-
-	public TopicEntity getTopicById(Integer topicId) {
-		TopicEntity topicEntity = null;
-		for (TopicEntity topic : topics) {
-			if (topicId == topic.getId()) {
-				topicEntity = topic;
-			}
-		}
-		return topicEntity;
-	}
-
-	public void removeTopicById(Integer topicId) {
-		TopicEntity topicEntity = getTopicById(topicId);
-		topics.remove(topicEntity);
 	}
 	
 	public Integer getId() {

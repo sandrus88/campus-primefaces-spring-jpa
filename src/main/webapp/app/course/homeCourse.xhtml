@@ -12,7 +12,10 @@
 					<h:outputText value="#{msg['course.search']}" />
 				</h1>
 				
-				<h:panelGrid border="0" columns="4">
+				<h:panelGrid border="0" columns="6">
+					<p:outputLabel for="id" value="#{msg['course.id']}" />
+					<p:inputText id="id" value="#{courseController.searchId}"/>
+				
 					<p:outputLabel for="name" value="#{msg['course.name']}" />
 					<p:inputText id="name" value="#{courseController.searchName}" maxlength="20"/>
 				
@@ -61,12 +64,12 @@
 						<h:outputText value="#{item.description}" styleClass="descriptionCourse"/>
 					</p:column>
 					
-					<!-- <p:column width="85">
+					<p:column width="85">
 						<f:facet name="header">
 							<h:outputText value="#{msg['topic.number']}" />
 						</f:facet>
 						<h:outputText value="#{courseController.topicsNumber(item)}" id="numberTopics"/>
-					</p:column> -->
+					</p:column>
 				
 					<p:column width="60">
 						<f:facet name="header">
@@ -96,6 +99,10 @@
 							<p:tooltip for="linkRemove" value="#{msg['action.delete']}" position="bottom"/>
 							<f:setPropertyActionListener value="#{item}" target="#{courseController.selectedCourse}" />
 						</p:commandLink> | 
+						<p:commandLink actionListener="#{courseController.viewTopics(item)}" update="courseTopicForm" oncomplete="PF('dialogTopics').show()" id="linkTopics" >
+							<i class="fa fa-fw fa-list-alt"/>
+							<p:tooltip for="linkTopics" value="#{msg['course.topics']}" position="bottom"/>
+						</p:commandLink>
 					</p:column>
 				</p:dataTable>
 				
@@ -106,14 +113,10 @@
 				</p:dialog>
 			</h:form>	
 			
-		<!-- 	<ui:include src="courseTopicsDialog.xhtml" /> -->
+			<ui:include src="courseTopicsDialog.xhtml" />
 			<ui:include src="editCourseDialog.xhtml" />
 			<ui:include src="viewCourseDialog.xhtml" />
 			<ui:include src="newCourseDialog.xhtml" />
 		</ui:define>
 	</ui:composition>
-	<!-- <p:commandLink actionListener="#{courseController.viewTopics(item)}" update="courseTopicForm" oncomplete="PF('dialogTopics').show()" id="linkTopics" >
-							<i class="fa fa-fw fa-list-alt"/>
-							<p:tooltip for="linkTopics" value="#{msg['course.topics']}" position="bottom"/>
-						</p:commandLink> -->
 </html>

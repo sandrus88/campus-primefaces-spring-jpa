@@ -13,7 +13,10 @@
 					<h:outputText value="#{msg['topic.search']}" />
 				</h1>
 				
-				<h:panelGrid border="0" columns="2">
+				<h:panelGrid border="0" columns="4">
+					<p:outputLabel for="id" value="#{msg['topic.id']}" />
+					<p:inputText id="id" value="#{topicController.searchId}"/>
+				
 					<p:outputLabel for="name" value="#{msg['topic.name']}" />
 					<p:inputText id="name" value="#{topicController.searchName}" maxlength="20"/>
 				</h:panelGrid>

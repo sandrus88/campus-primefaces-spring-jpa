@@ -33,7 +33,8 @@ public class StudentController {
 	private String newJobTitle;
 	private PaymentType newPaymentType;
 	private String newSex;
-
+	
+	private Integer searchId;
 	private String searchName;
 	private String searchSurname;
 	private String searchEmail;
@@ -53,7 +54,7 @@ public class StudentController {
 	}
 
 	public void searchStudent() {
-		Student searchDto = new Student(searchName, searchSurname, searchEmail, searchJobTitle, searchPaymentType, searchSex);
+		Student searchDto = new Student(searchId, searchName, searchSurname, searchEmail, searchJobTitle, searchPaymentType, searchSex);
 		studentList = studentService.searchStudent(searchDto);
 	}
 
@@ -67,6 +68,7 @@ public class StudentController {
 	}
 
 	public void cleanSearchForm() {
+		searchId = null;
 		searchName = null;
 		searchSurname = null;
 		searchEmail = null;
@@ -193,6 +195,14 @@ public class StudentController {
 
 	public void setNewPaymentType(PaymentType newPaymentType) {
 		this.newPaymentType = newPaymentType;
+	}
+
+	public Integer getSearchId() {
+		return searchId;
+	}
+
+	public void setSearchId(Integer searchId) {
+		this.searchId = searchId;
 	}
 
 	public String getSearchName() {

@@ -12,8 +12,10 @@
 					<h:outputText value="#{msg['student.search']}" />
 				</h1>
 				
-				<h:panelGrid border="0" columns="6">
-	
+				<h:panelGrid border="0" columns="8">
+					<p:outputLabel for="id" value="#{msg['student.id']}" />
+					<p:inputText id="id" value="#{studentController.searchId}" />
+					
 					<p:outputLabel for="name" value="#{msg['student.name']}" />
 					<p:inputText id="name" value="#{studentController.searchName}" maxlength="20"/>
 				

@@ -3,9 +3,13 @@ package org.sg.campus.bl.service.impl;
 import java.util.List;
 
 import org.sg.campus.bl.assembler.CourseAssembler;
+import org.sg.campus.bl.assembler.TopicAssembler;
 import org.sg.campus.bl.dao.CourseDao;
+import org.sg.campus.bl.dao.TopicDao;
 import org.sg.campus.bl.domain.Course;
+import org.sg.campus.bl.domain.Topic;
 import org.sg.campus.bl.entities.CourseEntity;
+import org.sg.campus.bl.entities.TopicEntity;
 import org.sg.campus.bl.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +20,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class CourseServiceImpl implements CourseService {
 
 	final private CourseDao courseDao;
+	final private TopicDao topicDao;
 
 	@Autowired
-	public CourseServiceImpl(CourseDao courseDao) {
+	public CourseServiceImpl(CourseDao courseDao, TopicDao topicDao) {
 		this.courseDao = courseDao;
+		this.topicDao = topicDao;
 	}
 
 	public Course insert(Course course) {
@@ -58,5 +64,19 @@ public class CourseServiceImpl implements CourseService {
 		List<CourseEntity> listEntities = courseDao.searchCourse(searchDto);
 		List<Course> list = CourseAssembler.getDTOList(listEntities);
 		return list;
+	}
+	
+	@Override
+	public List<Topic> getAllTopics() {
+		List<TopicEntity> entityList = topicDao.getAll();
+		List<Topic> dtoList = TopicAssembler.getDTOList(entityList);
+		return dtoList;
+	}
+
+	@Override
+	public List<Topic> getTopicsOfCourse(Course course) {
+		List<TopicEntity> entityList = courseDao.TopicsOfCourse(course);
+		List<Topic> dtoList = TopicAssembler.getDTOList(entityList);
+		return dtoList;
 	}
 }

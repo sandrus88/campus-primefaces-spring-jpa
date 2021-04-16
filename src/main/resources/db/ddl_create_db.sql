@@ -31,39 +31,6 @@ create table topic (
     CONSTRAINT topic_course_fk FOREIGN KEY (COURSE_ID) REFERENCES course(ID)
 );
   
-create table subscriptions (   
-    STUDENT_ID number,
-    COURSE_ID number,
-        
-    PRIMARY KEY (STUDENT_ID, COURSE_ID),
-    CONSTRAINT student_to_course_fk FOREIGN KEY (STUDENT_ID) REFERENCES student(ID),
-    CONSTRAINT course_to_student_fk FOREIGN KEY (COURSE_ID) REFERENCES course(ID)
-);
-    
-create table exams (
-    ID number,
-    EXAM_DATE date,
-    MARK number,
-    STUDENT_ID number,
-    COURSE_ID number,
-        
-    PRIMARY KEY (ID),
-    CONSTRAINT exam_student_fk FOREIGN KEY (STUDENT_ID) REFERENCES student(ID),
-    CONSTRAINT exam_course_fk FOREIGN KEY (COURSE_ID) REFERENCES course(ID)
-);
-    
-create table address (
-    STUDENT_ID number,
-    STREET varchar2(100 byte),
-    NR varchar2(100 byte),
-    POSTAL_CODE number,
-    CITY varchar2(100 byte),
-    PROVINCE_CODE varchar2(2 byte),
-    
-    PRIMARY KEY (STUDENT_ID),
-    CONSTRAINT address_student_fk FOREIGN KEY (STUDENT_ID) REFERENCES student(ID)
-);
-    
 create sequence seq_student
     START WITH 1000
     INCREMENT BY 1;
@@ -73,10 +40,6 @@ create sequence seq_course
     INCREMENT BY 1;
         
 create sequence seq_topic
-    START WITH 1000
-    INCREMENT BY 1;
-    
-create sequence seq_exam
     START WITH 1000
     INCREMENT BY 1;
     

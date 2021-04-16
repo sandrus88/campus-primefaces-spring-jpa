@@ -15,12 +15,12 @@ public class TopicEntity {
 	private String name;
 	@Column(name = "DESCRIPTION")
 	private String description;
+	@Column(name = "COURSE_ID")
+	private Integer courseId;
 
 //	@ManyToOne(fetch = FetchType.LAZY)
 //	@JoinColumn(name = "COURSE_ID")
 //	private CourseEntity courseEntity;
-	@Column(name = "COURSE_ID")
-	private Integer courseId;
 
 	public Integer getId() {
 		return id;
@@ -46,13 +46,13 @@ public class TopicEntity {
 		this.description = description;
 	}
 
-//	public void setCourseEntity(CourseEntity courseEntity) {
-//		this.courseEntity = courseEntity;
-//	}
+	public Integer getCourseId() {
+		return courseId;
+	}
 
-//	public CourseEntity getCourseEntity() {
-//		return courseEntity;
-//	}
+	public void setCourseId(Integer courseId) {
+		this.courseId = courseId;
+	}
 
 	@Override
 	public boolean equals(Object o) {
@@ -72,25 +72,24 @@ public class TopicEntity {
 		if (description != null && !description.equals(other.description)) {
 			return false;
 		}
-//		if (courseEntity != null && !courseEntity.equals(other.courseEntity)) {
-//			return false;
-//		}
+		if (courseId != null && !courseId.equals(other.courseId)) {
+			return false;
+		}
 		return true;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		int result = id;
 		result = result + ((name == null) ? 0 : name.hashCode());
 		result = result + ((description == null) ? 0 : description.hashCode());
-//		result = result + ((courseEntity == null) ? 0 : courseEntity.hashCode());
+		result = result + ((courseId == null) ? 0 : courseId.hashCode());
 		return result;
 	}
 
 	@Override
 	public String toString() {
 		return this.getClass().getSimpleName() + " [id: " + id + ", name: " + name + ", description: " + description
-//				+ ", courseId: " + (courseEntity != null ? courseEntity.getId() : "null")
-				+ "]";
+				+ ", courseId: " + courseId + "]";
 	}
 }

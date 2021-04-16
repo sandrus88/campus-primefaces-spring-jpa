@@ -6,6 +6,7 @@ import org.sg.campus.bl.dao.CourseDao;
 import org.sg.campus.bl.dao.GenericDao;
 import org.sg.campus.bl.domain.Course;
 import org.sg.campus.bl.entities.CourseEntity;
+import org.sg.campus.bl.entities.TopicEntity;
 import org.sg.campus.web.util.SGUtil;
 import org.springframework.stereotype.Repository;
 
@@ -50,7 +51,9 @@ public class CourseDaoImpl extends GenericDao implements CourseDao {
 	public List<CourseEntity> searchCourse(Course searchDto) {
 		String sql = "select c from CourseEntity c ";
 		sql += "where 1=1";
-		//search per ID in tutti i dao con ==
+		if (searchDto.getId() != null) {
+			sql += "and c.id = '" + searchDto.getId() + "'";
+		}
 		if (!SGUtil.isEmpty(searchDto.getName())) {
 			sql += "and upper(c.name) like upper('%" + searchDto.getName() + "%')";
 		}
@@ -63,4 +66,15 @@ public class CourseDaoImpl extends GenericDao implements CourseDao {
 		List<CourseEntity> courses = entityManager.createQuery(sql, CourseEntity.class).getResultList();
 		return courses;
 	}
+	
+	@Override
+	public List<TopicEntity> TopicsOfCourse(Course courseDto) {
+		String sql = "select t from TopicEntity t ";
+		sql += "where 1=1";
+		if (courseDto.getId() != null) {
+			sql += "and course_id = '" + courseDto.getId() + "'";
+		}
+		List<TopicEntity> topics = entityManager.createQuery(sql, TopicEntity.class).getResultList();
+		return topics;
+	}	
 }

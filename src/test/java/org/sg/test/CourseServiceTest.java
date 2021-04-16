@@ -14,13 +14,18 @@ import org.junit.Test;
 import org.sg.campus.bl.domain.Course;
 import org.sg.campus.bl.domain.PaymentType;
 import org.sg.campus.bl.domain.Student;
+import org.sg.campus.bl.domain.Topic;
 import org.sg.campus.bl.service.CourseService;
+import org.sg.campus.bl.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class CourseServiceTest extends AbstractSpringTest {
 
     @Autowired
     private CourseService courseService;
+    @Autowired
+    private TopicService topicService;
+
     
     @Test
     public void test_getCourse_withoutTopics() {
@@ -34,6 +39,25 @@ public class CourseServiceTest extends AbstractSpringTest {
         assertNotNull(course);
         assertEquals(course.getName(), "Javascript");
         assertEquals(course.getDescription(), "Concetti base di Javascript");
+    }
+
+
+    @Test
+    public void test_getCourse_withTopics() {
+        // Given
+        final Integer courseId = 1;
+        final Topic topic = new Topic(301, "Objects Oriented Paradigm", "OOPS concepts (Data Abstraction, Encapsulation, Inheritance, Polymorphism)", courseId);
+
+        // When
+        Course course = courseService.getCourse(courseId);
+
+        // Then
+        assertNotNull(course);
+        assertNotNull(course.getTopics());
+        assertEquals(5, course.getTopics().size());
+
+        assertNotNull(course.getTopics().get(0));
+        assertEquals(topic, course.getTopics().get(0));
     }
     
     @Test
@@ -146,7 +170,7 @@ public class CourseServiceTest extends AbstractSpringTest {
     }
 
     @Test
-    public void test_deleteCourse() {
+    public void test_deleteCourse_withoutTopics() {
         // Given
         final Integer courseId = 9;
         
@@ -160,8 +184,20 @@ public class CourseServiceTest extends AbstractSpringTest {
     }
 
     @Test
-    public void test_deleteCourse_withTopics() {
-        // delete only course, but not topics
+    public void test_deleteCourse_withTopics_shouldRemoveCourseButNotTopics() {
+        // Given
+        final Integer courseId = 1;
+        final Integer topicId = 301;
+
+        // When
+        boolean deleting = courseService.deleteCourse(courseId);
+        Course course = courseService.getCourse(courseId);
+        Topic topic = topicService.getTopic(topicId);
+
+        // Then
+        assertTrue(deleting);
+        assertNull(course);
+        assertNotNull(topic);
     }
     
     @Test

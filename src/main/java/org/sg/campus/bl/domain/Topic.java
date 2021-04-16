@@ -4,18 +4,25 @@ public class Topic {
 	private Integer id;
 	private String name;
 	private String description;
-	private boolean checked;
+
+	private Integer courseId;
 	
 	public Topic(){
-
 	}
 
     public Topic(Integer id, String name) {
+		this();
     	this.id = id;
     	this.name = name;
     }
 
-	public Integer getId() {
+    public Topic(Integer id, String name, String description, Integer courseId) {
+		this(id, name);
+		this.description = description;
+		this.courseId = courseId;
+    }
+
+    public Integer getId() {
 		return id;
 	}
 
@@ -39,14 +46,14 @@ public class Topic {
 		this.description = description;
 	}
 
-	public boolean isChecked() {
-		return checked;
+	public Integer getCourseId() {
+		return courseId;
 	}
 
-	public void setChecked(boolean checked) {
-		this.checked = checked;
+	public void setCourseId(Integer courseId) {
+		this.courseId = courseId;
 	}
-	
+
 	@Override
 	public boolean equals(Object o) {
 		if (o == null) {
@@ -82,7 +89,6 @@ public class Topic {
 
 	@Override
 	public String toString() {
-		return this.getClass().getSimpleName() + " [id: " + id + ", name: " + name + ", description: " + description
-				+ ", checked: " + checked + "]";
+		return this.getClass().getSimpleName() + " [id: " + id + ", name: " + name + ", description: " + description + "]";
 	}
 }

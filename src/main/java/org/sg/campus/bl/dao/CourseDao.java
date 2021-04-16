@@ -19,5 +19,5 @@ public interface CourseDao {
     
     List<CourseEntity> searchCourse(Course searchDto);
     
-    List<TopicEntity> TopicsOfCourse(Course searchDto);
+    List<TopicEntity> getTopicsForCourse(Course searchDto);
 }

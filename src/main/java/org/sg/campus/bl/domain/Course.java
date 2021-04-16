@@ -20,6 +20,10 @@ public class Course {
 		this.enabled = enabled;
 	}
 
+	public void addTopic(Topic topic) {
+		topics.add(topic);
+	}
+
 	public Integer getId() {
 		return id;
 	}

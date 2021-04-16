@@ -1,10 +1,12 @@
 package org.sg.campus.bl.assembler;
 
+import org.sg.campus.bl.domain.Course;
+import org.sg.campus.bl.domain.Topic;
+import org.sg.campus.bl.entities.CourseEntity;
+import org.sg.campus.bl.entities.TopicEntity;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import org.sg.campus.bl.domain.Course;
-import org.sg.campus.bl.entities.CourseEntity;
 
 public class CourseAssembler {
 	
@@ -18,6 +20,11 @@ public class CourseAssembler {
         dto.setName(entity.getName());
         dto.setDescription(entity.getDescription());
         dto.setEnabled(entity.getEnabled());
+
+        for (TopicEntity topicEntity : entity.getTopics()) {
+            Topic topic  = TopicAssembler.getDTO(topicEntity);
+            dto.addTopic(topic);
+        }
         return dto;
     }
 

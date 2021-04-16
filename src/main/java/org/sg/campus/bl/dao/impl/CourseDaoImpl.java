@@ -68,12 +68,10 @@ public class CourseDaoImpl extends GenericDao implements CourseDao {
 	}
 	
 	@Override
-	public List<TopicEntity> TopicsOfCourse(Course courseDto) {
+	public List<TopicEntity> getTopicsForCourse(Course courseDto) {
 		String sql = "select t from TopicEntity t ";
-		sql += "where 1=1";
-		if (courseDto.getId() != null) {
-			sql += "and course_id = '" + courseDto.getId() + "'";
-		}
+		sql += "where course_id = " + courseDto.getId();
+
 		List<TopicEntity> topics = entityManager.createQuery(sql, TopicEntity.class).getResultList();
 		return topics;
 	}	

@@ -20,7 +20,7 @@ public class CourseEntity {
 	@Column(name = "ENABLED")
 	private Boolean enabled;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = false)
 	@JoinColumn(name = "COURSE_ID")
 	private List<TopicEntity> topics;
 

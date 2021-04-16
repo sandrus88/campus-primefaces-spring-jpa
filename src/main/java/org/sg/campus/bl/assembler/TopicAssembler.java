@@ -17,6 +17,7 @@ public class TopicAssembler {
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setDescription(entity.getDescription());
+        dto.setCourseId(entity.getCourseId());
         return dto;
     }
 
@@ -29,6 +30,7 @@ public class TopicAssembler {
         entity.setId(dto.getId());
         entity.setName(dto.getName());
         entity.setDescription(dto.getDescription());
+        entity.setCourseId(dto.getCourseId());
         return entity;
     }
 

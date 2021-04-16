@@ -88,9 +88,9 @@ public class CourseController {
 		List<Topic> checkedTopics = courseService.getTopicsOfCourse(course);
 		for (int i = 0; i < allTopics.size(); i++) {
 			final Topic topic = allTopics.get(i);
-			if (topic.isChecked()) {
-				checkedTopics.add(topic);
-			}
+//			if (topic.isChecked()) {
+//				checkedTopics.add(topic);
+//			}
 		}
 		course.setTopics(checkedTopics);
 		courseService.update(course);
@@ -103,7 +103,7 @@ public class CourseController {
 		for (int i = 0; i < allTopics.size(); i++) {
 			final Topic topic = allTopics.get(i);
 			if (checkedTopics.contains(topic)) {
-				topic.setChecked(true);
+//				topic.setChecked(true);
 			}
 		}
 //		getAllTopics();
@@ -119,7 +119,7 @@ public class CourseController {
 	public void cleanAllTopics() {
 		for (int i = 0; i < allTopics.size(); i++) {
 			final Topic topic = allTopics.get(i);
-			topic.setChecked(false);
+//			topic.setChecked(false);
 		}
 	}
 

@@ -20,5 +20,5 @@ public interface CourseService {
 
 	boolean deleteCourse(Integer id);
 
-	List<Topic> getTopicsOfCourse(Course course);
+	List<Topic> getTopicsOfCourseId(int courseId);
 }

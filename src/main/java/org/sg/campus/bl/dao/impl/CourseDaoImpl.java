@@ -31,7 +31,7 @@ public class CourseDaoImpl extends GenericDao implements CourseDao {
 		return courseEntity;
 	}
 
-	@Override
+@Override
 	public boolean delete(Integer id) {
 		CourseEntity courseEntity = entityManager.find(CourseEntity.class, id);
 		if (courseEntity != null) {
@@ -69,9 +69,9 @@ public class CourseDaoImpl extends GenericDao implements CourseDao {
 	}
 	
 	@Override
-	public List<TopicEntity> getTopicsForCourse(Course courseDto) {
+	public List<TopicEntity> getTopicsForCourseId(int courseId) {
 		String sql = "select t from TopicEntity t ";
-		sql += "where course_id = " + courseDto.getId();
+		sql += "where course_id = " + courseId;
 
 		List<TopicEntity> topics = entityManager.createQuery(sql, TopicEntity.class).getResultList();
 		return topics;

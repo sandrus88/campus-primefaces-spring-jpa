@@ -74,8 +74,8 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public List<Topic> getTopicsOfCourse(Course course) {
-		List<TopicEntity> entityList = courseDao.getTopicsForCourse(course);
+	public List<Topic> getTopicsOfCourse(int courseId) {
+		List<TopicEntity> entityList = courseDao.getTopicsForCourseId(courseId);
 		List<Topic> dtoList = TopicAssembler.getDTOList(entityList);
 		return dtoList;
 	}

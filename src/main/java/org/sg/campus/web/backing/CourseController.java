@@ -39,6 +39,7 @@ public class CourseController {
 	@PostConstruct
 	public void init() {
 		selectedCourse = new Course();
+		allTopics = courseService.getAllTopics();
 		searchCourse();
 		cleanDialogForm();
 		cleanSearchForm();
@@ -85,21 +86,24 @@ public class CourseController {
 
 	public void updateCourseTopics(Course course) {
 		selectedCourse = course;
-		List<Topic> checkedTopics = courseService.getTopicsOfCourse(course);
-		for (int i = 0; i < allTopics.size(); i++) {
-			final Topic topic = allTopics.get(i);
-//			if (topic.isChecked()) {
-//				checkedTopics.add(topic);
-//			}
-		}
-		course.setTopics(checkedTopics);
+		List<Topic> courseTopics = course.getTopics();
+		List<Topic> allTopics = topicService.getAll();
+		
+////		List<Topic> checkedTopics = courseService.getTopicsOfCourse(course);
+//		for (int i = 0; i < allTopics.size(); i++) {
+//			final Topic topic = allTopics.get(i);
+////			if (topic.isChecked()) {
+////				checkedTopics.add(topic);
+////			}
+//		}
+//		course.setTopics(checkedTopics);
 		courseService.update(course);
 		System.out.println("Topics selected for course id" + selectedCourse.getId() + ": " + checkedTopics);
 	}
 
 	public void viewTopics(Course course) {
 		selectedCourse = course;
-		List<Topic> checkedTopics = courseService.getTopicsOfCourse(selectedCourse);
+		List<Topic> checkedTopics = courseService.getTopicsOfCourseId(selectedCourse.getId());
 		for (int i = 0; i < allTopics.size(); i++) {
 			final Topic topic = allTopics.get(i);
 			if (checkedTopics.contains(topic)) {
@@ -124,7 +128,7 @@ public class CourseController {
 	}
 
 	public List<Topic> getAllTopics() {
-		return allTopics = courseService.getAllTopics();
+		return allTopics ;
 	}
 
 	public String getNewName() {

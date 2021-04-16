@@ -124,7 +124,7 @@ public class CourseServiceTest extends AbstractSpringTest {
 		List<Course> list = courseService.searchCourse(searchBean);
 
 		// Then
-		assertEquals(2, list.size());
+		assertEquals(3, list.size());
 	}
 
 	@Test
@@ -152,7 +152,7 @@ public class CourseServiceTest extends AbstractSpringTest {
 
         searchBean.setEnabled(true);
         list = courseService.searchCourse(searchBean);
-        assertEquals(9999, list.size());
+        assertEquals(5, list.size());
 	}
     
     @Test

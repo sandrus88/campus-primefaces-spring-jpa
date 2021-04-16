@@ -15,8 +15,6 @@ public interface CourseService {
 	List<Course> getAllCourses();
 
 	List<Course> searchCourse(Course searchDto);
-	
-	List<Topic> getAllTopics();
 
 	boolean deleteCourse(Integer id);
 

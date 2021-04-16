@@ -6,6 +6,7 @@ public class Topic {
 	private String description;
 
 	private Integer courseId;
+	private boolean checked;
 	
 	public Topic(){
 	}
@@ -52,6 +53,14 @@ public class Topic {
 
 	public void setCourseId(Integer courseId) {
 		this.courseId = courseId;
+	}
+
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
+	
+	public boolean isChecked() {
+		return checked;
 	}
 
 	@Override

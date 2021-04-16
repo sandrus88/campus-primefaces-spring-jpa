@@ -11,6 +11,7 @@ import javax.faces.bean.SessionScoped;
 import org.sg.campus.bl.domain.Course;
 import org.sg.campus.bl.domain.Topic;
 import org.sg.campus.bl.service.CourseService;
+import org.sg.campus.bl.service.TopicService;
 import org.sg.campus.web.beans.ApplicationBean;
 
 @ManagedBean
@@ -22,6 +23,9 @@ public class CourseController {
 
 	@ManagedProperty(value = "#{courseService}")
 	private CourseService courseService;
+	
+	@ManagedProperty(value = "#{topicService}")
+	private TopicService topicService;
 
 	private List<Course> courseList = new ArrayList<>();
 	private Course selectedCourse;
@@ -39,7 +43,7 @@ public class CourseController {
 	@PostConstruct
 	public void init() {
 		selectedCourse = new Course();
-		allTopics = courseService.getAllTopics();
+//		allTopics = courseService.getAllTopics();
 		searchCourse();
 		cleanDialogForm();
 		cleanSearchForm();
@@ -87,18 +91,17 @@ public class CourseController {
 	public void updateCourseTopics(Course course) {
 		selectedCourse = course;
 		List<Topic> courseTopics = course.getTopics();
-		List<Topic> allTopics = topicService.getAll();
+		List<Topic> allTopics = topicService.getAllTopics();
 		
 ////		List<Topic> checkedTopics = courseService.getTopicsOfCourse(course);
-//		for (int i = 0; i < allTopics.size(); i++) {
-//			final Topic topic = allTopics.get(i);
-////			if (topic.isChecked()) {
-////				checkedTopics.add(topic);
-////			}
-//		}
-//		course.setTopics(checkedTopics);
+		for (int i = 0; i < allTopics.size(); i++) {
+			final Topic topic = allTopics.get(i);
+			if (topic.isChecked()) {
+				courseTopics.add(topic);
+			}
+		}
 		courseService.update(course);
-		System.out.println("Topics selected for course id" + selectedCourse.getId() + ": " + checkedTopics);
+		System.out.println("Topics selected for course id" + selectedCourse.getId() + ": " + courseTopics);
 	}
 
 	public void viewTopics(Course course) {

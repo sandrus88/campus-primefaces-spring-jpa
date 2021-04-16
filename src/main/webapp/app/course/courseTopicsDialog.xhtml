@@ -43,7 +43,7 @@
 
 			<h:panelGrid border="0" columns="2">
 				<p:commandButton value="#{msg['save']}" actionListener="#{courseController.updateCourseTopics(courseController.selectedCourse)}" update="courseListForm" oncomplete="PF('dialogTopics').show()" />
-				<p:commandButton value="#{msg['close']}" actionListener="#{courseController.cleanAllTopics()}" update="courseTopicForm" oncomplete="PF('dialogTopics').hide()" />
+				<p:commandButton value="#{msg['close']}" update="courseTopicForm" oncomplete="PF('dialogTopics').hide()" />
 			</h:panelGrid>
 		</p:dialog>
 	</h:form>

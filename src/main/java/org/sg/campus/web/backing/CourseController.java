@@ -43,7 +43,7 @@ public class CourseController {
 	@PostConstruct
 	public void init() {
 		selectedCourse = new Course();
-//		allTopics = courseService.getAllTopics();
+//		allTopics = topicService.getAllTopics();
 		searchCourse();
 		cleanDialogForm();
 		cleanSearchForm();
@@ -87,34 +87,33 @@ public class CourseController {
 		courseService.deleteCourse(course.getId());
 		searchCourse();
 	}
+	
+	public void viewTopics(Course course) {
+		selectedCourse = course;
+		allTopics = topicService.getAllTopics();
+		List<Topic> selectedCourseTopics = course.getTopics();
+		
+		for (int i = 0; i < allTopics.size(); i++) {
+			final Topic topic = allTopics.get(i);
+			if (selectedCourseTopics.contains(topic)) {
+				topic.setChecked(true);
+			}
+		}
+		System.out.println("viewTopics: " + selectedCourse);
+	}
 
 	public void updateCourseTopics(Course course) {
 		selectedCourse = course;
-		List<Topic> courseTopics = course.getTopics();
 		List<Topic> allTopics = topicService.getAllTopics();
 		
-////		List<Topic> checkedTopics = courseService.getTopicsOfCourse(course);
 		for (int i = 0; i < allTopics.size(); i++) {
 			final Topic topic = allTopics.get(i);
 			if (topic.isChecked()) {
-				courseTopics.add(topic);
+				selectedCourse.addTopic(topic);
 			}
 		}
-		courseService.update(course);
-		System.out.println("Topics selected for course id" + selectedCourse.getId() + ": " + courseTopics);
-	}
-
-	public void viewTopics(Course course) {
-		selectedCourse = course;
-		List<Topic> checkedTopics = courseService.getTopicsOfCourseId(selectedCourse.getId());
-		for (int i = 0; i < allTopics.size(); i++) {
-			final Topic topic = allTopics.get(i);
-			if (checkedTopics.contains(topic)) {
-//				topic.setChecked(true);
-			}
-		}
-//		getAllTopics();
-		System.out.println("viewTopics: " + selectedCourse);
+		System.out.println("Topics selected for course id" + selectedCourse.getId() + ": " + selectedCourse.getTopics());
+		searchCourse();
 	}
 
 	public int topicsNumber(Course course) {
@@ -122,14 +121,7 @@ public class CourseController {
 		int topics = selectedCourse.getTopics().size();
 		return topics;
 	}
-
-	public void cleanAllTopics() {
-		for (int i = 0; i < allTopics.size(); i++) {
-			final Topic topic = allTopics.get(i);
-//			topic.setChecked(false);
-		}
-	}
-
+	
 	public List<Topic> getAllTopics() {
 		return allTopics ;
 	}
@@ -220,5 +212,9 @@ public class CourseController {
 
 	public void setCourseService(CourseService courseService) {
 		this.courseService = courseService;
+	}
+	
+	public void setTopicService(TopicService topicService) {
+		this.topicService = topicService;
 	}
 }

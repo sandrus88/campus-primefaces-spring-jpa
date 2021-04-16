@@ -27,6 +27,11 @@ public class Course {
 	public void removeTopic(Topic topic) {
 		topics.remove(topic);
 	}
+	
+	public void removeAllTopics() {
+		topics.clear();
+	}
+	
 
 	public Integer getId() {
 		return id;

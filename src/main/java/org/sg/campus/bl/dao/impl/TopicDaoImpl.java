@@ -1,7 +1,5 @@
 package org.sg.campus.bl.dao.impl;
 
-import java.util.List;
-
 import org.sg.campus.bl.dao.GenericDao;
 import org.sg.campus.bl.dao.TopicDao;
 import org.sg.campus.bl.domain.Topic;
@@ -9,6 +7,8 @@ import org.sg.campus.bl.entities.CourseEntity;
 import org.sg.campus.bl.entities.TopicEntity;
 import org.sg.campus.web.util.SGUtil;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class TopicDaoImpl extends GenericDao implements TopicDao {
@@ -33,19 +33,26 @@ public class TopicDaoImpl extends GenericDao implements TopicDao {
 
 	@Override
 	public boolean delete(Integer id) {
-		TopicEntity topicEntity = entityManager.find(TopicEntity.class, id);
-		if (topicEntity != null && topicEntity.getCourseId() != null) {
+//		TopicEntity topicEntity = entityManager.find(TopicEntity.class, id);
+//		if (topicEntity != null) {
+//			entityManager.remove(topicEntity);
+//			return true;
+//		}
+//		return false;
+		TopicEntity topicEntity = get(id);
+		if (topicEntity == null) {
+			throw new IllegalArgumentException("Topic " + id + " not found");
+		}
+
+		if (topicEntity.getCourseId() != null) {
 			CourseEntity courseEntity = entityManager.find(CourseEntity.class, topicEntity.getCourseId());
 			if (courseEntity.getTopics().contains(topicEntity)) {
 				courseEntity.removeTopic(topicEntity);
-				entityManager.remove(topicEntity);
-				return true;
 			}
-		} else if (topicEntity != null) {
-			entityManager.remove(topicEntity);
-			return true;
 		}
-		return false;
+
+		entityManager.remove(topicEntity);
+		return true;
 	}
 
 	@Override

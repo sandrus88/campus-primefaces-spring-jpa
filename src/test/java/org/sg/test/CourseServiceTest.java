@@ -188,28 +188,41 @@ public class CourseServiceTest extends AbstractSpringTest {
 	@Test
 	public void test_updateCourse_addTopics() {
 		// Given
-		final Integer courseId = 1;
+		final Integer courseId = 10;
 		Topic topic = topicService.getTopic(308);
 		Topic topic2 = topicService.getTopic(309);
 		Topic topic3 = topicService.getTopic(310);
-		Topic topic4 = topicService.getTopic(302);
 
 		// When
 		Course course = courseService.getCourse(courseId);
 		course.addTopic(topic);
 		course.addTopic(topic2);
 		course.addTopic(topic3);
-		course.removeTopic(topic4);
 		course = courseService.update(course);
 		Course courseDb = courseService.getCourse(courseId);
 
 		// Then
 		assertEquals(courseDb, course);
 		assertNotNull(courseDb.getTopics());
-		assertEquals(7, courseDb.getTopics().size());
-		assertEquals(topic.getId(), courseDb.getTopics().get(4).getId());
-		assertEquals(topic2.getId(), courseDb.getTopics().get(5).getId());
-		assertEquals(topic3.getId(), courseDb.getTopics().get(6).getId());
+		assertEquals(3, courseDb.getTopics().size());
+	}
+	
+	@Test
+	public void test_updateCourse_removeTopics() {
+		// Given
+		final Integer courseId = 1;
+		Topic topic = new Topic(301, "Objects Oriented Paradigm", "OOPS concepts (Data Abstraction, Encapsulation, Inheritance, Polymorphism)", 1);
+		
+		// When
+		Course course = courseService.getCourse(courseId);
+		course.removeTopic(topic);
+		course = courseService.update(course);
+		Course courseDb = courseService.getCourse(courseId);
+		
+		// Then
+		assertEquals(courseDb, course);
+		assertNotNull(courseDb.getTopics());
+		assertEquals(4, courseDb.getTopics().size());
 	}
 
 	@Test

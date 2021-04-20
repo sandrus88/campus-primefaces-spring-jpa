@@ -163,7 +163,7 @@ public class TopicServiceTest extends AbstractSpringTest {
     @Test
     public void test_deleteTopic_presentInACourse() {
     	 // Given
-        final Integer topicId = 304;
+        final Integer topicId = 303;
         final Integer courseId = 1;
         
         // When

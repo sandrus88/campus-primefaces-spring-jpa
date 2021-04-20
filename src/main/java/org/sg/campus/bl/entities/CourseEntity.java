@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.sg.campus.bl.dao.TopicDao;
 
 @Entity
 @Table(name = "COURSE")
@@ -30,8 +27,8 @@ public class CourseEntity {
 	private String name;
 	@Column(name = "DESCRIPTION")
 	private String description;
-	@Column(name = "ENABLED")
-	private Boolean enabled;
+	@Column(name = "ACTIVE")
+	private Character enable;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "COURSE_ID")
@@ -72,13 +69,13 @@ public class CourseEntity {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	public Boolean getEnabled() {
-		return enabled;
+
+	public Character getEnable() {
+		return enable;
 	}
 
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
+	public void setEnable(Character active) {
+		this.enable = active;
 	}
 
 	public void setTopics(List<TopicEntity> topics) {
@@ -107,7 +104,7 @@ public class CourseEntity {
 		if (description != null && !description.equals(other.description)) {
 			return false;
 		}
-		if (enabled != null && !enabled.equals(other.enabled)) {
+		if (enable != null && !enable.equals(other.enable)) {
 			return false;
 		}
 		if (topics != null && !topics.equals(other.topics)) {
@@ -121,14 +118,14 @@ public class CourseEntity {
 		int result = id;
 		result = result + ((name == null) ? 0 : name.hashCode());
 		result = result + ((description == null) ? 0 : description.hashCode());
-		result = result + ((enabled == null) ? 0 : enabled.hashCode());
+		result = result + ((enable == null) ? 0 : enable.hashCode());
 		result = result + ((topics == null) ? 0 : topics.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public String toString() {
-		return this.getClass().getSimpleName() + " [id: " + id + ", name: " + name + ", description: " + description + ", enabled: " + enabled +
+		return this.getClass().getSimpleName() + " [id: " + id + ", name: " + name + ", description: " + description + ", enable: " + enable +
 				", topics: " + topics + "]";
 	}
 }

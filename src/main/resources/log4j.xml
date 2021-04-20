@@ -23,7 +23,7 @@
 	<!--trace -> debug -> info-> warn.->error ->fatal -->
 
 	<logger name="org.hibernate.SQL">
-		<level value="WARN" />
+		<level value="TRACE" />
 	</logger>
 	<logger name="org.hibernate">
 		<level value="WARN" />
@@ -45,7 +45,7 @@
 		<level value="WARN" />
 	</logger>
 	<logger name="org.springframework.jdbc">
-		<level value="DEBUG" /> <!-- DEBUG if you want to see sql inserts of DBInitializer -->
+		<level value="INFO" /> <!-- DEBUG if you want to see sql inserts of DBInitializer -->
 	</logger>
 	<logger name="org.springframework">
 		<level value="WARN" />

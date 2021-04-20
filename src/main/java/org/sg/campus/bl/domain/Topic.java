@@ -60,7 +60,16 @@ public class Topic {
 	}
 	
 	public boolean isChecked() {
-		return checked;
+		//checked se courseId e' gia popolato. Significato che il topic e' gia assocciato a un corso
+		// se il corso assocciato non è il selected course allora isDisbaled deve dare true
+		
+		return courseId != null;
+	}
+	
+	public boolean isDisabled() {
+		//checked se courseId e' gia popolato. Significato che il topic e' gia assocciato a un corso
+		// se il corso assocciato non è il selected course allora isDisbaled deve dare true
+		return true;
 	}
 
 	@Override

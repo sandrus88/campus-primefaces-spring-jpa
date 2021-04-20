@@ -5,9 +5,11 @@
 
 	<persistence-unit name="campus-pu" transaction-type="RESOURCE_LOCAL">
 
+		<!--<class>org.sg.campus.bl.entities.CourseEntity</class>-->
+
 		<properties>
 			<property name="hibernate.id.new_generator_mappings" value="true"/>
-			<property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+			<!--<property name="hibernate.hbm2ddl.auto" value="create-drop"/>-->
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>
 	</persistence-unit>

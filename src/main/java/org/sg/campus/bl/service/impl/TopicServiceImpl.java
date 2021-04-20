@@ -3,6 +3,7 @@ package org.sg.campus.bl.service.impl;
 import java.util.List;
 
 import org.sg.campus.bl.assembler.TopicAssembler;
+import org.sg.campus.bl.dao.CourseDao;
 import org.sg.campus.bl.dao.TopicDao;
 import org.sg.campus.bl.domain.Topic;
 import org.sg.campus.bl.entities.TopicEntity;

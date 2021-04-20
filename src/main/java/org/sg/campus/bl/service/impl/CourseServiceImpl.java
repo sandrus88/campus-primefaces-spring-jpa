@@ -3,12 +3,9 @@ package org.sg.campus.bl.service.impl;
 import java.util.List;
 
 import org.sg.campus.bl.assembler.CourseAssembler;
-import org.sg.campus.bl.assembler.TopicAssembler;
 import org.sg.campus.bl.dao.CourseDao;
 import org.sg.campus.bl.domain.Course;
-import org.sg.campus.bl.domain.Topic;
 import org.sg.campus.bl.entities.CourseEntity;
-import org.sg.campus.bl.entities.TopicEntity;
 import org.sg.campus.bl.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,12 +58,5 @@ public class CourseServiceImpl implements CourseService {
 		List<CourseEntity> listEntities = courseDao.searchCourse(searchDto);
 		List<Course> list = CourseAssembler.getDTOList(listEntities);
 		return list;
-	}
-
-	@Override
-	public List<Topic> getTopicsOfCourseId(int courseId) {
-		List<TopicEntity> entityList = courseDao.getTopicsForCourseId(courseId);
-		List<Topic> dtoList = TopicAssembler.getDTOList(entityList);
-		return dtoList;
 	}
 }

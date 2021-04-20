@@ -6,7 +6,6 @@ import org.sg.campus.bl.dao.CourseDao;
 import org.sg.campus.bl.dao.GenericDao;
 import org.sg.campus.bl.domain.Course;
 import org.sg.campus.bl.entities.CourseEntity;
-import org.sg.campus.bl.entities.TopicEntity;
 import org.sg.campus.web.util.SGUtil;
 import org.springframework.stereotype.Repository;
 
@@ -66,14 +65,5 @@ public class CourseDaoImpl extends GenericDao implements CourseDao {
 		}
 		List<CourseEntity> courses = entityManager.createQuery(sql, CourseEntity.class).getResultList();
 		return courses;
-	}
-	
-	@Override
-	public List<TopicEntity> getTopicsForCourseId(int courseId) {
-		String sql = "select t from TopicEntity t ";
-		sql += "where course_id = " + courseId;
-
-		List<TopicEntity> topics = entityManager.createQuery(sql, TopicEntity.class).getResultList();
-		return topics;
 	}	
 }

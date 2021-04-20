@@ -18,6 +18,4 @@ public interface CourseDao {
     boolean delete(Integer id);
     
     List<CourseEntity> searchCourse(Course searchDto);
-    
-    List<TopicEntity> getTopicsForCourseId(int courseId);
 }

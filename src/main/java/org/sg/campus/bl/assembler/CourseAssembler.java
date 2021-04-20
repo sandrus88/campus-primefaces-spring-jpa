@@ -38,6 +38,11 @@ public class CourseAssembler {
         entity.setName(dto.getName());
         entity.setDescription(dto.getDescription());
         entity.setEnabled(dto.getEnabled());
+        
+        for (Topic topic : dto.getTopics()) {
+            TopicEntity topicEntity  = TopicAssembler.getEntity(topic);
+            entity.addTopic(topicEntity);
+        }
         return entity;
     }
 

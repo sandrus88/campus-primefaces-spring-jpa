@@ -17,4 +17,6 @@ public interface TopicDao {
     boolean delete(Integer id);
     
     List<TopicEntity> searchTopic(Topic searchDto);
+    
+    List<TopicEntity> getTopicsForCourseId(int courseId);
 }

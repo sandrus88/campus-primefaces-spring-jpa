@@ -11,7 +11,9 @@ import static org.sg.test.util.EntityUtils.updateTopic;
 import java.util.List;
 
 import org.junit.Test;
+import org.sg.campus.bl.domain.Course;
 import org.sg.campus.bl.domain.Topic;
+import org.sg.campus.bl.service.CourseService;
 import org.sg.campus.bl.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,6 +21,9 @@ public class TopicServiceTest extends AbstractSpringTest {
 
     @Autowired
     private TopicService topicService;
+    
+    @Autowired
+    private CourseService courseService;
     
     @Test
     public void test_getTopic() {
@@ -37,16 +42,16 @@ public class TopicServiceTest extends AbstractSpringTest {
     @Test
     public void test_getAllTopics() {
         // Given
-        final Integer[] topicsId = { 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322 };
+        final Integer[] topicsId = { 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318 };
 
         // When
         List<Topic> courses = topicService.getAllTopics();
 
         // Then
         assertNotNull(courses);
-        assertEquals(courses.size(), 22);
+        assertEquals(courses.size(), 18);
         assertEquals(courses.get(0).getId(), topicsId[0]);
-        assertEquals(courses.get(21).getId(), topicsId[21]);
+        assertEquals(courses.get(17).getId(), topicsId[17]);
     }
 
     @Test
@@ -70,7 +75,7 @@ public class TopicServiceTest extends AbstractSpringTest {
 		List<Topic> list = topicService.searchTopic(searchBean);
 
 		// Then
-		assertEquals(22, list.size());
+		assertEquals(18, list.size());
 	}
 
 	@Test
@@ -144,7 +149,7 @@ public class TopicServiceTest extends AbstractSpringTest {
     @Test
     public void test_deleteTopic() {
         // Given
-        final Integer topicId = 304;
+        final Integer topicId = 305;
         
         // When
         boolean deleting = topicService.deleteTopic(topicId);
@@ -157,7 +162,19 @@ public class TopicServiceTest extends AbstractSpringTest {
 
     @Test
     public void test_deleteTopic_presentInACourse() {
-        //TODO
+    	 // Given
+        final Integer topicId = 304;
+        final Integer courseId = 1;
+        
+        // When
+        boolean deleting = topicService.deleteTopic(topicId);
+        Topic topic = topicService.getTopic(topicId);
+        Course course  = courseService.getCourse(courseId);
+        
+        // Then
+        assertTrue(deleting);
+        assertNull(topic);
+        assertEquals(4, course.getTopics().size());
     }
     
     @Test

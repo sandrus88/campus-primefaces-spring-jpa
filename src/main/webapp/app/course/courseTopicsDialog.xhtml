@@ -6,13 +6,13 @@
 
 	<h:form id="courseTopicForm">
 		<p:dialog widgetVar="dialogTopics" showEffect="fade" hideEffect="fade" modal="true" width="600" resizable="false" position="center" draggable="false" styleClass="containerBox">
-		
+
 			<f:facet name="header">
 				<h:outputText value="#{msg['course.topics.title']} #{courseController.selectedCourse.name}" />
 			</f:facet>
 		
 			<p:dataTable value="#{courseController.allTopics}" var="topic" border="0" id="courseTopicsTable" styleClass="fixed-size">
-				<p:column width="5">
+				<p:column width="15">
 					<f:facet name="header">
 						<h:outputText value="#{msg['topic.id']}" />
 					</f:facet>
@@ -23,17 +23,10 @@
 					<f:facet name="header">
 						<h:outputText value="#{msg['topic.name']}" />
 					</f:facet>
-					<h:outputText value="#{topic.name}" />
+					<h:outputText value="#{topic.name}" styleClass="nameTopicOnDialog"/>
 				</p:column>
 
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="#{msg['topic.description']}" />
-					</f:facet>
-					<h:outputText value="#{topic.description}" styleClass="descriptionTopicOnDialog"/>
-				</p:column>
-
-				<p:column>
+				<p:column width="60" style="text-align: center">
 					<f:facet name="header">
 						<h:outputText value="#{msg['action.selection']}" />
 					</f:facet>

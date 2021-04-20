@@ -78,6 +78,14 @@ h3 {
     text-overflow: ellipsis;
 }
 
+.nameTopicOnDialog {
+	display:inline-block;
+    max-width: 40ch;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .searchForm {
 	text-align: left;
 }

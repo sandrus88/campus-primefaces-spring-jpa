@@ -23,7 +23,7 @@ public class CourseController {
 
 	@ManagedProperty(value = "#{courseService}")
 	private CourseService courseService;
-	
+
 	@ManagedProperty(value = "#{topicService}")
 	private TopicService topicService;
 
@@ -35,7 +35,7 @@ public class CourseController {
 	private String newName;
 	private String newDescription;
 	private Boolean newEnabled;
-	
+
 	private Integer searchId;
 	private String searchName;
 	private Boolean searchEnabled;
@@ -43,7 +43,6 @@ public class CourseController {
 	@PostConstruct
 	public void init() {
 		selectedCourse = new Course();
-//		allTopics = topicService.getAllTopics();
 		searchCourse();
 		cleanDialogForm();
 		cleanSearchForm();
@@ -87,12 +86,12 @@ public class CourseController {
 		courseService.deleteCourse(course.getId());
 		searchCourse();
 	}
-	
+
 	public void viewTopics(Course course) {
 		selectedCourse = course;
 		allTopics = topicService.getAllTopics();
 		List<Topic> selectedCourseTopics = course.getTopics();
-		
+
 		for (int i = 0; i < allTopics.size(); i++) {
 			final Topic topic = allTopics.get(i);
 			if (selectedCourseTopics.contains(topic)) {
@@ -100,21 +99,25 @@ public class CourseController {
 			}
 		}
 		System.out.println("viewTopics: " + selectedCourse);
+		searchCourse();
 	}
 
 	public void updateCourseTopics(Course course) {
 		selectedCourse = course;
-		List<Topic> allTopics = topicService.getAllTopics();
-		System.out.println("Topics before update for courseId" + selectedCourse.getId() + ": " + selectedCourse.getTopics());
-		
+//		List<Topic> allTopics = topicService.getAllTopics();
+//		allTopics = topicService.getAllTopics();
+		System.out.println(
+				"Topics before update for courseId" + selectedCourse.getId() + ": " + selectedCourse.getTopics());
+
 		for (int i = 0; i < allTopics.size(); i++) {
 			final Topic topic = allTopics.get(i);
 			if (topic.isChecked()) {
 				selectedCourse.addTopic(topic);
 			}
 		}
-		courseService.update(selectedCourse);
-		System.out.println("Topics after update for courseId" + selectedCourse.getId() + ": " + selectedCourse.getTopics());
+		selectedCourse = courseService.update(selectedCourse);
+		System.out.println(
+				"Topics after update for courseId" + selectedCourse.getId() + ": " + selectedCourse.getTopics());
 		searchCourse();
 	}
 
@@ -123,9 +126,9 @@ public class CourseController {
 		int topics = selectedCourse.getTopics().size();
 		return topics;
 	}
-	
+
 	public List<Topic> getAllTopics() {
-		return allTopics ;
+		return allTopics;
 	}
 
 	public String getNewName() {
@@ -215,7 +218,7 @@ public class CourseController {
 	public void setCourseService(CourseService courseService) {
 		this.courseService = courseService;
 	}
-	
+
 	public void setTopicService(TopicService topicService) {
 		this.topicService = topicService;
 	}

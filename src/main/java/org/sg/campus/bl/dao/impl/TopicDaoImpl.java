@@ -5,6 +5,7 @@ import java.util.List;
 import org.sg.campus.bl.dao.GenericDao;
 import org.sg.campus.bl.dao.TopicDao;
 import org.sg.campus.bl.domain.Topic;
+import org.sg.campus.bl.entities.CourseEntity;
 import org.sg.campus.bl.entities.TopicEntity;
 import org.sg.campus.web.util.SGUtil;
 import org.springframework.stereotype.Repository;
@@ -33,7 +34,14 @@ public class TopicDaoImpl extends GenericDao implements TopicDao {
 	@Override
 	public boolean delete(Integer id) {
 		TopicEntity topicEntity = entityManager.find(TopicEntity.class, id);
-		if (topicEntity != null) {
+		if (topicEntity != null && topicEntity.getCourseId() != null) {
+			CourseEntity courseEntity = entityManager.find(CourseEntity.class, topicEntity.getCourseId());
+			if (courseEntity.getTopics().contains(topicEntity)) {
+				courseEntity.removeTopic(topicEntity);
+				entityManager.remove(topicEntity);
+				return true;
+			}
+		} else if (topicEntity != null) {
 			entityManager.remove(topicEntity);
 			return true;
 		}
@@ -59,6 +67,15 @@ public class TopicDaoImpl extends GenericDao implements TopicDao {
 		if (!SGUtil.isEmpty(searchDto.getDescription())) {
 			sql += "and upper(t.description) like upper('%" + searchDto.getDescription() + "%')";
 		}
+		List<TopicEntity> topics = entityManager.createQuery(sql, TopicEntity.class).getResultList();
+		return topics;
+	}
+	
+	@Override
+	public List<TopicEntity> getTopicsForCourseId(int courseId) {
+		String sql = "select t from TopicEntity t ";
+		sql += "where course_id = " + courseId;
+
 		List<TopicEntity> topics = entityManager.createQuery(sql, TopicEntity.class).getResultList();
 		return topics;
 	}

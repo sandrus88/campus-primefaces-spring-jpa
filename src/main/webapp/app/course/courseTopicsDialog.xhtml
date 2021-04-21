@@ -32,6 +32,13 @@
 					</f:facet>
 					<p:selectBooleanCheckbox id="selectionTopic" disabled="#{topic.isDisabled(courseController.selectedCourse)}" value="#{topic.checked}" />
 				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="courseId" />
+					</f:facet>
+					<h:outputText value="#{topic.courseId}" styleClass="nameTopicOnDialog"/>
+				</p:column>
 			</p:dataTable>
 
 			<h:panelGrid border="0" columns="2">

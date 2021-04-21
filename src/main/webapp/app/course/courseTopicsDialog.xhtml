@@ -30,7 +30,7 @@
 					<f:facet name="header">
 						<h:outputText value="#{msg['action.selection']}" />
 					</f:facet>
-					<p:selectBooleanCheckbox id="selectionTopic" disabled="#{topic.disabled}" value="#{topic.checked}" />
+					<p:selectBooleanCheckbox id="selectionTopic" disabled="#{topic.isDisabled(courseController.selectedCourse)}" value="#{topic.checked}" />
 				</p:column>
 			</p:dataTable>
 

@@ -93,10 +93,10 @@ public class CourseController {
 		List<Topic> selectedCourseTopics = course.getTopics();
 
 		for (int i = 0; i < allTopics.size(); i++) {
-			final Topic topic = allTopics.get(i);
+			Topic topic = allTopics.get(i);
 			if (selectedCourseTopics.contains(topic)) {
-				topic.setChecked(true);
-			}
+				topic.isDisabled(selectedCourse);
+			} 
 		}
 		System.out.println("viewTopics: " + selectedCourse);
 		searchCourse();

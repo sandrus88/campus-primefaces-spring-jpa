@@ -67,7 +67,7 @@ public class Topic {
 	}
 	
 	public boolean isDisabled(Course course) {
-		if(isChecked() && courseId.equals(course.getId())) {
+		if(isChecked() && !courseId.equals(course.getId())) {
 			return true;
 		}
 		//checked se courseId e' gia popolato. Significato che il topic e' gia assocciato a un corso

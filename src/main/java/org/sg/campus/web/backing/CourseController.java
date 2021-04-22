@@ -95,6 +95,7 @@ public class CourseController {
 		for (int i = 0; i < allTopics.size(); i++) {
 			Topic topic = allTopics.get(i);
 			if (selectedCourseTopics.contains(topic)) {
+				topic.setChecked(true);
 				topic.isDisabled(selectedCourse);
 			}
 		}
@@ -108,6 +109,8 @@ public class CourseController {
 			final Topic topic = allTopics.get(i);
 			if (topic.isChecked()) {
 				selectedCourse.addTopic(topic);
+			} else {
+				selectedCourse.removeTopic(topic);
 			}
 		}
 		selectedCourse = courseService.update(selectedCourse);
@@ -115,8 +118,7 @@ public class CourseController {
 	}
 
 	public int topicsNumber(Course course) {
-		selectedCourse = course;
-		int topics = selectedCourse.getTopics().size();
+		int topics = course.getTopics().size();
 		return topics;
 	}
 

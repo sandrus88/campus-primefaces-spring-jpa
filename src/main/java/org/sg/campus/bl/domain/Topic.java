@@ -67,8 +67,7 @@ public class Topic {
 	}
 	
 	public boolean isDisabled(Course course) {
-		if(courseId != null && courseId.equals(course.getId())) {
-			setChecked(true);
+		if(courseId != null && !courseId.equals(course.getId())) {
 			return true;
 		}
 		return false;

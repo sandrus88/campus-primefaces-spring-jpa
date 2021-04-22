@@ -5,13 +5,13 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<h:form id="courseTopicForm">
-		<p:dialog widgetVar="dialogTopics" showEffect="fade" hideEffect="fade" modal="true" width="600" resizable="false" position="center" draggable="false" styleClass="containerBox" style="overflow-y: scroll; max-height: 100%;">
+		<p:dialog widgetVar="dialogTopics" showEffect="fade" hideEffect="fade" modal="true" width="600" resizable="false" position="center" draggable="false" styleClass="containerBox">
 
 			<f:facet name="header">
 				<h:outputText value="#{msg['course.topics.title']} #{courseController.selectedCourse.name}" />
 			</f:facet>
 		
-			<p:dataTable value="#{courseController.allTopics}" var="topic" border="0" id="courseTopicsTable" styleClass="fixed-size">
+			<p:dataTable value="#{courseController.allTopics}" var="topic" border="0" id="courseTopicsTable" styleClass="fixed-size" scrollable="true" scrollHeight="600">
 				<p:column width="15">
 					<f:facet name="header">
 						<h:outputText value="#{msg['topic.id']}" />
@@ -33,11 +33,11 @@
 					<p:selectBooleanCheckbox id="selectionTopic" disabled="#{topic.isDisabled(courseController.selectedCourse)}" value="#{topic.checked}" />
 				</p:column>
 				
-				<p:column>
+				<p:column width="60">
 					<f:facet name="header">
-						<h:outputText value="courseId" />
+						<h:outputText value="CourseId" />
 					</f:facet>
-					<h:outputText value="#{topic.courseId}" styleClass="nameTopicOnDialog"/>
+					<h:outputText value="#{topic.courseId}"/>
 				</p:column>
 			</p:dataTable>
 

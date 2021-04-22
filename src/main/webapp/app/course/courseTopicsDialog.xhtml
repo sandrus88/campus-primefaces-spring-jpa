@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<h:form id="courseTopicForm">
-		<p:dialog widgetVar="dialogTopics" showEffect="fade" hideEffect="fade" modal="true" width="600" resizable="false" position="center" draggable="false" styleClass="containerBox">
+		<p:dialog widgetVar="dialogTopics" showEffect="fade" hideEffect="fade" modal="true" width="600" resizable="false" position="center" draggable="false" styleClass="containerBox" style="overflow-y: scroll; max-height: 100%;">
 
 			<f:facet name="header">
 				<h:outputText value="#{msg['course.topics.title']} #{courseController.selectedCourse.name}" />

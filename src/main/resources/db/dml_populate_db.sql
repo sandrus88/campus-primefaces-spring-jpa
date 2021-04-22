@@ -49,3 +49,13 @@ insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (315, 'Basic Data St
 insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (316, 'Basic math operations', 'addition, subtraction, multiplication, division, exponentiation', 6);
 insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (317, 'Multithreading', '', 2);
 insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (318, 'Programmazione di stringa', '', 2);
+insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (319, 'Topic 319', '', null);
+insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (320, 'Topic 320', '', null);
+insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (321, 'Topic 321', '', null);
+insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (322, 'Topic 322', '', null);
+insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (323, 'Topic 323', '', null);
+insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (324, 'Topic 324', '', null);
+insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (325, 'Topic 325', '', null);
+insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (326, 'Topic 326', '', null);
+insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (327, 'Topic 327', '', null);
+insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (328, 'Topic 328', '', null);

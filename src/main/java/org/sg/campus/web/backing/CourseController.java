@@ -96,7 +96,7 @@ public class CourseController {
 			Topic topic = allTopics.get(i);
 			if (selectedCourseTopics.contains(topic)) {
 				topic.isDisabled(selectedCourse);
-			} 
+			}
 		}
 		System.out.println("viewTopics: " + selectedCourse);
 		searchCourse();
@@ -104,11 +104,6 @@ public class CourseController {
 
 	public void updateCourseTopics(Course course) {
 		selectedCourse = course;
-//		List<Topic> allTopics = topicService.getAllTopics();
-//		allTopics = topicService.getAllTopics();
-		System.out.println(
-				"Topics before update for courseId" + selectedCourse.getId() + ": " + selectedCourse.getTopics());
-
 		for (int i = 0; i < allTopics.size(); i++) {
 			final Topic topic = allTopics.get(i);
 			if (topic.isChecked()) {
@@ -116,8 +111,6 @@ public class CourseController {
 			}
 		}
 		selectedCourse = courseService.update(selectedCourse);
-		System.out.println(
-				"Topics after update for courseId" + selectedCourse.getId() + ": " + selectedCourse.getTopics());
 		searchCourse();
 	}
 

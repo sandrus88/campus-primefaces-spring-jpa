@@ -10,8 +10,8 @@ import java.util.List;
 
 public class CourseAssembler {
     
-    public static final Character ENABLE_Y = 'Y';
-    public static final Character ENABLE_N = 'N';
+    public static final int ENABLE_1 = 1;
+    public static final int ENABLE_0 = 0;
 	
 	public static Course getDTO(CourseEntity entity) {
 		if (entity == null) {
@@ -22,7 +22,7 @@ public class CourseAssembler {
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setDescription(entity.getDescription());
-        dto.setEnabled(Boolean.parseBoolean(entity.getEnable() + ""));
+        dto.setEnabled(getBooleanFromInt(entity.getEnable()));
 
         for (TopicEntity topicEntity : entity.getTopics()) {
             Topic topic  = TopicAssembler.getDTO(topicEntity);
@@ -40,7 +40,7 @@ public class CourseAssembler {
         entity.setId(dto.getId());
         entity.setName(dto.getName());
         entity.setDescription(dto.getDescription());
-        entity.setEnable(getCharFromBoolean(dto.getEnabled()));
+        entity.setEnable(getIntFromBoolean(dto.getEnabled()));
         
         for (Topic topic : dto.getTopics()) {
             TopicEntity topicEntity  = TopicAssembler.getEntity(topic);
@@ -49,11 +49,18 @@ public class CourseAssembler {
         return entity;
     }
     
-    private static Character getCharFromBoolean(Boolean b) {
-        if (b != null && b) {
-            return ENABLE_Y;
+    public static boolean getBooleanFromInt(int i) {
+        if (i == ENABLE_1) {
+            return true;
         }
-        return ENABLE_N;
+        return false;
+    }
+    
+    public static int getIntFromBoolean(Boolean b) {
+        if (b != null && b) {
+            return ENABLE_1;
+        }
+        return ENABLE_0;
     }
     
     public static List<Course> getDTOList(List<CourseEntity> entityList) {

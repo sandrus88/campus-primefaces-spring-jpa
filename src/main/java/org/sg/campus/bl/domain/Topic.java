@@ -60,9 +60,9 @@ public class Topic {
 	}
 	
 	public boolean isChecked() {
-		if(courseId != null) {
-			return checked;
-		}
+//		if(courseId != null) {
+//			return checked;
+//		}
 		return checked;
 	}
 	

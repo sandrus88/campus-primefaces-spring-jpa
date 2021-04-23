@@ -2,6 +2,7 @@ package org.sg.campus.bl.dao.impl;
 
 import java.util.List;
 
+import org.sg.campus.bl.assembler.CourseAssembler;
 import org.sg.campus.bl.dao.CourseDao;
 import org.sg.campus.bl.dao.GenericDao;
 import org.sg.campus.bl.domain.Course;
@@ -61,7 +62,7 @@ public class CourseDaoImpl extends GenericDao implements CourseDao {
 			sql += "and upper(c.description) like upper('%" + searchDto.getDescription() + "%')";
 		}
 		if(searchDto.getEnabled() != null) {
-			sql += "and c.enabled = '" + searchDto.getEnabled() + "'";
+			sql += "and c.enable = " + CourseAssembler.getIntFromBoolean(searchDto.getEnabled());
 		}
 		List<CourseEntity> courses = entityManager.createQuery(sql, CourseEntity.class).getResultList();
 		return courses;

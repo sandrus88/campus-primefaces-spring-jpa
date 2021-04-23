@@ -18,23 +18,23 @@
 					
 					<p:outputLabel for="name" value="#{msg['student.name']}" />
 					<p:inputText id="name" value="#{studentController.searchName}" maxlength="20"/>
+					
+					<p:outputLabel for="surname" value="#{msg['student.surname']}" />
+					<p:inputText id="surname" value="#{studentController.searchSurname}" maxlength="20"/>
 				
 					<p:outputLabel for="email" value="#{msg['student.email']}" />
 					<p:inputText id="email" value="#{studentController.searchEmail}" maxlength="20">
 						<f:validator validatorId="emailValidator" />
 					</p:inputText>
+					
+					<p:outputLabel for="jobTitle" value="#{msg['student.jobTitle']}" />
+					<p:inputText id="jobTitle" value="#{studentController.searchJobTitle}" maxlength="20"/>
 				
 					<p:outputLabel for="paymentType" value="#{msg['student.paymentType']}" />
 					<p:selectOneMenu id="paymentType" value="#{studentController.searchPaymentType}">
 						<f:selectItem itemLabel="" />
 						<f:selectItems value="#{studentController.getEnumValues()}" var="payment" itemValue="#{payment}" itemLabel="#{studentController.showPaymentType(payment)}" />
 					</p:selectOneMenu>
-
-					<p:outputLabel for="surname" value="#{msg['student.surname']}" />
-					<p:inputText id="surname" value="#{studentController.searchSurname}" maxlength="20"/>
-
-					<p:outputLabel for="jobTitle" value="#{msg['student.jobTitle']}" />
-					<p:inputText id="jobTitle" value="#{studentController.searchJobTitle}" maxlength="20"/>
 				
 					<p:outputLabel for="sex" value="#{msg['student.sex']}" />
 					<p:selectOneMenu id="sex" value="#{studentController.searchSex}">
@@ -44,9 +44,9 @@
 					</p:selectOneMenu>
 				</h:panelGrid>
 
-				<h:panelGrid border="0" columns="2" style="margin-left: 680px;">
-					<p:commandButton value="#{msg['search']}" actionListener="#{studentController.searchStudent()}" update="studentListForm"/>
-					<p:commandButton value="#{msg['clear']}" actionListener="#{studentController.cleanSearchForm()}" update="searchStudentForm"/>
+				<h:panelGrid border="0" columns="2" style="margin-left: 877px;">
+					<p:commandButton value="#{msg['search']}" actionListener="#{studentController.searchStudent()}" update="studentListForm" styleClass="button"/>
+					<p:commandButton value="#{msg['clear']}" actionListener="#{studentController.cleanSearchForm()}" update="searchStudentForm" styleClass="button"/>
 				</h:panelGrid>
 			</h:form>
 			

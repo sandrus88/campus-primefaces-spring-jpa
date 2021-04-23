@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
@@ -27,6 +28,7 @@ import org.sg.campus.bl.service.StudentService;
 import org.sg.campus.bl.service.TopicService;
 import org.sg.campus.web.util.JSFUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 @ManagedBean
 @SessionScoped
@@ -38,13 +40,13 @@ public class DashboardController {
 	private int courseCount;
 	private int topicCount;
 
-	@Autowired
+	@ManagedProperty(value = "#{studentService}")
 	private StudentService studentService;
 
-	@Autowired
+	@ManagedProperty(value = "#{courseService}")
 	private CourseService courseService;
 
-	@Autowired
+	@ManagedProperty(value = "#{topicService}")
 	private TopicService topicService;
 
 	@PostConstruct
@@ -133,17 +135,41 @@ public class DashboardController {
 	}
 
 	public void refreshStudentCount() {
-//		List<Student> allStudentsList = studentService.getAllStudents();
-//		studentCount = allStudentsList.size();
+		List<Student> allStudentsList = studentService.getAllStudents();
+		studentCount = allStudentsList.size();
 	}
 
 	public void refreshTopicCount() {
-//		List<Topic> allTopicsList = topicService.getAllTopics();
-//		topicCount = allTopicsList.size();
+		List<Topic> allTopicsList = topicService.getAllTopics();
+		topicCount = allTopicsList.size();
 	}
 
 	public void refreshCourseCount() {
-//		List<Course> allCoursesList = courseService.getAllCourses();
-//		courseCount = allCoursesList.size();
+		List<Course> allCoursesList = courseService.getAllCourses();
+		courseCount = allCoursesList.size();
+	}
+
+	public void setStudentService(StudentService studentService) {
+		this.studentService = studentService;
+	}
+
+	public void setCourseService(CourseService courseService) {
+		this.courseService = courseService;
+	}
+
+	public void setTopicService(TopicService topicService) {
+		this.topicService = topicService;
+	}
+
+	public StudentService getStudentService() {
+		return studentService;
+	}
+
+	public CourseService getCourseService() {
+		return courseService;
+	}
+
+	public TopicService getTopicService() {
+		return topicService;
 	}
 }

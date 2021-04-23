@@ -89,3 +89,7 @@ h3 {
 .searchForm {
 	text-align: left;
 }
+
+.button {
+	width: 85px;
+}

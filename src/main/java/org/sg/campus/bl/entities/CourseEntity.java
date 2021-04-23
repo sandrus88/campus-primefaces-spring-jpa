@@ -28,7 +28,7 @@ public class CourseEntity {
 	@Column(name = "DESCRIPTION")
 	private String description;
 	@Column(name = "ACTIVE")
-	private Character enable;
+	private int enable;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "COURSE_ID")
@@ -70,12 +70,12 @@ public class CourseEntity {
 		this.description = description;
 	}
 
-	public Character getEnable() {
+	public int getEnable() {
 		return enable;
 	}
 
-	public void setEnable(Character active) {
-		this.enable = active;
+	public void setEnable(int enable) {
+		this.enable = enable;
 	}
 
 	public void setTopics(List<TopicEntity> topics) {
@@ -104,9 +104,6 @@ public class CourseEntity {
 		if (description != null && !description.equals(other.description)) {
 			return false;
 		}
-		if (enable != null && !enable.equals(other.enable)) {
-			return false;
-		}
 		if (topics != null && !topics.equals(other.topics)) {
 			return false;
 		}
@@ -118,7 +115,6 @@ public class CourseEntity {
 		int result = id;
 		result = result + ((name == null) ? 0 : name.hashCode());
 		result = result + ((description == null) ? 0 : description.hashCode());
-		result = result + ((enable == null) ? 0 : enable.hashCode());
 		result = result + ((topics == null) ? 0 : topics.hashCode());
 		return result;
 	}

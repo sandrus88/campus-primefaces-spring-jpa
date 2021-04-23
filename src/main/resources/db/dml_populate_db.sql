@@ -20,16 +20,16 @@ insert into student (ID, NAME, SURNAME, EMAIL, JOB_TITLE, PAYMENT_TYPE, SEX) val
 insert into student (ID, NAME, SURNAME, EMAIL, JOB_TITLE, PAYMENT_TYPE, SEX) values (29, 'Student29', 'Surname29', null, 'Job29', 'OK', 'M');
 insert into student (ID, NAME, SURNAME, EMAIL, JOB_TITLE, PAYMENT_TYPE, SEX) values (30, 'Student30', 'Surname30', null, 'Job30', 'OK', 'M');
 
-insert into course (ID, NAME, DESCRIPTION, ACTIVE) values (1, 'Java', 'Basic concepts and Java fundamentals', 'Y');
-insert into course (ID, NAME, DESCRIPTION, ACTIVE) values (2, 'Java advanced programming', '', 'Y');
-insert into course (ID, NAME, DESCRIPTION, ACTIVE) values (3, 'Operating Systems', 'This course will introduce you to modern operating systems', 'N');
-insert into course (ID, NAME, DESCRIPTION, ACTIVE) values (4, 'Computer Network', '', 'Y');
-insert into course (ID, NAME, DESCRIPTION, ACTIVE) values (5, 'Javascript', 'Concetti base di Javascript', 'N');
-insert into course (ID, NAME, DESCRIPTION, ACTIVE) values (6, 'XML', 'XMLSchema e parsing con Java', 'N');
-insert into course (ID, NAME, DESCRIPTION, ACTIVE) values (7, 'Data Structures and Algorithms', '', 'N');
-insert into course (ID, NAME, DESCRIPTION, ACTIVE) values (8, 'Course 8', 'Description of course 8', 'N');
-insert into course (ID, NAME, DESCRIPTION, ACTIVE) values (9, 'Course 9', 'Description of course 9', 'Y');
-insert into course (ID, NAME, DESCRIPTION, ACTIVE) values (10, 'Course 10', 'Description of course 10', 'Y');
+insert into course (ID, NAME, DESCRIPTION, ACTIVE) values (1, 'Java', 'Basic concepts and Java fundamentals', 1);
+insert into course (ID, NAME, DESCRIPTION, ACTIVE) values (2, 'Java advanced programming', '', 1);
+insert into course (ID, NAME, DESCRIPTION, ACTIVE) values (3, 'Operating Systems', 'This course will introduce you to modern operating systems', 0);
+insert into course (ID, NAME, DESCRIPTION, ACTIVE) values (4, 'Computer Network', '', 1);
+insert into course (ID, NAME, DESCRIPTION, ACTIVE) values (5, 'Javascript', 'Concetti base di Javascript', 0);
+insert into course (ID, NAME, DESCRIPTION, ACTIVE) values (6, 'XML', 'XMLSchema e parsing con Java', 0);
+insert into course (ID, NAME, DESCRIPTION, ACTIVE) values (7, 'Data Structures and Algorithms', '', 0);
+insert into course (ID, NAME, DESCRIPTION, ACTIVE) values (8, 'Course 8', 'Description of course 8', 0);
+insert into course (ID, NAME, DESCRIPTION, ACTIVE) values (9, 'Course 9', 'Description of course 9', 1);
+insert into course (ID, NAME, DESCRIPTION, ACTIVE) values (10, 'Course 10', 'Description of course 10', 1);
 
 insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (301, 'Objects Oriented Paradigm', 'OOPS concepts (Data Abstraction, Encapsulation, Inheritance, Polymorphism)', 1);
 insert into topic (ID, NAME, DESCRIPTION, COURSE_ID) values (302, 'Basic Java constructs like loops and data types', '', 1);

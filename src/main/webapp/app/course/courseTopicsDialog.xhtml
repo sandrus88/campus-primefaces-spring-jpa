@@ -5,13 +5,13 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<h:form id="courseTopicForm">
-		<p:dialog widgetVar="dialogTopics" showEffect="fade" hideEffect="fade" modal="true" width="600" resizable="false" position="center" draggable="false" styleClass="containerBox">
+		<p:dialog widgetVar="dialogTopics" showEffect="fade" hideEffect="fade" modal="true" width="600" resizable="false" position="center" draggable="false" height="800" styleClass="containerBox">
 
 			<f:facet name="header">
 				<h:outputText value="#{msg['course.topics.title']} #{courseController.selectedCourse.name}" />
 			</f:facet>
 		
-			<p:dataTable value="#{courseController.allTopics}" var="topic" border="0" id="courseTopicsTable" styleClass="fixed-size" scrollable="true" scrollHeight="600">
+			<p:dataTable value="#{courseController.allTopics}" var="topic" border="0" id="courseTopicsTable" styleClass="fixed-size" scrollable="true" scrollHeight="525">
 				<p:column width="15">
 					<f:facet name="header">
 						<h:outputText value="#{msg['topic.id']}" />

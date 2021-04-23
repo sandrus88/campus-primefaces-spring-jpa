@@ -21,9 +21,9 @@
 					<p:inputText id="name" value="#{topicController.searchName}" maxlength="20"/>
 				</h:panelGrid>
 
-				<h:panelGrid border="0" columns="2" style="margin-left: 58px;">
-					<p:commandButton value="#{msg['search']}" actionListener="#{topicController.searchTopic()}" update="topicsListForm"/>
-					<p:commandButton value="#{msg['clear']}" actionListener="#{topicController.cleanSearchForm()}" update="searchTopicForm" />
+				<h:panelGrid border="0" columns="2" style="margin-left: 249px;">
+					<p:commandButton value="#{msg['search']}" actionListener="#{topicController.searchTopic()}" update="topicsListForm" styleClass="button"/>
+					<p:commandButton value="#{msg['clear']}" actionListener="#{topicController.cleanSearchForm()}" update="searchTopicForm" styleClass="button"/>
 				</h:panelGrid>
 			</h:form>
 

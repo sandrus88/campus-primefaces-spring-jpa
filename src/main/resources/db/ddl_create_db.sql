@@ -4,7 +4,7 @@ create table course (
     ID number, 
     NAME varchar2(100 byte) not null, 
     DESCRIPTION varchar2(500 byte),
-    ENABLED	BOOLEAN,
+    ACTIVE number(1),
         
     PRIMARY KEY (ID)
 );

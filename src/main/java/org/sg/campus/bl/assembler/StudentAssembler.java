@@ -21,7 +21,6 @@ public class StudentAssembler {
 		dto.setEmail(entity.getEmail());
 		dto.setJobTitle(entity.getJobTitle());
 		dto.setPaymentType(PaymentTypeAssembler.getEnum(entity.getPaymentType()));
-		dto.setJobTitle(entity.getJobTitle());
 		dto.setSex(entity.getSex());
 		return dto;
 	}
@@ -49,5 +48,4 @@ public class StudentAssembler {
 		}
 		return list;
 	}
-
 }

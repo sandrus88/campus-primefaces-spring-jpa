@@ -41,7 +41,7 @@ public class TopicDaoImpl extends GenericDao implements TopicDao {
 //		return false;
 		TopicEntity topicEntity = get(id);
 		if (topicEntity == null) {
-			throw new IllegalArgumentException("Topic " + id + " not found");
+			return false;
 		}
 
 		if (topicEntity.getCourseId() != null) {
@@ -50,7 +50,6 @@ public class TopicDaoImpl extends GenericDao implements TopicDao {
 				courseEntity.removeTopic(topicEntity);
 			}
 		}
-
 		entityManager.remove(topicEntity);
 		return true;
 	}

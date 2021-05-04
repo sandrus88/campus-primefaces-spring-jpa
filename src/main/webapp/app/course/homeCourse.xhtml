@@ -99,7 +99,7 @@
 							<p:tooltip for="linkRemove" value="#{msg['action.delete']}" position="bottom"/>
 							<f:setPropertyActionListener value="#{item}" target="#{courseController.selectedCourse}" />
 						</p:commandLink> | 
-						<p:commandLink actionListener="#{courseController.viewTopics(item)}" update="courseTopicForm" oncomplete="PF('dialogTopics').show()" id="linkTopics" >
+						<p:commandLink actionListener="#{courseController.viewTopics(item)}" update="courseTopicForm" oncomplete="PF('dialogTopics').show()" id="linkPartners" >
 							<i class="fa fa-fw fa-list-alt"/>
 							<p:tooltip for="linkTopics" value="#{msg['course.topics']}" position="bottom"/>
 						</p:commandLink>
